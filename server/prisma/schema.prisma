@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  phone     String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bookings Booking[]
+  reviews  Review[]
+
+  @@map("users")
+}
+
+model Hotel {
+  id          String   @id @default(uuid())
+  name        String
+  location    String
+  address     String
+  description String
+  amenities   String[]
+  images      String[]
+  rating      Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  rooms    Room[]
+  bookings Booking[]
+  reviews  Review[]
+
+  @@map("hotels")
+}
+
+model Room {
+  id          String    @id @default(uuid())
+  hotelId     String
+  roomType    String
+  price       Float
+  capacity    Int
+  amenities   String[]
+  images      String[]
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  hotel    Hotel     @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  bookings Booking[]
+
+  @@map("rooms")
+}
+
+model Booking {
+  id          String        @id @default(uuid())
+  userId      String
+  hotelId     String
+  roomId      String
+  checkIn     DateTime
+  checkOut    DateTime
+  guests      Int
+  totalPrice  Float
+  status      BookingStatus @default(PENDING)
+  specialRequests String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hotel  Hotel  @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  review Review?
+
+  @@map("bookings")
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  userId    String
+  hotelId   String
+  bookingId String   @unique
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  hotel   Hotel   @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, hotelId, bookingId])
+  @@map("reviews")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
