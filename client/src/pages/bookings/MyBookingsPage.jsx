@@ -32,8 +32,9 @@ const MyBookingsPage = () => {
 
   const cancelMutation = useMutation({
     mutationFn: (id) => bookingsAPI.cancel(id),
-    onSuccess: () => {
+    onSuccess: (_, cancelledBookingId) => {
       queryClient.invalidateQueries({ queryKey: ['myBookings'] });
+      queryClient.invalidateQueries({ queryKey: ['rooms'] });
       setCancelBookingId(null);
     },
   });

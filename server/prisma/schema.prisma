@@ -18,8 +18,9 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bookings Booking[]
-  reviews  Review[]
+  bookings   Booking[]
+  reviews    Review[]
+  fcmTokens  FcmToken[]
 
   @@map("users")
 }
@@ -70,7 +71,7 @@ model Booking {
   checkOut    DateTime
   guests      Int
   totalPrice  Float
-  status      BookingStatus @default(PENDING)
+  status      BookingStatus @default(CONFIRMED)
   specialRequests String?
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
@@ -99,6 +100,18 @@ model Review {
 
   @@unique([userId, hotelId, bookingId])
   @@map("reviews")
+}
+
+model FcmToken {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("fcm_tokens")
 }
 
 enum Role {

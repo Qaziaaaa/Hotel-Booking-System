@@ -59,4 +59,13 @@ export const getMe = catchAsync(async (req, res) => {
   });
 });
 
-export default { register, login, logout, getMe };
+export const updateMe = catchAsync(async (req, res) => {
+  const { firstName, lastName, phone } = req.body;
+  const user = await authService.updateMe(req.user.id, { firstName, lastName, phone });
+  res.status(200).json({
+    status: 'success',
+    data: { user },
+  });
+});
+
+export default { register, login, logout, getMe, updateMe };

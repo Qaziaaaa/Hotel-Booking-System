@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import * as yup from 'yup';
 import { hotelsAPI, roomsAPI, bookingsAPI } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import { Calendar, Users, MapPin, CreditCard, AlertCircle, Check, ChevronLeft } from 'lucide-react';
@@ -11,7 +12,9 @@ const BookingPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const [specialRequests, setSpecialRequests] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   const checkIn = searchParams.get('checkIn') || dayjs().format('YYYY-MM-DD');
   const checkOut = searchParams.get('checkOut') || dayjs().add(1, 'day').format('YYYY-MM-DD');
@@ -30,12 +33,30 @@ const BookingPage = () => {
   const createBookingMutation = useMutation({
     mutationFn: (data) => bookingsAPI.create(data),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['myBookings'] });
+      queryClient.invalidateQueries({ queryKey: ['rooms'] });
       navigate('/my-bookings');
     },
   });
 
   const hotel = hotelData?.data.data.hotel;
   const room = roomData?.data.data.room;
+
+  const bookingSchema = yup.object({
+    checkIn: yup
+      .date()
+      .min(new Date(new Date().setHours(0, 0, 0, 0)), 'Check-in cannot be in the past')
+      .required(),
+    checkOut: yup
+      .date()
+      .min(yup.ref('checkIn'), 'Check-out must be after check-in')
+      .required(),
+    guests: yup
+      .number()
+      .min(1)
+      .max(room?.capacity || 99, `Max ${room?.capacity} guests`)
+      .required(),
+  });
 
   if (!hotel || !room) {
     return (
@@ -50,7 +71,14 @@ const BookingPage = () => {
   const taxes = roomTotal * 0.15; // 15% taxes
   const total = roomTotal + taxes;
 
-  const handleBooking = () => {
+  const handleBooking = async () => {
+    try {
+      await bookingSchema.validate({ checkIn: new Date(checkIn), checkOut: new Date(checkOut), guests });
+    } catch (validationErr) {
+      setValidationError(validationErr.message);
+      return;
+    }
+    setValidationError('');
     createBookingMutation.mutate({
       hotelId,
       roomId,
@@ -177,6 +205,13 @@ const BookingPage = () => {
                   <p className="text-sm text-red-600">
                     {createBookingMutation.error?.response?.data?.message || 'Booking failed. Please try again.'}
                   </p>
+                </div>
+              )}
+
+              {validationError && (
+                <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-3 flex items-start space-x-2">
+                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-red-600">{validationError}</p>
                 </div>
               )}
 

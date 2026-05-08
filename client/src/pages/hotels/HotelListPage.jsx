@@ -17,8 +17,8 @@ const HotelListPage = () => {
   const page = parseInt(searchParams.get('page')) || 1;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['hotels', { location: filters.location, page }],
-    queryFn: () => hotelsAPI.getAll({ location: filters.location, page, limit: 9 }),
+    queryKey: ['hotels', { location: filters.location, page, checkIn: filters.checkIn, checkOut: filters.checkOut, guests: filters.guests }],
+    queryFn: () => hotelsAPI.getAll({ location: filters.location, page, limit: 9, checkIn: filters.checkIn, checkOut: filters.checkOut, guests: filters.guests }),
   });
 
   const handleSearch = (e) => {

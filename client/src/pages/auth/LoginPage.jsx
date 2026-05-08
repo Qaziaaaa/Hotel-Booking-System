@@ -1,38 +1,38 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useAuth } from '../../context/AuthContext';
 import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
+
+const schema = yup.object({
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+});
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuth();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   const from = location.state?.from?.pathname || '/';
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: yupResolver(schema) });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const onSubmit = async (data) => {
     setError('');
-
     try {
-      await login(formData);
+      await login(data);
       navigate(from, { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed. Please try again.');
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -59,7 +59,7 @@ const LoginPage = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
@@ -70,16 +70,16 @@ const LoginPage = () => {
                 </div>
                 <input
                   id="email"
-                  name="email"
                   type="email"
                   autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
+                  {...register('email')}
                   className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                   placeholder="you@example.com"
                 />
               </div>
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              )}
             </div>
 
             <div>
@@ -92,12 +92,9 @@ const LoginPage = () => {
                 </div>
                 <input
                   id="password"
-                  name="password"
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
+                  {...register('password')}
                   className="appearance-none block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                   placeholder="••••••••"
                 />
@@ -113,6 +110,9 @@ const LoginPage = () => {
                   )}
                 </button>
               </div>
+              {errors.password && (
+                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+              )}
             </div>
 
             <div className="flex items-center justify-between">
@@ -137,10 +137,10 @@ const LoginPage = () => {
 
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isSubmitting}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Signing in...' : 'Sign in'}
+              {isSubmitting ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
         </div>

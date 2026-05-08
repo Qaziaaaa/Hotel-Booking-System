@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { hotelsAPI, roomsAPI } from '../../services/api';
+import { hotelsAPI, roomsAPI, reviewsAPI } from '../../services/api';
 import { MapPin, Star, Wifi, Car, Coffee, Dumbbell, Waves, Check, X, ChevronLeft } from 'lucide-react';
 import dayjs from 'dayjs';
 
@@ -32,8 +32,17 @@ const HotelDetailPage = () => {
     queryFn: () => roomsAPI.getByHotel(id, { checkIn, checkOut, guests }),
   });
 
+  const [reviewPage, setReviewPage] = useState(1);
+
+  const { data: reviewsData } = useQuery({
+    queryKey: ['reviews', id, reviewPage],
+    queryFn: () => reviewsAPI.getByHotel(id, { page: reviewPage, limit: 5 }),
+  });
+
   const hotel = hotelData?.data.data.hotel;
   const rooms = roomsData?.data.data.rooms || [];
+  const reviews = reviewsData?.data.data.reviews || hotel?.reviews?.slice(0, 3) || [];
+  const reviewPagination = reviewsData?.data.data.pagination;
 
   if (hotelLoading) {
     return (
@@ -138,11 +147,11 @@ const HotelDetailPage = () => {
             </div>
 
             {/* Reviews */}
-            {hotel.reviews && hotel.reviews.length > 0 && (
+            {(reviews.length > 0) && (
               <div className="bg-white rounded-xl p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Recent Reviews</h2>
                 <div className="space-y-4">
-                  {hotel.reviews.slice(0, 3).map((review) => (
+                  {reviews.map((review) => (
                     <div key={review.id} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
                       <div className="flex items-center justify-between mb-2">
                         <span className="font-medium text-gray-900">
@@ -163,6 +172,21 @@ const HotelDetailPage = () => {
                     </div>
                   ))}
                 </div>
+                {reviewPagination && reviewPagination.pages > 1 && (
+                  <div className="flex justify-center mt-4 space-x-2">
+                    <button
+                      onClick={() => setReviewPage(p => Math.max(1, p - 1))}
+                      disabled={reviewPage === 1}
+                      className="px-3 py-1 border border-gray-300 rounded-lg disabled:opacity-50 text-sm"
+                    >Prev</button>
+                    <span className="px-3 py-1 text-sm text-gray-600">{reviewPage} / {reviewPagination.pages}</span>
+                    <button
+                      onClick={() => setReviewPage(p => Math.min(reviewPagination.pages, p + 1))}
+                      disabled={reviewPage === reviewPagination.pages}
+                      className="px-3 py-1 border border-gray-300 rounded-lg disabled:opacity-50 text-sm"
+                    >Next</button>
+                  </div>
+                )}
               </div>
             )}
           </div>

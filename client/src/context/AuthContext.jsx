@@ -1,5 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { authAPI } from '../services/api';
+import useFCM from '../hooks/useFCM';
+
+// Inner component so the hook is only mounted when the user is authenticated
+const FCMRegistrar = () => {
+  useFCM();
+  return null;
+};
 
 const AuthContext = createContext(null);
 
@@ -89,6 +96,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
+      {isAuthenticated && <FCMRegistrar />}
       {children}
     </AuthContext.Provider>
   );

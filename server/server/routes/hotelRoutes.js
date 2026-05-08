@@ -10,6 +10,8 @@ import {
 } from '../controllers/hotelController.js';
 import roomRoutes from './roomRoutes.js';
 import reviewRoutes from './reviewRoutes.js';
+import upload from '../middleware/upload.js';
+import cloudinaryUpload from '../middleware/cloudinaryUpload.js';
 
 const router = express.Router();
 
@@ -19,11 +21,11 @@ router.use('/:hotelId/reviews', reviewRoutes);
 
 router.route('/')
   .get(getAllHotels)
-  .post(protect, restrictTo('ADMIN'), createHotel);
+  .post(protect, restrictTo('ADMIN'), upload, cloudinaryUpload, createHotel);
 
 router.route('/:id')
   .get(getHotel)
-  .patch(protect, restrictTo('ADMIN'), updateHotel)
+  .patch(protect, restrictTo('ADMIN'), upload, cloudinaryUpload, updateHotel)
   .delete(protect, restrictTo('ADMIN'), deleteHotel);
 
 export default router;

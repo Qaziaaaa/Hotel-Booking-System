@@ -88,4 +88,24 @@ export const getMe = async (userId) => {
   return user;
 };
 
-export default { register, login, getMe };
+export const updateMe = async (userId, { firstName, lastName, phone }) => {
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      ...(firstName !== undefined && { firstName }),
+      ...(lastName !== undefined && { lastName }),
+      ...(phone !== undefined && { phone }),
+    },
+    select: {
+      id: true,
+      email: true,
+      firstName: true,
+      lastName: true,
+      phone: true,
+      role: true,
+    },
+  });
+  return user;
+};
+
+export default { register, login, getMe, updateMe };

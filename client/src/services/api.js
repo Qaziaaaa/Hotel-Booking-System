@@ -41,12 +41,16 @@ export const authAPI = {
   login: (data) => api.post('/auth/login', data),
   logout: () => api.get('/auth/logout'),
   getMe: () => api.get('/auth/me'),
+  updateMe: (data) => api.patch('/auth/me', data),
 };
 
 // Hotels API
 export const hotelsAPI = {
   getAll: (params) => api.get('/hotels', { params }),
   getById: (id) => api.get(`/hotels/${id}`),
+  create: (formData) => api.post('/hotels', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  update: (id, formData) => api.patch('/hotels/' + id, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  delete: (id) => api.delete('/hotels/' + id),
 };
 
 // Rooms API
@@ -54,6 +58,9 @@ export const roomsAPI = {
   getByHotel: (hotelId, params) => api.get(`/hotels/${hotelId}/rooms`, { params }),
   getById: (id) => api.get(`/rooms/${id}`),
   checkAvailability: (params) => api.get('/rooms/availability', { params }),
+  create: (hotelId, formData) => api.post('/hotels/' + hotelId + '/rooms', formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  update: (id, formData) => api.patch('/rooms/' + id, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  delete: (id) => api.delete('/rooms/' + id),
 };
 
 // Bookings API

@@ -7,6 +7,7 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [ratingError, setRatingError] = useState('');
 
   const submitReview = useMutation({
     mutationFn: (data) => reviewsAPI.create(data),
@@ -17,7 +18,11 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (rating === 0) return;
+    if (rating < 1 || rating > 5) {
+      setRatingError('Please select a rating between 1 and 5');
+      return;
+    }
+    setRatingError('');
 
     submitReview.mutate({
       hotelId: booking.hotelId,
@@ -65,6 +70,9 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
                 </button>
               ))}
             </div>
+            {ratingError && (
+              <p className="text-red-600 text-sm mt-1">{ratingError}</p>
+            )}
           </div>
 
           <div className="mb-4">

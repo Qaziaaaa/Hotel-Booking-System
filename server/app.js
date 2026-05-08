@@ -11,6 +11,7 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import aiRoutes from './routes/aiRoutes.js';
 import analyticsRoutes from './routes/analyticsRoutes.js';
 import chatbotRoutes from './routes/chatbotRoutes.js';
+import notificationRoutes from './routes/notificationRoutes.js';
 import globalErrorHandler from './middleware/errorHandler.js';
 import AppError from './utils/AppError.js';
 
@@ -52,6 +53,7 @@ app.use('/api/bookings', bookingRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 // Health check
 app.get('/health', (req, res) => {

@@ -2,7 +2,11 @@ import * as hotelService from '../services/hotelService.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const createHotel = catchAsync(async (req, res) => {
-  const hotel = await hotelService.createHotel(req.body);
+  const data = { ...req.body };
+  if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
+    data.images = [...(data.images || []), ...req.cloudinaryUrls];
+  }
+  const hotel = await hotelService.createHotel(data);
 
   res.status(201).json({
     status: 'success',
@@ -42,7 +46,11 @@ export const getHotel = catchAsync(async (req, res) => {
 });
 
 export const updateHotel = catchAsync(async (req, res) => {
-  const hotel = await hotelService.updateHotel(req.params.id, req.body);
+  const data = { ...req.body };
+  if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
+    data.images = [...(data.images || []), ...req.cloudinaryUrls];
+  }
+  const hotel = await hotelService.updateHotel(req.params.id, data);
 
   res.status(200).json({
     status: 'success',

@@ -1,10 +1,25 @@
 import cron from 'node-cron';
 import prisma from '../config/database.js';
 import { sendReminderEmail } from '../utils/email.js';
+import * as notificationService from '../services/notificationService.js';
 
 // Run every day at 9 AM
 const reminderJob = cron.schedule('0 9 * * *', async () => {
   console.log('Running reminder email job...');
+
+  // Mark past-checkout CONFIRMED bookings as COMPLETED
+  try {
+    const result = await prisma.booking.updateMany({
+      where: {
+        status: 'CONFIRMED',
+        checkOut: { lt: new Date() },
+      },
+      data: { status: 'COMPLETED' },
+    });
+    console.log(`Marked ${result.count} booking(s) as COMPLETED`);
+  } catch (error) {
+    console.error('Error marking bookings as COMPLETED:', error);
+  }
 
   try {
     const tomorrow = new Date();
@@ -58,6 +73,11 @@ const reminderJob = cron.schedule('0 9 * * *', async () => {
         console.log(`Reminder sent to ${booking.user.email}`);
       } catch (error) {
         console.error(`Failed to send reminder to ${booking.user.email}:`, error);
+      }
+      try {
+        await notificationService.sendReminderNotification(booking);
+      } catch (error) {
+        console.error(`Failed to send reminder push notification to user ${booking.userId}:`, error);
       }
     }
 

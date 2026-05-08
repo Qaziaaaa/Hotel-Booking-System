@@ -2,6 +2,7 @@ import prisma from '../config/database.js';
 import AppError from '../utils/AppError.js';
 import { checkRoomAvailability } from './roomService.js';
 import { sendBookingConfirmation, sendBookingCancellation } from '../utils/email.js';
+import * as notificationService from './notificationService.js';
 
 const calculateNights = (checkIn, checkOut) => {
   const oneDay = 24 * 60 * 60 * 1000;
@@ -104,6 +105,13 @@ export const createBooking = async (data, user) => {
     });
   } catch (error) {
     console.error('Failed to send confirmation email:', error);
+  }
+
+  // Send push notification
+  try {
+    await notificationService.sendBookingConfirmedNotification(booking);
+  } catch (error) {
+    console.error('Failed to send booking confirmation push notification:', error);
   }
 
   return booking;
@@ -239,6 +247,13 @@ export const cancelBooking = async (id, userId) => {
     });
   } catch (error) {
     console.error('Failed to send cancellation email:', error);
+  }
+
+  // Send push notification
+  try {
+    await notificationService.sendBookingCancelledNotification(updatedBooking);
+  } catch (error) {
+    console.error('Failed to send booking cancellation push notification:', error);
   }
 
   return updatedBooking;

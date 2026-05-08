@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, MapPin, Users, Calendar, Star, ArrowRight } from 'lucide-react';
+import * as yup from 'yup';
 import dayjs from 'dayjs';
 import AIRecommendations from '../components/AIRecommendations';
 
@@ -12,9 +13,40 @@ const HomePage = () => {
     checkOut: dayjs().add(1, 'day').format('YYYY-MM-DD'),
     guests: 2,
   });
+  const [searchErrors, setSearchErrors] = useState({});
 
-  const handleSearch = (e) => {
+  const searchSchema = yup.object({
+    checkIn: yup
+      .date()
+      .min(new Date(new Date().setHours(0, 0, 0, 0)), 'Check-in cannot be in the past')
+      .required(),
+    checkOut: yup
+      .date()
+      .min(yup.ref('checkIn'), 'Check-out must be after check-in')
+      .required(),
+    guests: yup.number().min(1, 'At least 1 guest required').required(),
+  });
+
+  const handleSearch = async (e) => {
     e.preventDefault();
+    try {
+      await searchSchema.validate(
+        {
+          checkIn: new Date(searchParams.checkIn),
+          checkOut: new Date(searchParams.checkOut),
+          guests: searchParams.guests,
+        },
+        { abortEarly: false }
+      );
+      setSearchErrors({});
+    } catch (err) {
+      const errors = {};
+      err.inner?.forEach((e) => {
+        errors[e.path] = e.message;
+      });
+      setSearchErrors(errors);
+      return;
+    }
     const params = new URLSearchParams();
     if (searchParams.location) params.append('location', searchParams.location);
     params.append('checkIn', searchParams.checkIn);
@@ -89,6 +121,9 @@ const HomePage = () => {
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
+                {searchErrors.checkIn && (
+                  <p className="text-red-500 text-xs mt-1">{searchErrors.checkIn}</p>
+                )}
               </div>
 
               <div>
@@ -103,6 +138,9 @@ const HomePage = () => {
                     className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   />
                 </div>
+                {searchErrors.checkOut && (
+                  <p className="text-red-500 text-xs mt-1">{searchErrors.checkOut}</p>
+                )}
               </div>
 
               <div>
@@ -121,6 +159,9 @@ const HomePage = () => {
                     ))}
                   </select>
                 </div>
+                {searchErrors.guests && (
+                  <p className="text-red-500 text-xs mt-1">{searchErrors.guests}</p>
+                )}
               </div>
             </div>
 
