@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const Footer = () => (
-  <footer className="bg-primary-container border-t border-outline-variant/20">
+  <footer className="bg-primary-container border-t border-white/10" style={{ backgroundColor: '#131b2e' }}>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-5 md:px-16 py-20 max-w-[1440px] mx-auto">
       <div className="md:col-span-1">
         <div className="font-serif text-2xl text-white mb-6">Ascendant Luxury</div>

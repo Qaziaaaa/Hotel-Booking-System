@@ -49,7 +49,7 @@ export default {
         'error-container': '#ffdad6',
         'tertiary-fixed': '#e0e3e5',
         'secondary-container': '#fed65b',
-        'surface-container-low': '#eff4ff',
+        'surface-container-low': '#f5f5f5',
         'on-secondary': '#ffffff',
         'secondary': '#735c00',
         // Keep primary-600 alias for backward compat

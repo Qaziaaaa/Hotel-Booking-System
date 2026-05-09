@@ -89,7 +89,7 @@ const LoginPage = () => {
                 autoComplete="email"
                 {...register('email')}
                 placeholder="you@example.com"
-                className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
               />
               {errors.email && (
                 <p className="mt-1 font-sans text-sm text-error">{errors.email.message}</p>
@@ -108,7 +108,7 @@ const LoginPage = () => {
                   autoComplete="current-password"
                   {...register('password')}
                   placeholder="••••••••"
-                  className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 pr-12 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                  className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 pr-12 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
                 />
                 <button
                   type="button"

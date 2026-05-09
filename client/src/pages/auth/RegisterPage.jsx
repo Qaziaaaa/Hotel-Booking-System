@@ -97,7 +97,7 @@ const RegisterPage = () => {
                   type="text"
                   {...register('firstName')}
                   placeholder="John"
-                  className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                  className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
                 />
                 {errors.firstName && (
                   <p className="mt-1 font-sans text-xs text-error">{errors.firstName.message}</p>
@@ -112,7 +112,7 @@ const RegisterPage = () => {
                   type="text"
                   {...register('lastName')}
                   placeholder="Doe"
-                  className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                  className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
                 />
                 {errors.lastName && (
                   <p className="mt-1 font-sans text-xs text-error">{errors.lastName.message}</p>
@@ -131,7 +131,7 @@ const RegisterPage = () => {
                 autoComplete="email"
                 {...register('email')}
                 placeholder="you@example.com"
-                className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
               />
               {errors.email && (
                 <p className="mt-1 font-sans text-sm text-error">{errors.email.message}</p>
@@ -148,7 +148,7 @@ const RegisterPage = () => {
                 type="tel"
                 {...register('phone')}
                 placeholder="+1 (555) 123-4567"
-                className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
               />
               {errors.phone && (
                 <p className="mt-1 font-sans text-sm text-error">{errors.phone.message}</p>
@@ -166,7 +166,7 @@ const RegisterPage = () => {
                   type={showPassword ? 'text' : 'password'}
                   {...register('password')}
                   placeholder="••••••••"
-                  className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 pr-12 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                  className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 pr-12 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
                 />
                 <button
                   type="button"
@@ -196,7 +196,7 @@ const RegisterPage = () => {
                 type={showPassword ? 'text' : 'password'}
                 {...register('confirmPassword')}
                 placeholder="••••••••"
-                className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
               />
               {errors.confirmPassword && (
                 <p className="mt-1 font-sans text-sm text-error">{errors.confirmPassword.message}</p>
