@@ -36,7 +36,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-1 min-h-[600px]">
+    <div className="flex flex-1">
       {/* Left panel — hidden on mobile */}
       <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-16 overflow-hidden flex-shrink-0" style={{ backgroundColor: '#131b2e' }}>
         {/* Background image */}
