@@ -177,11 +177,14 @@ async function main() {
   for (const hotelData of hotels) {
     const { rooms, ...hotelInfo } = hotelData;
 
-    const hotel = await prisma.hotel.upsert({
-      where: { name: hotelInfo.name },
-      update: {},
-      create: hotelInfo,
-    });
+    // Check if hotel already exists to make seed idempotent
+    const existing = await prisma.hotel.findFirst({ where: { name: hotelInfo.name } });
+    if (existing) {
+      console.log('Hotel already exists, skipping:', hotelInfo.name);
+      continue;
+    }
+
+    const hotel = await prisma.hotel.create({ data: hotelInfo });
     console.log('Created hotel:', hotel.name);
 
     for (const roomData of rooms) {
