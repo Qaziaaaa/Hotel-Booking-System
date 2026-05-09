@@ -56,19 +56,19 @@ const MyBookingsPage = () => {
     switch (status) {
       case 'CONFIRMED':
         return (
-          <span className="inline-block px-3 py-1 bg-surface-container-low text-secondary rounded-full font-sans text-[11px] font-semibold uppercase tracking-widest">
+          <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-sans text-[11px] font-semibold uppercase tracking-widest">
             Confirmed
           </span>
         );
       case 'PENDING':
         return (
-          <span className="inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-sans text-[11px] font-semibold uppercase tracking-widest">
+          <span className="inline-block px-3 py-1 bg-amber-50 text-amber-800 border border-amber-200 rounded-full font-sans text-[11px] font-semibold uppercase tracking-widest">
             Pending
           </span>
         );
       case 'COMPLETED':
         return (
-          <span className="inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-sans text-[11px] font-semibold uppercase tracking-widest">
+          <span className="inline-block px-3 py-1 bg-surface-container text-on-surface-variant border border-outline-variant/50 rounded-full font-sans text-[11px] font-semibold uppercase tracking-widest">
             Completed
           </span>
         );

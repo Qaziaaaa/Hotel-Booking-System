@@ -386,7 +386,7 @@ const HomePage = () => {
               <h2 className="font-serif text-[48px] leading-tight font-semibold text-on-primary mb-6">
                 Let AI Plan Your Perfect Escape
               </h2>
-              <p className="font-sans text-body-lg text-on-primary-container mb-8">
+              <p className="font-sans text-body-lg text-white/80 mb-8">
                 Our intelligent concierge analyzes your preferences to suggest tailored itineraries and properties that match your unique taste.
               </p>
 

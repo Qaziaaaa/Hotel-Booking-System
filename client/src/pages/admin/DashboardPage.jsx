@@ -37,10 +37,10 @@ const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 // ─── Shared UI helpers ───────────────────────────────────────────────────────
 const ModalWrapper = ({ title, onClose, children }) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-      <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>
-        <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+    <div className="bg-surface-container-lowest rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <div className="flex items-center justify-between p-6 border-b border-outline-variant">
+        <h2 className="text-lg font-semibold text-on-surface">{title}</h2>
+        <button onClick={onClose} className="text-on-surface-variant hover:text-on-surface">
           <X className="h-5 w-5" />
         </button>
       </div>
@@ -51,14 +51,14 @@ const ModalWrapper = ({ title, onClose, children }) => (
 
 const FormField = ({ label, value, onChange, type = 'text', textarea = false, required = false }) => (
   <div>
-    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{label}</label>
+    <label className="block text-sm font-medium text-on-surface-variant mb-1">{label}</label>
     {textarea ? (
       <textarea
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
         rows={3}
-        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        className="w-full px-3 py-2 border border-outline-variant rounded-lg bg-surface text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
       />
     ) : (
       <input
@@ -66,7 +66,7 @@ const FormField = ({ label, value, onChange, type = 'text', textarea = false, re
         value={value}
         onChange={(e) => onChange(e.target.value)}
         required={required}
-        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+        className="w-full px-3 py-2 border border-outline-variant rounded-lg bg-surface text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
       />
     )}
   </div>
@@ -110,16 +110,16 @@ const CreateHotelModal = ({ onClose, queryClient }) => {
         <FormField label="Description" value={form.description} onChange={(v) => setForm({ ...form, description: v })} textarea required />
         <FormField label="Amenities (comma-separated)" value={form.amenities} onChange={(v) => setForm({ ...form, amenities: v })} />
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Images</label>
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Images</label>
           <input type="file" multiple accept="image/*" onChange={(e) => setImageFiles(Array.from(e.target.files))}
-            className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
+            className="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface-container-low file:text-on-surface hover:file:bg-surface-container" />
         </div>
         {mutation.isError && (
-          <p className="text-red-600 text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
+          <p className="text-error text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
         )}
         <div className="flex justify-end gap-3 pt-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">Cancel</button>
-          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50">
+          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-on-surface bg-surface-container hover:bg-surface-container-high rounded-lg">Cancel</button>
+          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-on-primary bg-primary-container rounded-lg hover:bg-surface-tint disabled:opacity-50">
             {mutation.isPending ? 'Creating...' : 'Create Hotel'}
           </button>
         </div>
@@ -171,16 +171,16 @@ const EditHotelModal = ({ hotel, onClose, queryClient }) => {
         <FormField label="Description" value={form.description} onChange={(v) => setForm({ ...form, description: v })} textarea required />
         <FormField label="Amenities (comma-separated)" value={form.amenities} onChange={(v) => setForm({ ...form, amenities: v })} />
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Replace Images (optional)</label>
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Replace Images (optional)</label>
           <input type="file" multiple accept="image/*" onChange={(e) => setImageFiles(Array.from(e.target.files))}
-            className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
+            className="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface-container-low file:text-on-surface hover:file:bg-surface-container" />
         </div>
         {mutation.isError && (
-          <p className="text-red-600 text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
+          <p className="text-error text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
         )}
         <div className="flex justify-end gap-3 pt-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">Cancel</button>
-          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50">
+          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-on-surface bg-surface-container hover:bg-surface-container-high rounded-lg">Cancel</button>
+          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-on-primary bg-primary-container rounded-lg hover:bg-surface-tint disabled:opacity-50">
             {mutation.isPending ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
@@ -228,16 +228,16 @@ const CreateRoomModal = ({ hotelId, onClose, queryClient }) => {
         <FormField label="Description (optional)" value={form.description} onChange={(v) => setForm({ ...form, description: v })} textarea />
         <FormField label="Amenities (comma-separated)" value={form.amenities} onChange={(v) => setForm({ ...form, amenities: v })} />
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Images</label>
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Images</label>
           <input type="file" multiple accept="image/*" onChange={(e) => setImageFiles(Array.from(e.target.files))}
-            className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
+            className="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface-container-low file:text-on-surface hover:file:bg-surface-container" />
         </div>
         {mutation.isError && (
-          <p className="text-red-600 text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
+          <p className="text-error text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
         )}
         <div className="flex justify-end gap-3 pt-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">Cancel</button>
-          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50">
+          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-on-surface bg-surface-container hover:bg-surface-container-high rounded-lg">Cancel</button>
+          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-on-primary bg-primary-container rounded-lg hover:bg-surface-tint disabled:opacity-50">
             {mutation.isPending ? 'Creating...' : 'Create Room'}
           </button>
         </div>
@@ -289,16 +289,16 @@ const EditRoomModal = ({ room, hotelId, onClose, queryClient }) => {
         <FormField label="Description (optional)" value={form.description} onChange={(v) => setForm({ ...form, description: v })} textarea />
         <FormField label="Amenities (comma-separated)" value={form.amenities} onChange={(v) => setForm({ ...form, amenities: v })} />
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Replace Images (optional)</label>
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Replace Images (optional)</label>
           <input type="file" multiple accept="image/*" onChange={(e) => setImageFiles(Array.from(e.target.files))}
-            className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
+            className="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface-container-low file:text-on-surface hover:file:bg-surface-container" />
         </div>
         {mutation.isError && (
-          <p className="text-red-600 text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
+          <p className="text-error text-sm">{mutation.error?.response?.data?.message || 'An error occurred'}</p>
         )}
         <div className="flex justify-end gap-3 pt-2">
-          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">Cancel</button>
-          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50">
+          <button type="button" onClick={onClose} className="px-4 py-2 text-sm font-medium text-on-surface bg-surface-container hover:bg-surface-container-high rounded-lg">Cancel</button>
+          <button type="submit" disabled={mutation.isPending} className="px-4 py-2 text-sm font-medium text-on-primary bg-primary-container rounded-lg hover:bg-surface-tint disabled:opacity-50">
             {mutation.isPending ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
@@ -361,10 +361,10 @@ const HotelsTab = () => {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Hotels</h2>
+        <h2 className="text-xl font-semibold text-on-surface">Hotels</h2>
         <button
           onClick={() => setShowCreateHotel(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm font-medium"
+          className="flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary rounded-lg hover:bg-surface-tint text-sm font-medium"
         >
           <Plus className="h-4 w-4" />
           Add Hotel
@@ -373,42 +373,42 @@ const HotelsTab = () => {
 
       {hotelsLoading ? (
         <div className="flex items-center justify-center py-12">
-          <Loader2 className="h-8 w-8 text-primary-600 animate-spin" />
+          <Loader2 className="h-8 w-8 text-secondary animate-spin" />
         </div>
       ) : hotels.length === 0 ? (
-        <div className="text-center py-12 text-gray-500 dark:text-gray-400">No hotels found. Add your first hotel.</div>
+        <div className="text-center py-12 text-on-surface-variant">No hotels found. Add your first hotel.</div>
       ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden">
+        <div className="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
-                <th className="text-left px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Name</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Location</th>
-                <th className="text-left px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Rooms</th>
-                <th className="text-right px-6 py-3 font-medium text-gray-500 dark:text-gray-400">Actions</th>
+              <tr className="border-b border-outline-variant bg-surface-container-low">
+                <th className="text-left px-6 py-3 font-medium text-on-surface-variant">Name</th>
+                <th className="text-left px-6 py-3 font-medium text-on-surface-variant">Location</th>
+                <th className="text-left px-6 py-3 font-medium text-on-surface-variant">Rooms</th>
+                <th className="text-right px-6 py-3 font-medium text-on-surface-variant">Actions</th>
               </tr>
             </thead>
             <tbody>
               {hotels.map((hotel) => (
                 <>
-                  <tr key={hotel.id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/30">
-                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">{hotel.name}</td>
-                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{hotel.location}</td>
-                    <td className="px-6 py-4 text-gray-600 dark:text-gray-300">
+                  <tr key={hotel.id} className="border-b border-outline-variant/30 hover:bg-surface-container-low">
+                    <td className="px-6 py-4 font-medium text-on-surface">{hotel.name}</td>
+                    <td className="px-6 py-4 text-on-surface-variant">{hotel.location}</td>
+                    <td className="px-6 py-4 text-on-surface-variant">
                       {hotel._count?.rooms ?? hotel.rooms?.length ?? 0}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => setExpandedHotelId(expandedHotelId === hotel.id ? null : hotel.id)}
-                          className="p-1.5 text-gray-500 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                          className="p-1.5 text-on-surface-variant hover:text-secondary"
                           title="View rooms"
                         >
                           {expandedHotelId === hotel.id ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                         </button>
                         <button
                           onClick={() => setEditHotel(hotel)}
-                          className="p-1.5 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                          className="p-1.5 text-on-surface-variant hover:text-secondary"
                           title="Edit hotel"
                         >
                           <Edit className="h-4 w-4" />
@@ -416,7 +416,7 @@ const HotelsTab = () => {
                         <button
                           onClick={() => handleDeleteHotel(hotel)}
                           disabled={deleteHotelMutation.isPending}
-                          className="p-1.5 text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 disabled:opacity-50"
+                          className="p-1.5 text-on-surface-variant hover:text-error disabled:opacity-50"
                           title="Delete hotel"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -425,46 +425,46 @@ const HotelsTab = () => {
                     </td>
                   </tr>
                   {expandedHotelId === hotel.id && (
-                    <tr key={`${hotel.id}-rooms`} className="bg-gray-50 dark:bg-gray-700/20">
+                    <tr key={`${hotel.id}-rooms`} className="bg-surface-container-low">
                       <td colSpan={4} className="px-6 py-4">
                         <div className="flex justify-between items-center mb-3">
-                          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300">Rooms for {hotel.name}</h3>
+                          <h3 className="text-sm font-semibold text-on-surface-variant">Rooms for {hotel.name}</h3>
                           <button
                             onClick={() => setShowCreateRoom(true)}
-                            className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 text-xs font-medium"
+                            className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-on-secondary rounded-lg hover:bg-on-secondary-container text-xs font-medium"
                           >
                             <Plus className="h-3.5 w-3.5" />
                             Add Room
                           </button>
                         </div>
                         {roomsLoading ? (
-                          <div className="flex items-center gap-2 py-4 text-gray-500 dark:text-gray-400">
+                          <div className="flex items-center gap-2 py-4 text-on-surface-variant">
                             <Loader2 className="h-4 w-4 animate-spin" />
                             <span className="text-sm">Loading rooms...</span>
                           </div>
                         ) : rooms.length === 0 ? (
-                          <p className="text-sm text-gray-500 dark:text-gray-400 py-2">No rooms yet. Add the first room.</p>
+                          <p className="text-sm text-on-surface-variant py-2">No rooms yet. Add the first room.</p>
                         ) : (
                           <table className="w-full text-sm">
                             <thead>
-                              <tr className="border-b border-gray-200 dark:border-gray-600">
-                                <th className="text-left py-2 pr-4 font-medium text-gray-500 dark:text-gray-400">Room Type</th>
-                                <th className="text-left py-2 pr-4 font-medium text-gray-500 dark:text-gray-400">Price/Night</th>
-                                <th className="text-left py-2 pr-4 font-medium text-gray-500 dark:text-gray-400">Capacity</th>
-                                <th className="text-right py-2 font-medium text-gray-500 dark:text-gray-400">Actions</th>
+                              <tr className="border-b border-outline-variant">
+                                <th className="text-left py-2 pr-4 font-medium text-on-surface-variant">Room Type</th>
+                                <th className="text-left py-2 pr-4 font-medium text-on-surface-variant">Price/Night</th>
+                                <th className="text-left py-2 pr-4 font-medium text-on-surface-variant">Capacity</th>
+                                <th className="text-right py-2 font-medium text-on-surface-variant">Actions</th>
                               </tr>
                             </thead>
                             <tbody>
                               {rooms.map((room) => (
-                                <tr key={room.id} className="border-b border-gray-100 dark:border-gray-600/50">
-                                  <td className="py-2 pr-4 text-gray-900 dark:text-white">{room.roomType}</td>
-                                  <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">${room.price}</td>
-                                  <td className="py-2 pr-4 text-gray-600 dark:text-gray-300">{room.capacity} guests</td>
+                                <tr key={room.id} className="border-b border-outline-variant/30">
+                                  <td className="py-2 pr-4 text-on-surface">{room.roomType}</td>
+                                  <td className="py-2 pr-4 text-on-surface-variant">${room.price}</td>
+                                  <td className="py-2 pr-4 text-on-surface-variant">{room.capacity} guests</td>
                                   <td className="py-2">
                                     <div className="flex items-center justify-end gap-2">
                                       <button
                                         onClick={() => setEditRoom(room)}
-                                        className="p-1 text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400"
+                                        className="p-1 text-on-surface-variant hover:text-secondary"
                                         title="Edit room"
                                       >
                                         <Edit className="h-3.5 w-3.5" />
@@ -472,7 +472,7 @@ const HotelsTab = () => {
                                       <button
                                         onClick={() => handleDeleteRoom(room)}
                                         disabled={deleteRoomMutation.isPending}
-                                        className="p-1 text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 disabled:opacity-50"
+                                        className="p-1 text-on-surface-variant hover:text-error disabled:opacity-50"
                                         title="Delete room"
                                       >
                                         <Trash2 className="h-3.5 w-3.5" />
@@ -544,20 +544,20 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
+    <div className="min-h-screen bg-background py-8 pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Monitor your hotel booking performance</p>
+            <h1 className="text-3xl font-bold text-on-surface">Admin Dashboard</h1>
+            <p className="text-on-surface-variant mt-1">Monitor your hotel booking performance</p>
           </div>
           {activeTab === 'analytics' && (
             <div className="mt-4 sm:mt-0">
               <select
                 value={period}
                 onChange={(e) => setPeriod(e.target.value)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500"
+                className="px-4 py-2 border border-outline-variant rounded-lg bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
               >
                 {periodOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -568,13 +568,13 @@ const DashboardPage = () => {
         </div>
 
         {/* Tab Bar */}
-        <div className="flex gap-1 mb-8 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex gap-1 mb-8 border-b border-outline-variant">
           <button
             onClick={() => setActiveTab('analytics')}
             className={`px-5 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${
               activeTab === 'analytics'
-                ? 'bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border border-b-white dark:border-gray-700 dark:border-b-gray-800 -mb-px'
-                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                ? 'bg-surface-container-lowest text-secondary border border-outline-variant border-b-surface-container-lowest -mb-px'
+                : 'text-on-surface-variant hover:text-on-surface'
             }`}
           >
             Analytics
@@ -583,8 +583,8 @@ const DashboardPage = () => {
             onClick={() => setActiveTab('hotels')}
             className={`px-5 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${
               activeTab === 'hotels'
-                ? 'bg-white dark:bg-gray-800 text-primary-600 dark:text-primary-400 border border-b-white dark:border-gray-700 dark:border-b-gray-800 -mb-px'
-                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
+                ? 'bg-surface-container-lowest text-secondary border border-outline-variant border-b-surface-container-lowest -mb-px'
+                : 'text-on-surface-variant hover:text-on-surface'
             }`}
           >
             Hotels
@@ -597,66 +597,66 @@ const DashboardPage = () => {
             {isLoading ? (
               <div className="flex items-center justify-center py-24">
                 <div className="flex items-center space-x-3">
-                  <Loader2 className="h-8 w-8 text-primary-600 animate-spin" />
-                  <span className="text-gray-600 dark:text-gray-300">Loading analytics...</span>
+                  <Loader2 className="h-8 w-8 text-secondary animate-spin" />
+                  <span className="text-on-surface-variant">Loading analytics...</span>
                 </div>
               </div>
             ) : (
               <>
                 {/* Summary Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Total Bookings</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <p className="text-sm text-on-surface-variant">Total Bookings</p>
+                        <p className="text-2xl font-bold text-on-surface">
                           {stats?.summary?.totalBookings || 0}
                         </p>
                       </div>
-                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                        <Calendar className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                      <div className="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center">
+                        <Calendar className="h-6 w-6 text-secondary" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Revenue</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <p className="text-sm text-on-surface-variant">Revenue</p>
+                        <p className="text-2xl font-bold text-on-surface">
                           {formatCurrency(stats?.summary?.totalRevenue || 0)}
                         </p>
                       </div>
-                      <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
-                        <DollarSign className="h-6 w-6 text-green-600 dark:text-green-400" />
+                      <div className="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center">
+                        <DollarSign className="h-6 w-6 text-secondary" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">New Users</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <p className="text-sm text-on-surface-variant">New Users</p>
+                        <p className="text-2xl font-bold text-on-surface">
                           {stats?.summary?.newUsers || 0}
                         </p>
                       </div>
-                      <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
-                        <Users className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                      <div className="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center">
+                        <Users className="h-6 w-6 text-secondary" />
                       </div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Occupancy Rate</p>
-                        <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                        <p className="text-sm text-on-surface-variant">Occupancy Rate</p>
+                        <p className="text-2xl font-bold text-on-surface">
                           {(stats?.summary?.occupancyRate || 0).toFixed(1)}%
                         </p>
                       </div>
-                      <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center">
-                        <Hotel className="h-6 w-6 text-yellow-600 dark:text-yellow-400" />
+                      <div className="w-12 h-12 bg-surface-container-low rounded-lg flex items-center justify-center">
+                        <Hotel className="h-6 w-6 text-secondary" />
                       </div>
                     </div>
                   </div>
@@ -665,8 +665,8 @@ const DashboardPage = () => {
                 {/* Charts */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                   {/* Bookings Over Time */}
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Bookings Over Time</h3>
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-on-surface mb-4">Bookings Over Time</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={stats?.bookingsOverTime || []}>
@@ -695,8 +695,8 @@ const DashboardPage = () => {
                   </div>
 
                   {/* Revenue Over Time */}
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Revenue Over Time</h3>
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-on-surface mb-4">Revenue Over Time</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={stats?.revenueOverTime || []}>
@@ -723,8 +723,8 @@ const DashboardPage = () => {
                 {/* Bottom Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Bookings by Status */}
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Bookings by Status</h3>
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-on-surface mb-4">Bookings by Status</h3>
                     <div className="h-64">
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
@@ -751,27 +751,27 @@ const DashboardPage = () => {
                   </div>
 
                   {/* Top Hotels */}
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Performing Hotels</h3>
+                  <div className="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-6 shadow-sm">
+                    <h3 className="text-lg font-semibold text-on-surface mb-4">Top Performing Hotels</h3>
                     <div className="space-y-4">
                       {(stats?.topHotels || []).map((hotel, idx) => (
                         <div key={hotel.hotelId} className="flex items-center justify-between">
                           <div className="flex items-center space-x-3">
-                            <div className="w-8 h-8 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                              <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{idx + 1}</span>
+                            <div className="w-8 h-8 bg-surface-container-low rounded-lg flex items-center justify-center">
+                              <span className="text-sm font-bold text-secondary">{idx + 1}</span>
                             </div>
                             <div>
-                              <p className="font-medium text-gray-900 dark:text-white">{hotel.hotelName}</p>
-                              <p className="text-sm text-gray-500 dark:text-gray-400">{hotel._count.id} bookings</p>
+                              <p className="font-medium text-on-surface">{hotel.hotelName}</p>
+                              <p className="text-sm text-on-surface-variant">{hotel._count.id} bookings</p>
                             </div>
                           </div>
-                          <p className="font-semibold text-green-600 dark:text-green-400">
+                          <p className="font-semibold text-secondary">
                             {formatCurrency(hotel._sum.totalPrice || 0)}
                           </p>
                         </div>
                       ))}
                       {(!stats?.topHotels || stats.topHotels.length === 0) && (
-                        <p className="text-gray-500 dark:text-gray-400 text-center py-8">No data available</p>
+                        <p className="text-on-surface-variant text-center py-8">No data available</p>
                       )}
                     </div>
                   </div>

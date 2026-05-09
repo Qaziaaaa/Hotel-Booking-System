@@ -55,7 +55,7 @@ const HotelListPage = () => {
       <div className="sticky top-16 z-30 bg-surface-container-lowest border-b border-outline-variant/20 shadow-ambient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <form onSubmit={handleSearch}>
-            <div className="flex items-center gap-2 bg-background border border-outline-variant/40 rounded-full px-4 py-2 shadow-sm">
+            <div className="flex items-center gap-2 bg-background border border-outline-variant rounded-full px-4 py-2 shadow-sm">
               {/* Location */}
               <span className="material-symbols-outlined text-on-surface-variant text-[20px]">location_on</span>
               <input

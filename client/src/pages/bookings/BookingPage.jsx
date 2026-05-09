@@ -257,24 +257,24 @@ const BookingPage = () => {
               </div>
 
               {/* Price Summary Card */}
-              <div className="bg-primary-container text-on-primary-container rounded-xl shadow-lg p-8">
-                <h3 className="font-serif text-[24px] text-on-primary mb-6">Price Summary</h3>
+              <div className="bg-primary-container rounded-xl shadow-lg p-8">
+                <h3 className="font-serif text-[24px] text-white mb-6">Price Summary</h3>
 
-                <div className="space-y-4 mb-6 border-b border-on-primary-container/30 pb-6">
+                <div className="space-y-4 mb-6 border-b border-white/20 pb-6">
                   <div className="flex justify-between items-center">
-                    <span className="font-sans text-base opacity-80">
+                    <span className="font-sans text-base text-white/80">
                       ${room.price} × {nights} night{nights !== 1 ? 's' : ''}
                     </span>
-                    <span className="font-sans font-medium text-on-primary">${roomTotal.toFixed(2)}</span>
+                    <span className="font-sans font-medium text-white">${roomTotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="font-sans text-base opacity-80">Taxes &amp; Fees (15%)</span>
-                    <span className="font-sans font-medium text-on-primary">${taxes.toFixed(2)}</span>
+                    <span className="font-sans text-base text-white/80">Taxes &amp; Fees (15%)</span>
+                    <span className="font-sans font-medium text-white">${taxes.toFixed(2)}</span>
                   </div>
                 </div>
 
                 <div className="flex justify-between items-end mb-8">
-                  <span className="font-serif text-[20px] text-on-primary">Total</span>
+                  <span className="font-serif text-[20px] text-white">Total</span>
                   <span className="font-serif text-[36px] text-secondary-fixed-dim leading-none">
                     ${total.toFixed(2)}
                   </span>
@@ -308,12 +308,12 @@ const BookingPage = () => {
                   )}
                 </button>
 
-                <p className="font-sans text-[12px] text-center opacity-70">
+                <p className="font-sans text-[12px] text-center text-white/70">
                   You won't be charged yet. Payment processed at the hotel.
                 </p>
 
                 {/* Trust Badges */}
-                <div className="flex justify-center gap-6 mt-4 opacity-60">
+                <div className="flex justify-center gap-6 mt-4 text-white/60">
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-[20px]">lock</span>
                     <span className="font-sans text-[10px] font-semibold uppercase tracking-widest">Secure Payment</span>

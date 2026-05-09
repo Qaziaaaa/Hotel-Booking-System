@@ -32,16 +32,28 @@ const Navbar = () => {
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
       <div className="flex justify-between items-center w-full px-5 md:px-16 py-4 max-w-[1440px] mx-auto">
         {/* Logo */}
-        <Link to="/" className="font-serif text-2xl font-semibold text-on-surface">
+        <Link to="/" className={`font-serif text-2xl font-semibold transition-colors duration-300 ${isHomePage && !scrolled ? 'text-white' : 'text-on-surface'}`}>
           Ascendant Luxury
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">
-          <Link to="/hotels" className="text-secondary border-b-2 border-secondary pb-1 font-sans hover:text-secondary transition-colors duration-300">
+          <Link
+            to="/hotels"
+            className={`font-sans transition-colors duration-300 ${
+              isHomePage && !scrolled
+                ? 'text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim pb-1'
+                : 'text-secondary border-b-2 border-secondary pb-1'
+            }`}
+          >
             Hotels
           </Link>
-          <a href="#" className="text-on-surface font-sans hover:text-secondary transition-colors duration-300">
+          <a
+            href="#"
+            className={`font-sans transition-colors duration-300 ${
+              isHomePage && !scrolled ? 'text-white/90 hover:text-white' : 'text-on-surface hover:text-secondary'
+            }`}
+          >
             About
           </a>
         </nav>
@@ -52,13 +64,13 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 text-on-surface hover:text-secondary transition-colors duration-300"
+                className={`flex items-center gap-2 transition-colors duration-300 ${isHomePage && !scrolled ? 'text-white/90 hover:text-white' : 'text-on-surface hover:text-secondary'}`}
               >
                 <div className="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-sans font-semibold text-sm">
                   {user?.firstName?.[0]}{user?.lastName?.[0]}
                 </div>
-                <span className="font-sans text-sm">{user?.firstName}</span>
-                <span className="material-symbols-outlined text-base">expand_more</span>
+                <span className={`font-sans text-sm ${isHomePage && !scrolled ? 'text-white/90' : 'text-on-surface'}`}>{user?.firstName}</span>
+                <span className={`material-symbols-outlined text-base ${isHomePage && !scrolled ? 'text-white/90' : 'text-on-surface'}`}>expand_more</span>
               </button>
               {dropdownOpen && (
                 <div className="absolute right-0 top-full mt-2 w-52 bg-surface-container-lowest rounded-xl shadow-ambient-hover border border-outline-variant/30 py-2 z-50">
@@ -86,10 +98,19 @@ const Navbar = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-secondary font-sans hover:text-on-secondary-container transition-colors duration-300">
+              <Link
+                to="/login"
+                className={`font-sans transition-colors duration-300 ${
+                  isHomePage && !scrolled ? 'text-white/90 hover:text-white' : 'text-secondary hover:text-on-secondary-container'
+                }`}
+              >
                 Login/Register
               </Link>
-              <button className="text-on-surface hover:text-secondary transition-colors duration-300">
+              <button
+                className={`transition-colors duration-300 ${
+                  isHomePage && !scrolled ? 'text-white/90 hover:text-white' : 'text-on-surface hover:text-secondary'
+                }`}
+              >
                 <span className="material-symbols-outlined">person</span>
               </button>
             </>
@@ -97,7 +118,10 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Hamburger */}
-        <button className="md:hidden text-on-surface" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className={`md:hidden transition-colors duration-300 ${isHomePage && !scrolled ? 'text-white' : 'text-on-surface'}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
         </button>
       </div>

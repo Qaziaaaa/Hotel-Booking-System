@@ -100,12 +100,12 @@ const ProfilePage = () => {
               {/* Total Bookings — full width */}
               <div className="col-span-2 bg-primary-container rounded-xl p-6 flex items-center justify-between">
                 <div>
-                  <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-primary-container mb-1">
+                  <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-white/70 mb-1">
                     Total Bookings
                   </p>
-                  <p className="font-serif text-[32px] text-on-primary leading-none">{totalBookings}</p>
+                  <p className="font-serif text-[32px] text-white leading-none">{totalBookings}</p>
                 </div>
-                <span className="material-symbols-outlined text-[40px] text-on-primary-container opacity-60">luggage</span>
+                <span className="material-symbols-outlined text-[40px] text-white/50">luggage</span>
               </div>
 
               {/* Reviews Written */}

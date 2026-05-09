@@ -57,6 +57,12 @@ export default {
         'primary-700': '#0f1520',
         'primary-100': '#dce9ff',
         'primary-50': '#eff4ff',
+        // Semantic aliases for dark-surface text
+        'navy': '#131b2e',
+        'gold': '#e9c349',
+        'gold-dark': '#735c00',
+        'navy-text': '#ffffff',
+        'navy-text-muted': 'rgba(255,255,255,0.7)',
       },
       borderRadius: {
         DEFAULT: '0.25rem',
