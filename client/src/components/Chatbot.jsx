@@ -17,7 +17,6 @@ const Chatbot = () => {
 
   // Hide chatbot on auth pages
   const isAuthPage = ['/login', '/register'].includes(location.pathname);
-  if (isAuthPage) return null;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -26,6 +25,8 @@ const Chatbot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  if (isAuthPage) return null;
 
   const handleSend = async (e) => {
     e.preventDefault();
