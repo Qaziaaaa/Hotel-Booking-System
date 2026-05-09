@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ascendant Luxury - Hotels in Santorini</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#745c00",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "primary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error": "#ba1a1a",
+                        "tertiary": "#000000",
+                        "secondary-fixed-dim": "#e9c349",
+                        "tertiary-container": "#191c1e",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f8f9ff",
+                        "on-tertiary-container": "#818486",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary": "#000000",
+                        "on-surface": "#0b1c30",
+                        "primary-container": "#131b2e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#131b2e",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-container": "#fed65b",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#735c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "section-gap": "120px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["DM Sans"],
+                        "label-caps": ["DM Sans"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["DM Sans"],
+                        "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest text-on-surface font-headline-lg text-headline-lg tracking-tight docked full-width top-0 sticky shadow-sm backdrop-blur-md bg-opacity-90 z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto ease-out duration-300">
+<div class="font-headline-lg text-headline-lg font-semibold text-on-surface">Ascendant Luxury</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-secondary border-b-2 border-secondary pb-1 hover:text-secondary transition-colors duration-300" href="#">Hotels</a>
+<a class="text-on-surface font-body-md hover:text-secondary transition-colors duration-300" href="#">About</a>
+</nav>
+<div class="flex items-center space-x-6">
+<button class="hidden md:block font-body-md text-on-surface hover:text-secondary transition-colors duration-300">Login/Register</button>
+<button class="flex items-center justify-center text-on-surface hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+<!-- Sticky Compact Search Bar -->
+<div class="bg-surface-container-low border-t border-outline-variant/30 py-3 px-margin-mobile md:px-margin-desktop">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center w-full md:w-auto bg-surface-container-lowest rounded-full px-4 py-2 shadow-sm border border-outline-variant/50 flex-grow max-w-2xl">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-body-md w-full" placeholder="Where are you going?" type="text" value="Santorini, Greece"/>
+<div class="h-6 w-px bg-outline-variant mx-3 hidden md:block"></div>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-body-md w-full hidden md:block" placeholder="Dates" type="text" value="Oct 12 - Oct 18"/>
+<div class="h-6 w-px bg-outline-variant mx-3 hidden md:block"></div>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-body-md w-full hidden md:block" placeholder="Guests" type="text" value="2 Guests"/>
+<button class="bg-primary-container text-secondary-fixed-dim rounded-full p-2 ml-2 hover:bg-surface-tint transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Results Header -->
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-8">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-4 md:mb-0">142 hotels found in Santorini</h1>
+<div class="flex items-center space-x-3 font-body-md text-on-surface-variant">
+<span>Sort by:</span>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-md py-2 px-4 text-on-surface focus:ring-secondary focus:border-secondary cursor-pointer">
+<option>Recommended</option>
+<option>Price (Low to High)</option>
+<option>Price (High to Low)</option>
+<option>Rating</option>
+<option>Newest</option>
+</select>
+</div>
+</div>
+<!-- Hotel Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="group rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm border border-outline-variant/20 hover:shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 flex flex-col cursor-pointer">
+<div class="relative aspect-video overflow-hidden">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out" data-alt="A breathtaking view of a luxury infinity pool overlooking the deep blue caldera of Santorini. The scene is bathed in brilliant Mediterranean sunlight, highlighting pristine white architecture and deep navy waters. The atmosphere is highly exclusive, serene, and modern minimalist, reflecting a premium five-star resort experience in a bright light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxOX0dodbBZ94wEb7sy6SaPFKMX9pJtfO-kwVm5Y4y-u-bmr5vwH8VoLp_RlPQYJmxeKmf8TqGBTH0eg6HC1M9gel-YigZfxxyT5p10FnqjS4yTM8n-9ko5CZ5_ZMIMu-5cw2ozOgn09HcHVBezlu1Sl0VUPkU2rHVuyrKjwodc6BW1yR2VV4IjlEVjOXjnLs9FCzaywgIHEVNdagFhjiv_JpNq3dxfwAQOMfoH20Z22DlZHBpHcoc3BMrn2fY3l97yMkLcpHHKt8"/>
+<span class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-caps text-label-caps uppercase tracking-wider">Available</span>
+<button class="absolute top-4 right-4 text-surface-container-lowest drop-shadow-md hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-size: 28px;">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg text-[24px] leading-tight font-semibold text-on-surface group-hover:text-secondary transition-colors">Oia Elegance Suites</h3>
+<div class="flex items-center space-x-1 bg-surface px-2 py-1 rounded">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1; font-size: 16px;">star</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">4.9</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant font-body-md text-body-md mb-5">
+<span class="material-symbols-outlined mr-1" style="font-size: 18px;">location_on</span>
+                        Oia, Santorini
+                    </div>
+<div class="flex space-x-5 mb-6 text-on-surface-variant border-t border-outline-variant/20 pt-4">
+<div class="flex items-center" title="Free High-Speed WiFi">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">wifi</span>
+</div>
+<div class="flex items-center" title="Infinity Pool">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">pool</span>
+</div>
+<div class="flex items-center" title="Fitness Center">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">fitness_center</span>
+</div>
+<div class="flex items-center" title="Spa Services">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">spa</span>
+</div>
+</div>
+<div class="mt-auto flex justify-between items-end pt-2">
+<div>
+<span class="font-body-md text-[13px] text-on-surface-variant uppercase tracking-wide">From</span>
+<div class="font-headline-lg text-[28px] font-semibold text-on-surface leading-none mt-1">$450<span class="font-body-md text-base font-normal text-on-surface-variant">/night</span></div>
+</div>
+<button class="bg-primary-container text-secondary-fixed-dim px-6 py-2.5 rounded-lg font-body-md font-medium hover:bg-surface-tint hover:text-on-primary transition-colors duration-300 ease-out shadow-sm">View Hotel</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm border border-outline-variant/20 hover:shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 flex flex-col cursor-pointer">
+<div class="relative aspect-video overflow-hidden">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out" data-alt="An elegant, modern minimalist hotel suite interior in Santorini. The room features a plush king-sized bed, pristine white stucco walls, and subtle gold accents. Large glass doors open out to a private balcony overlooking the Aegean sea. The lighting is soft and natural, emphasizing a tranquil, high-end exclusive atmosphere indicative of luxury travel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_-swyCVc_Wdnxo1p_Nfs2AHckr27er_o8IDH2wCwnGCcBYUiNPV1kbEbEoYzQNTl9B2BxRJphEA1-UPjQgPl3bWN38AGJk_S2mUIJShCjoDU6yxPYlY5CjUlWtsCrt9uDKXKpvPyN-xbnwx0LoAdON_O7XAPN9Y-pI4XfLflGbqLtvlV4lz7ErHchhS-DJdTJxJTB4t5XQi-PWgb1w0NKSmwkJotPe_DpFfdl0Tvp_M2noNczTvu4nvxe5A-w7IJVxCGxrag_kjE"/>
+<span class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-caps text-label-caps uppercase tracking-wider">Available</span>
+<button class="absolute top-4 right-4 text-surface-container-lowest drop-shadow-md hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-size: 28px;">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg text-[24px] leading-tight font-semibold text-on-surface group-hover:text-secondary transition-colors">Caldera View Retreat</h3>
+<div class="flex items-center space-x-1 bg-surface px-2 py-1 rounded">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1; font-size: 16px;">star</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">4.7</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant font-body-md text-body-md mb-5">
+<span class="material-symbols-outlined mr-1" style="font-size: 18px;">location_on</span>
+                        Imerovigli, Santorini
+                    </div>
+<div class="flex space-x-5 mb-6 text-on-surface-variant border-t border-outline-variant/20 pt-4">
+<div class="flex items-center" title="Free High-Speed WiFi">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">wifi</span>
+</div>
+<div class="flex items-center" title="Room Service">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">room_service</span>
+</div>
+<div class="flex items-center" title="Concierge">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">concierge</span>
+</div>
+</div>
+<div class="mt-auto flex justify-between items-end pt-2">
+<div>
+<span class="font-body-md text-[13px] text-on-surface-variant uppercase tracking-wide">From</span>
+<div class="font-headline-lg text-[28px] font-semibold text-on-surface leading-none mt-1">$320<span class="font-body-md text-base font-normal text-on-surface-variant">/night</span></div>
+</div>
+<button class="bg-primary-container text-secondary-fixed-dim px-6 py-2.5 rounded-lg font-body-md font-medium hover:bg-surface-tint hover:text-on-primary transition-colors duration-300 ease-out shadow-sm">View Hotel</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="group rounded-xl overflow-hidden bg-surface-container-lowest shadow-sm border border-outline-variant/20 hover:shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 flex flex-col cursor-pointer">
+<div class="relative aspect-video overflow-hidden">
+<img class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-in-out" data-alt="A luxurious outdoor dining area at a boutique hotel in Santorini at twilight. Tables are elegantly set with fine china and crystal, illuminated by soft candlelight and warm glowing lanterns. The backdrop features the iconic white domed architecture against a dusky sky. The mood is highly romantic, exclusive, and sophisticated, perfectly aligned with a premium brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3oqeeYFaxUzWgwGkX1M0s7sYyKWMnQe0bWuZFMRnGFpffUY_VcoymN8AK1UTpHKjbdxONyHRFjo1FOSSFG8ucB7k_Xi-YFAl3kFtVo7wb7lVV_pwCwTBYYYLCAIoNExtubl90sQby1NOFXn4qi7p-J_t-NttDGDOGQYLLSL-cc69bk4OvB0Vd7i4kvaIfXWlBfHZtxgInP42TUshAX6KvclMKR_XDq9Ta_HG9cZWzgPYX6zZZeRajWH6Vc3ymH3gYNhHRdUmuhro"/>
+<span class="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full font-label-caps text-label-caps uppercase tracking-wider">Available</span>
+<button class="absolute top-4 right-4 text-surface-container-lowest drop-shadow-md hover:text-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0; font-size: 28px;">favorite</span>
+</button>
+</div>
+<div class="p-6 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-lg text-[24px] leading-tight font-semibold text-on-surface group-hover:text-secondary transition-colors">Azure Boutique Villas</h3>
+<div class="flex items-center space-x-1 bg-surface px-2 py-1 rounded">
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'FILL' 1; font-size: 16px;">star</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">4.8</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant font-body-md text-body-md mb-5">
+<span class="material-symbols-outlined mr-1" style="font-size: 18px;">location_on</span>
+                        Fira, Santorini
+                    </div>
+<div class="flex space-x-5 mb-6 text-on-surface-variant border-t border-outline-variant/20 pt-4">
+<div class="flex items-center" title="Free High-Speed WiFi">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">wifi</span>
+</div>
+<div class="flex items-center" title="Pool">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">pool</span>
+</div>
+<div class="flex items-center" title="Fine Dining">
+<span class="material-symbols-outlined mr-1.5" style="font-size: 20px;">restaurant</span>
+</div>
+</div>
+<div class="mt-auto flex justify-between items-end pt-2">
+<div>
+<span class="font-body-md text-[13px] text-on-surface-variant uppercase tracking-wide">From</span>
+<div class="font-headline-lg text-[28px] font-semibold text-on-surface leading-none mt-1">$299<span class="font-body-md text-base font-normal text-on-surface-variant">/night</span></div>
+</div>
+<button class="bg-primary-container text-secondary-fixed-dim px-6 py-2.5 rounded-lg font-body-md font-medium hover:bg-surface-tint hover:text-on-primary transition-colors duration-300 ease-out shadow-sm">View Hotel</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-16 flex justify-center items-center space-x-2 font-body-md text-on-surface">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary-container text-secondary-fixed-dim font-medium shadow-sm">1</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant transition-colors">2</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant transition-colors">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant transition-colors">12</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant transition-colors text-on-surface">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container text-on-primary-container font-body-md text-body-md full-width border-t border-outline-variant flat no shadows mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max mx-auto ease-in-out duration-200">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-lg text-headline-lg text-on-primary-container mb-6">Ascendant Luxury</div>
+<p class="text-on-primary-container opacity-80 mb-4">Elevating the standard of exclusive travel experiences globally.</p>
+<div class="text-on-primary-container opacity-80 mt-8">© 2024 Ascendant Luxury. All rights reserved.</div>
+</div>
+<div class="col-span-1 md:col-span-3 flex flex-wrap gap-8 md:justify-end">
+<div class="flex flex-col space-y-4 min-w-[150px]">
+<h4 class="font-bold text-secondary-fixed-dim mb-2 uppercase tracking-wider text-sm">Explore</h4>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Hotels</a>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">About</a>
+</div>
+<div class="flex flex-col space-y-4 min-w-[150px]">
+<h4 class="font-bold text-secondary-fixed-dim mb-2 uppercase tracking-wider text-sm">Support</h4>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Support</a>
+</div>
+<div class="flex flex-col space-y-4 min-w-[150px]">
+<h4 class="font-bold text-secondary-fixed-dim mb-2 uppercase tracking-wider text-sm">Legal</h4>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ascendant Luxury - Hotel Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#745c00",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "primary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error": "#ba1a1a",
+                        "tertiary": "#000000",
+                        "secondary-fixed-dim": "#e9c349",
+                        "tertiary-container": "#191c1e",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f8f9ff",
+                        "on-tertiary-container": "#818486",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary": "#000000",
+                        "on-surface": "#0b1c30",
+                        "primary-container": "#131b2e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#131b2e",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-container": "#fed65b",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#735c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "section-gap": "120px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["DM Sans"],
+                        "label-caps": ["DM Sans"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["DM Sans"],
+                        "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<header class="bg-surface backdrop-blur-md bg-opacity-90 dark:bg-opacity-100 shadow-sm dark:shadow-md docked full-width top-0 sticky z-50">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto ease-out duration-300">
+<!-- Brand -->
+<div class="font-headline-lg text-headline-lg font-semibold text-on-surface dark:text-on-primary">
+                Ascendant Luxury
+            </div>
+<!-- Links -->
+<ul class="hidden md:flex gap-gutter items-center">
+<li>
+<a class="text-secondary dark:text-secondary-fixed-dim border-b-2 border-secondary pb-1 hover:text-secondary transition-colors duration-300" href="#">Hotels</a>
+</li>
+<li>
+<a class="text-on-surface dark:text-on-primary font-body-md hover:text-secondary transition-colors duration-300" href="#">About</a>
+</li>
+</ul>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="hidden md:block font-label-caps text-label-caps text-primary-container uppercase hover:text-secondary transition-colors duration-300">
+                    Login/Register
+                </button>
+<button class="text-primary-container hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</nav>
+</header>
+<main class="pb-section-gap">
+<!-- Gallery Section -->
+<section class="max-w-container-max mx-auto px-margin-desktop mt-8 mb-12">
+<div class="flex flex-col md:flex-row gap-4 h-[400px] md:h-[600px] relative">
+<!-- Hero Image (60%) -->
+<div class="w-full md:w-[60%] h-full rounded-xl overflow-hidden relative group">
+<img alt="Main Hotel Image" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A high-resolution, wide-angle photograph of an ultra-luxurious, modern hotel exterior and sprawling infinity pool at dusk. The architecture features minimalist concrete and expansive glass panels reflecting the warm, golden-hour light. Deep navy blue water contrasts with crisp white loungers perfectly aligned on a light stone deck. The aesthetic is extremely sophisticated, conveying a private concierge level of exclusivity and serenity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgREeenqdPX5JrT5oddTI7wpMQ0wnIN84qR-Kmf_6swMhvogXgCXR5quXSFFqole0N_H_rn0RlrWU6kdms86kBLzDtm5LvY1TmNgZjyftWsT4XpICwEuZHqpLRfHe2QMOpZd7nldaF99veB1g4X61QJ9V5mf8nfqCi_SCgsaULZASTA14m-oeuJsuXWcsUNom1xh8udH4W40lO6kh2HRDulLEFWhcdcVWEzbCHIR9CzPqAKb9FB2gMssrzqgQp5vCjuWhVpdc05n8"/>
+</div>
+<!-- 2x2 Grid (40%) -->
+<div class="hidden w-full md:w-[40%] h-full md:grid grid-cols-2 grid-rows-2 gap-4">
+<div class="rounded-xl overflow-hidden group">
+<img alt="Hotel Room" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An interior shot of a sophisticated, minimalist hotel suite bathed in soft natural light. A plush king-sized bed with crisp white linens sits against a dark navy accent wall. Subtle gold bedside lamps add a touch of warmth. The room emphasizes negative space and uncluttered elegance, embodying a modern, high-end hospitality brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvRIvAFwQ1h3Elnjwz4iDGDMnxOoRK3-fn9Aj5i3gI3yFWRNJzJpFUNMUr1ntn4OvcATY-1VFL0Yrx2AdfG_J8nEr1ehSPXP531yT1u4SH3FeuhcyydLpxU3PQ1Ss9L3904N37TB-vabL50Ma9ATVhziPjabegul5KdCUYsMRSj4wB_SUV7X-TyP86JujcXvWLDpmHLq6EUmSB5sLH-XnPtgNrBqUFPnXwlttGQ0TuQPtWDqqsPKFXnzP2jHj2x6XWNfkTOosiS90"/>
+</div>
+<div class="rounded-xl overflow-hidden group">
+<img alt="Hotel Bathroom" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A luxurious, spa-like hotel bathroom featuring a freestanding white soaking tub placed elegantly on large-format grey stone tiles. Minimalist brushed gold fixtures contrast with the cool, bright tones of the room. Large floor-to-ceiling frosted glass panels allow ambient light to flood the space, creating an atmosphere of pristine cleanliness and quiet luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANCHIsJhZerhfLiLMu_Vb8xGFsMLnrDctgR0DDbAq3O92uRLKflOk_EX-Lcfpq7_eImIS_VjSGEE3YWoaU7AcaRf7WXNeri3P0CeqW1SppUvywRBdrUeJTmwpOKUphtryBgP5s97UlgFFNEIf5pci2jj5slgxeNxzIm3nbTpbJkgZSTBmOsm_Qy-Gl9HyKbhnetpSWxv8lo6SjgvtuD7fa9VcVoll937zPqlME5HdvdJYPYaF4OHVROKBsk4YaJDSnv2YQDlMw52U"/>
+</div>
+<div class="rounded-xl overflow-hidden group">
+<img alt="Hotel Restaurant" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An inviting, high-end hotel restaurant interior featuring dark wood tables perfectly set with fine white porcelain and crystal glassware. Elegant, dimly lit ambient lighting casts soft shadows, highlighting subtle gold architectural accents in the background. The space feels exclusive and meticulously organized, designed for an intimate, premium dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEfAg7bQNBh1qJVduLLcnHu61fTRovS5pAMkoOFyJyMC_R7E93wxuoE4Ib-Cv_9wFzD1G682g8CMi2abAZhHON56XQ7ld_MGBbtcmte9dBey3gsrE7mVMnapRiWdYbm-ZJUruyaL97RMoS7NNGc7JsjhWD78IctpZyBgLRcOcKoyOwGnuzGJ8A-SvJ_Y-PlYfjHJR73DXKC_CUHV_mysCmkxwxef5KzZG4UtH1QbqGAJWzzhV1QKLvJs6tc8tG3aeTIPTgIsSHbII"/>
+</div>
+<div class="rounded-xl overflow-hidden group relative">
+<img alt="Hotel Spa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A tranquil, minimalist spa area within a luxury hotel. A calm, rectangular indoor pool with deep blue water is surrounded by smooth, pale stone walls and warm teak wood accents. Soft, indirect lighting creates a serene, deeply relaxing mood, emphasizing smooth textures and a flawless, high-end design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5JEFxkfv56Xg5KNAwNQVEkHfVoV9VYRwKvm1jkHrIRTuSySeVPAtncCaMu03h-d1rvF0DbthFNgdyMBJqwoANzWhXmByq0blzQBOJprwIIF1-ngr5UUF_-H-USNEZEephjprVze43s_E5pcVlFPRb3oYLPJnudL2blVAV_Id4YjrSmbs6mn5wFCpoR0Z_sZI8hfcKEioIeILHQt7zaOZ9OFjaME5MY3gNfExrT6pC0nMyAxLskmUId3yU0OMEFTiVT-OalMsPTDA"/>
+<!-- View All Button Overlay -->
+<div class="absolute inset-0 bg-primary-container/20 flex items-center justify-center">
+<button class="bg-surface-container-lowest text-on-surface font-label-caps text-label-caps uppercase px-6 py-3 rounded-full shadow-lg hover:-translate-y-1 hover:shadow-xl transition-all duration-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+                                View all photos
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-12">
+<!-- Header -->
+<section class="flex flex-col gap-4 border-b border-outline-variant pb-8">
+<h1 class="font-display-lg text-display-lg text-primary-container tracking-tight">The Azure Enclave</h1>
+<div class="flex flex-wrap items-center gap-6 text-on-surface-variant font-body-md text-body-md">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.9</span>
+<span>(128 Reviews)</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined">location_on</span>
+<span>Santorini, Greece</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase px-4 py-2 rounded-full">Free High-Speed WiFi</span>
+<span class="bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase px-4 py-2 rounded-full">Infinity Pool</span>
+<span class="bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase px-4 py-2 rounded-full">Holistic Spa</span>
+<span class="bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase px-4 py-2 rounded-full">Concierge Service</span>
+</div>
+</section>
+<!-- About Section -->
+<section class="flex flex-col gap-6">
+<h2 class="font-headline-lg text-headline-lg text-primary-container">About this property</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                        Perched delicately above the caldera, The Azure Enclave offers an unparalleled sanctuary of modern minimalism and discreet luxury. Designed for the most discerning travelers, our property blends seamless architectural elegance with sweeping, unobstructed views of the Aegean Sea. Every detail is curated to provide a quiet, highly personalized retreat.
+                    </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4 p-6 bg-surface-container-low rounded-xl">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Check-in</p>
+<p class="font-body-lg text-body-lg text-on-surface font-medium">3:00 PM</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Check-out</p>
+<p class="font-body-lg text-body-lg text-on-surface font-medium">11:00 AM</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Policies</p>
+<p class="font-body-md text-body-md text-on-surface">Adults only. No pets allowed.</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Languages</p>
+<p class="font-body-md text-body-md text-on-surface">English, Greek, French</p>
+</div>
+</div>
+</section>
+<!-- Available Rooms Section -->
+<section class="flex flex-col gap-6 pt-8 border-t border-outline-variant">
+<h2 class="font-headline-lg text-headline-lg text-primary-container">Available Suites</h2>
+<div class="flex flex-col gap-6">
+<!-- Room Card 1 -->
+<div class="flex flex-col md:flex-row bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow duration-300">
+<div class="w-full md:w-1/3 h-48 md:h-auto">
+<img alt="Ocean View Suite" class="w-full h-full object-cover" data-alt="A bright, modern hotel suite showcasing a large plush bed with white linens and a deep navy throw blanket. Floor-to-ceiling windows reveal a stunning view of a calm blue ocean under a clear sky. The interior styling is minimalist luxury, featuring soft cream walls and light wood flooring, creating an expansive and serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEZ6GdvU6XFqF5lSQvR3R5ghi9xanr_DMKqa6iYYIcRdxjRnXicucdEO19bZgCMbrtXhBLFGCAwPSOoL4zapiVhO1WVAw8pL7CygJjJrZAaszVb4yad7GD4lDyr0KM9aIBY2jWwH5E6Yt8YIJDJ8n0rO0h-APPf7obCjY2_tLUEAIYF53Z0IlDzIvSbNNg7YvsE9nz4jGG-2O5oONNiN7FmjoumB23E_UlXyH1_F4mQpXPyokn_GFPaafDPbrd88Vo18mGCP3xgMA"/>
+</div>
+<div class="w-full md:w-2/3 p-6 flex flex-col justify-between gap-4">
+<div>
+<h3 class="font-headline-lg text-[24px] font-semibold text-primary-container">Panoramic Ocean Suite</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">King Bed • Private Balcony • 850 sq ft</p>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-body-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[20px]">person</span> Up to 2 guests</span>
+</div>
+<div class="flex justify-between items-end mt-2">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Per Night</p>
+<p class="font-headline-lg text-[28px] font-bold text-on-surface">$1,200</p>
+</div>
+<button class="bg-primary-container text-on-primary font-label-caps text-label-caps uppercase px-8 py-3 rounded-full hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                                        Book Now
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Room Card 2 -->
+<div class="flex flex-col md:flex-row bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30 hover:shadow-md transition-shadow duration-300">
+<div class="w-full md:w-1/3 h-48 md:h-auto">
+<img alt="Plunge Pool Suite" class="w-full h-full object-cover" data-alt="An exclusive luxury suite featuring a private, minimalist plunge pool on a sun-drenched outdoor terrace. The interior visible through sliding glass doors shows sleek, contemporary furniture and neutral, tonal depth in the color palette. The lighting is bright and inviting, emphasizing privacy and high-end concierge-level living." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIlrfEtEYb-tKzZvIoepUAsHC8xpLmSdjndllpiZd-Rd0u4STAUiOq1Juif3FnuWqqqtx1ZCKe1mKps1fZm2QV2KMJKgZWZdd9MAXPY7Brl8RQKcEGr5T541iKmgCx1UOrmLBcO2Zc8O4V5DVwQGcZmEt28d03wyeZGyB_rKS9YCNIjjfFmfunsAce_D6guIDOMjKyNY_QhxCH4oOVlNxEVJeHPGJm572eqPtnOYkZUC_d4z9owH7U5VSiLtaGGDuDUAgGIMFG9ls"/>
+</div>
+<div class="w-full md:w-2/3 p-6 flex flex-col justify-between gap-4">
+<div>
+<h3 class="font-headline-lg text-[24px] font-semibold text-primary-container">Signature Pool Villa</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">King Bed • Private Plunge Pool • 1,200 sq ft</p>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-body-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[20px]">person</span> Up to 2 guests</span>
+</div>
+<div class="flex justify-between items-end mt-2">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Per Night</p>
+<p class="font-headline-lg text-[28px] font-bold text-on-surface">$2,500</p>
+</div>
+<button class="bg-primary-container text-on-primary font-label-caps text-label-caps uppercase px-8 py-3 rounded-full hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                                        Book Now
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="flex flex-col gap-6 pt-8 border-t border-outline-variant">
+<div class="flex items-center gap-4 mb-2">
+<span class="material-symbols-outlined text-secondary text-[40px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary-container m-0 leading-none">4.9</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Exceptional • 128 verified reviews</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Review Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-dim rounded-full flex items-center justify-center font-headline-lg text-[20px] text-on-surface">
+                                    E
+                                </div>
+<div>
+<p class="font-body-lg text-body-lg font-medium text-on-surface m-0 leading-none">Eleanor R.</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">October 2023</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-4">
+                                "Flawless from start to finish. The minimalist design perfectly framed the breathtaking views. The staff anticipated every need without ever being intrusive. A true masterclass in modern luxury hospitality."
+                            </p>
+</div>
+<!-- Review Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 flex flex-col gap-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-dim rounded-full flex items-center justify-center font-headline-lg text-[20px] text-on-surface">
+                                    J
+                                </div>
+<div>
+<p class="font-body-lg text-body-lg font-medium text-on-surface m-0 leading-none">James T.</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">September 2023</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-4">
+                                "The Signature Pool Villa was an absolute dream. The attention to detail in the room's materials and lighting created such a calming environment. We didn't want to leave the property for our entire stay."
+                            </p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (4 cols) - Sticky Booking Summary -->
+<div class="hidden lg:block lg:col-span-4 relative">
+<div class="sticky top-[100px] bg-surface-container-lowest rounded-xl p-6 shadow-lg border border-outline-variant/20 flex flex-col gap-6">
+<div>
+<p class="font-headline-lg text-[28px] font-bold text-on-surface">$1,200 <span class="font-body-md text-body-md font-normal text-on-surface-variant">/ night</span></p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Prices are subject to availability</p>
+</div>
+<div class="flex flex-col border border-outline-variant rounded-lg overflow-hidden">
+<div class="flex border-b border-outline-variant">
+<div class="flex-1 p-3 border-r border-outline-variant">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase font-bold">Check-in</p>
+<p class="font-body-md text-body-md text-on-surface mt-1">Select date</p>
+</div>
+<div class="flex-1 p-3">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase font-bold">Check-out</p>
+<p class="font-body-md text-body-md text-on-surface mt-1">Select date</p>
+</div>
+</div>
+<div class="p-3">
+<p class="font-label-caps text-[10px] text-on-surface-variant uppercase font-bold">Guests</p>
+<p class="font-body-md text-body-md text-on-surface mt-1">2 Guests</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary font-label-caps text-label-caps uppercase py-4 rounded-full hover:-translate-y-1 hover:shadow-md transition-all duration-300">
+                        Check Availability
+                    </button>
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">You won't be charged yet</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-tertiary-container full-width border-t border-outline-variant flat no shadows mt-12">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max mx-auto ease-in-out duration-200">
+<!-- Brand -->
+<div class="col-span-1 md:col-span-4 mb-8">
+<span class="font-headline-lg text-headline-lg text-on-primary-container">Ascendant Luxury</span>
+</div>
+<!-- Links (Distributed for layout) -->
+<div class="flex flex-col gap-4">
+<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Hotels</a>
+<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">About</a>
+</div>
+<div class="flex flex-col gap-4">
+<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-4">
+<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Support</a>
+</div>
+<!-- Copyright -->
+<div class="col-span-1 md:col-span-4 mt-8 pt-8 border-t border-on-primary-container/20">
+<p class="font-body-md text-body-md text-on-primary-container opacity-80">© 2024 Ascendant Luxury. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

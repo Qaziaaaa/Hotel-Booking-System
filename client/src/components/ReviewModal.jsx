@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { reviewsAPI } from '../services/api';
-import { Star, X } from 'lucide-react';
 
 const ReviewModal = ({ booking, onClose, onSuccess }) => {
   const [rating, setRating] = useState(0);
@@ -25,7 +24,7 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
     setRatingError('');
 
     submitReview.mutate({
-      hotelId: booking.hotelId,
+      hotelId: booking.hotel?.id || booking.hotelId,
       bookingId: booking.id,
       rating,
       comment: comment || undefined,
@@ -34,23 +33,32 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl max-w-md w-full p-6">
+      <div className="bg-surface-container-lowest rounded-xl max-w-md w-full p-6 shadow-2xl">
+        {/* Header */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-900">Write a Review</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
-            <X className="h-6 w-6" />
+          <h2 className="font-serif text-xl text-on-surface">Write a Review</h2>
+          <button
+            onClick={onClose}
+            className="text-on-surface-variant hover:text-on-surface transition-colors"
+            aria-label="Close"
+          >
+            <span className="material-symbols-outlined text-[22px]">close</span>
           </button>
         </div>
 
-        <div className="mb-4">
-          <p className="text-gray-600">{booking.hotel.name}</p>
-          <p className="text-sm text-gray-500">{booking.room.roomType}</p>
+        {/* Hotel info */}
+        <div className="mb-5 pb-4 border-b border-outline-variant/30">
+          <p className="font-sans font-semibold text-on-surface">{booking.hotel?.name}</p>
+          <p className="font-sans text-sm text-on-surface-variant">{booking.room?.roomType}</p>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Rating</label>
-            <div className="flex space-x-1">
+          {/* Star Rating */}
+          <div className="mb-5">
+            <label className="block font-sans text-sm font-medium text-on-surface mb-3">
+              Your Rating
+            </label>
+            <div className="flex gap-1">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
@@ -58,54 +66,68 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
                   onClick={() => setRating(star)}
                   onMouseEnter={() => setHoverRating(star)}
                   onMouseLeave={() => setHoverRating(0)}
-                  className="focus:outline-none"
+                  className="focus:outline-none transition-transform hover:scale-110"
+                  aria-label={`Rate ${star} star${star > 1 ? 's' : ''}`}
                 >
-                  <Star
-                    className={`h-8 w-8 ${
+                  <span
+                    className={`material-symbols-outlined text-[36px] transition-colors ${
                       star <= (hoverRating || rating)
-                        ? 'text-yellow-400 fill-current'
-                        : 'text-gray-300'
+                        ? 'text-secondary-fixed-dim'
+                        : 'text-outline-variant'
                     }`}
-                  />
+                    style={{
+                      fontVariationSettings: star <= (hoverRating || rating)
+                        ? "'FILL' 1"
+                        : "'FILL' 0",
+                    }}
+                  >
+                    star
+                  </span>
                 </button>
               ))}
             </div>
             {ratingError && (
-              <p className="text-red-600 text-sm mt-1">{ratingError}</p>
+              <p className="font-sans text-sm text-error mt-1">{ratingError}</p>
             )}
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Review (optional)
+          {/* Comment */}
+          <div className="mb-5">
+            <label className="block font-sans text-sm font-medium text-on-surface mb-2">
+              Review <span className="text-on-surface-variant font-normal">(optional)</span>
             </label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="Share your experience..."
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full p-3 border border-outline-variant rounded-lg font-sans text-sm text-on-surface bg-surface focus:ring-1 focus:ring-secondary focus:outline-none resize-none"
               rows={4}
             />
           </div>
 
+          {/* API Error */}
           {submitReview.isError && (
-            <p className="text-red-600 text-sm mb-4">
-              {submitReview.error?.response?.data?.message || 'Failed to submit review'}
-            </p>
+            <div className="mb-4 bg-error-container rounded-lg p-3 flex items-center gap-2">
+              <span className="material-symbols-outlined text-on-error-container text-[18px]">error</span>
+              <p className="font-sans text-sm text-on-error-container">
+                {submitReview.error?.response?.data?.message || 'Failed to submit review. Please try again.'}
+              </p>
+            </div>
           )}
 
-          <div className="flex space-x-3">
+          {/* Actions */}
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50"
+              className="flex-1 py-2.5 border border-outline-variant rounded-lg font-sans text-sm font-medium text-on-surface hover:bg-surface-container transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={rating === 0 || submitReview.isPending}
-              className="flex-1 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 py-2.5 bg-primary-container text-on-primary rounded-lg font-sans text-sm font-medium hover:-translate-y-0.5 hover:shadow-md transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {submitReview.isPending ? 'Submitting...' : 'Submit Review'}
             </button>

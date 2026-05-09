@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Reservations - Ascendant Luxury</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#745c00",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "primary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error": "#ba1a1a",
+                        "tertiary": "#000000",
+                        "secondary-fixed-dim": "#e9c349",
+                        "tertiary-container": "#191c1e",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f8f9ff",
+                        "on-tertiary-container": "#818486",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary": "#000000",
+                        "on-surface": "#0b1c30",
+                        "primary-container": "#131b2e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#131b2e",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-container": "#fed65b",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#735c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "section-gap": "120px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["DM Sans"],
+                        "label-caps": ["DM Sans"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["DM Sans"],
+                        "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-transparent dark:bg-primary-container text-secondary dark:text-secondary-fixed-dim font-headline-lg text-headline-lg tracking-tight docked full-width top-0 sticky backdrop-blur-md bg-opacity-90 dark:bg-opacity-100 shadow-sm dark:shadow-md z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto ease-out duration-300">
+<div class="font-headline-lg text-headline-lg font-semibold text-on-surface dark:text-on-primary">Ascendant Luxury</div>
+<div class="hidden md:flex space-x-8">
+<a class="text-on-surface dark:text-on-primary font-body-md hover:text-secondary transition-colors duration-300" href="#">Hotels</a>
+<a class="text-on-surface dark:text-on-primary font-body-md hover:text-secondary transition-colors duration-300" href="#">About</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="font-body-md hover:text-secondary transition-colors duration-300">Login/Register</button>
+<button aria-label="person" class="hover:text-secondary transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-desktop py-section-gap">
+<!-- Header -->
+<header class="mb-12">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">My Reservations</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Manage your upcoming stays, review past experiences, and explore exclusive concierge services tailored for your journey.</p>
+</header>
+<!-- Tabs -->
+<div class="flex space-x-8 border-b border-outline-variant mb-12">
+<button class="pb-2 border-b-2 border-secondary text-secondary font-label-caps text-label-caps uppercase tracking-wider">All</button>
+<button class="pb-2 border-b-2 border-transparent text-on-surface-variant hover:text-secondary transition-colors duration-300 font-label-caps text-label-caps uppercase tracking-wider">Upcoming</button>
+<button class="pb-2 border-b-2 border-transparent text-on-surface-variant hover:text-secondary transition-colors duration-300 font-label-caps text-label-caps uppercase tracking-wider">Completed</button>
+<button class="pb-2 border-b-2 border-transparent text-on-surface-variant hover:text-secondary transition-colors duration-300 font-label-caps text-label-caps uppercase tracking-wider">Cancelled</button>
+</div>
+<!-- Booking Cards List -->
+<div class="flex flex-col space-y-8">
+<!-- Booking Card 1 (Upcoming) -->
+<article class="bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col md:flex-row group transition-transform duration-300 hover:-translate-y-1">
+<div class="md:w-1/3 h-64 md:h-auto relative">
+<img alt="Luxury Hotel Room" class="absolute inset-0 w-full h-full object-cover" data-alt="A luxurious hotel suite with floor-to-ceiling windows offering a panoramic view of a modern city skyline at dusk. The room features a plush king-sized bed with crisp white linens, contemporary minimalist furniture, and subtle warm lighting. The aesthetic is sophisticated, exuding exclusivity and calm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZ7bj7ov0baz4a3ZbJAcn6XATLpVVVe47mFORU7ZxqhdiyoX3dDVQ-ljFINlHZrhuayLZABs9ofh6D0r1T07liEms9wZVfQn857fTEw07Zivub0qSrUwa6lyj1owZIO6fAnjJmheJU_hAGCxdw4qzbFLYI_jaksP7CuNnLmh_vaYrr84IrZH9nGXi9eeylEVump4KGq48ZmCfE7Db2o5SI_I5HqB47nIZmea2nEuXdRDUlxG7BOFW8FHgVkFiJ0iQzLtJsTpuOtXc"/>
+</div>
+<div class="p-8 md:w-2/3 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="inline-block px-3 py-1 bg-surface-container-low text-secondary font-label-caps text-label-caps rounded-full mb-2">Confirmed</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The Ascendant Tokyo</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Presidential Suite \u2022 2 Guests</p>
+</div>
+<div class="text-right">
+<p class="font-headline-lg text-headline-lg text-on-surface">$3,450</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Total</p>
+</div>
+</div>
+<div class="flex items-center space-x-6 text-on-surface-variant font-body-md mb-6">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-2 text-secondary" data-icon="calendar_today">calendar_today</span>
+<span>Oct 15 - Oct 20, 2024</span>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-2 text-secondary" data-icon="location_on">location_on</span>
+<span>Tokyo, Japan</span>
+</div>
+</div>
+</div>
+<div class="flex justify-end space-x-4 border-t border-outline-variant pt-6">
+<button class="px-6 py-3 border border-secondary text-secondary font-body-md hover:bg-secondary hover:text-on-secondary transition-colors duration-300 rounded">Cancel</button>
+<button class="px-6 py-3 bg-primary text-on-primary font-body-md hover:bg-on-surface transition-colors duration-300 rounded shadow-md">View Details</button>
+</div>
+</div>
+</article>
+<!-- Booking Card 2 (Completed) -->
+<article class="bg-surface-container-lowest rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden flex flex-col md:flex-row group transition-transform duration-300 hover:-translate-y-1 opacity-80">
+<div class="md:w-1/3 h-64 md:h-auto relative">
+<img alt="Resort Pool" class="absolute inset-0 w-full h-full object-cover grayscale-[20%]" data-alt="An expansive infinity pool at a luxury tropical resort overlooking the ocean. The scene is bright and sunny, featuring elegant lounge chairs, pristine turquoise water, and lush palm trees. The overall mood is relaxing, vibrant, and highly premium, reflecting a high-end vacation experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjOplBv0gULW15e57AvRIBjP6IzDIYh_NINDgs-_tbyOKeMU2RG84H-b4yrWbUEGYQHV1ILz0aQHBbBaXcfH52pwFfwrXgqAxhrJbw8orx4wKuOgfEY1WR4Hr6H4qfpfHJK9s5KAiVCraM5Mo0TQV-E1LODhtGuTtJ_jaIdrbspul4BoDtS7r0HLexXfhqArmA4HNHHmaFRiV6QsXEsKnjc1e9i3bIOpHS6QIY8ZSR4i7CiL7Iyau1xeWIrCVcsXELAcwKZQcgQOs"/>
+</div>
+<div class="p-8 md:w-2/3 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="inline-block px-3 py-1 bg-outline-variant text-on-surface font-label-caps text-label-caps rounded-full mb-2">Completed</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Ascendant Maldives</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Overwater Villa \u2022 2 Guests</p>
+</div>
+<div class="text-right">
+<p class="font-headline-lg text-headline-lg text-on-surface">$8,200</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Total</p>
+</div>
+</div>
+<div class="flex items-center space-x-6 text-on-surface-variant font-body-md mb-6">
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-2 text-secondary" data-icon="calendar_today">calendar_today</span>
+<span>Aug 01 - Aug 08, 2024</span>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined mr-2 text-secondary" data-icon="location_on">location_on</span>
+<span>Malé, Maldives</span>
+</div>
+</div>
+</div>
+<div class="flex justify-end space-x-4 border-t border-outline-variant pt-6">
+<button class="px-6 py-3 border border-secondary text-secondary font-body-md hover:bg-secondary hover:text-on-secondary transition-colors duration-300 rounded">View Details</button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container dark:bg-tertiary-container text-on-primary-container dark:text-on-tertiary-container font-body-md text-body-md full-width border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-section-gap max-w-container-max mx-auto ease-in-out duration-200">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-lg text-headline-lg text-on-primary-container mb-4">Ascendant Luxury</div>
+<p class="text-on-primary-container opacity-80">© 2024 Ascendant Luxury. All rights reserved.</p>
+</div>
+<div class="col-span-1 md:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="flex flex-col space-y-2">
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Hotels</a>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">About</a>
+</div>
+<div class="flex flex-col space-y-2">
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Privacy Policy</a>
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col space-y-2">
+<a class="text-on-primary-container opacity-80 hover:text-secondary-fixed transition-opacity duration-300" href="#">Support</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

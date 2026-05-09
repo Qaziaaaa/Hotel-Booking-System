@@ -2,7 +2,9 @@ import * as reviewService from '../services/reviewService.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const createReview = catchAsync(async (req, res) => {
-  const review = await reviewService.createReview(req.body, req.user.id);
+  // hotelId comes from route params (/hotels/:hotelId/reviews), merge it into body
+  const data = { ...req.body, hotelId: req.params.hotelId };
+  const review = await reviewService.createReview(data, req.user.id);
 
   res.status(201).json({
     status: 'success',

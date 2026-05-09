@@ -268,7 +268,7 @@ This plan covers the 13 implementation gaps identified in §11.2 of the design d
       - **Validates: Requirements 15.2, 24.2**
       - Use fast-check to generate arbitrary `(userId, [token1, token2, ...tokenN])` sequences and assert that after all upserts, `prisma.fcmToken.findUnique({ where: { userId } })` returns the last token in the sequence
 
-- [-] 13. Final checkpoint — ensure all tests pass
+- [x] 13. Final checkpoint — ensure all tests pass
   - Run `npm test` inside `server/` and confirm all property-based and unit tests pass
   - Verify the server starts without errors (`node server.js` or `npm run dev`)
   - Verify the client builds without errors (`npm run build` inside `client/`)

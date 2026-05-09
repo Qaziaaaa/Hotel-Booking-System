@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - Ascendant Luxury</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#745c00",
+                        "outline": "#76777d",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "primary-fixed": "#dae2fd",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary-fixed-variant": "#574500",
+                        "error": "#ba1a1a",
+                        "tertiary": "#000000",
+                        "secondary-fixed-dim": "#e9c349",
+                        "tertiary-container": "#191c1e",
+                        "on-tertiary-fixed": "#191c1e",
+                        "background": "#f8f9ff",
+                        "on-tertiary-container": "#818486",
+                        "surface-container-high": "#dce9ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c6c6cd",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "primary": "#000000",
+                        "on-surface": "#0b1c30",
+                        "primary-container": "#131b2e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#131b2e",
+                        "secondary-fixed": "#ffe088",
+                        "on-surface-variant": "#45464d",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary-container": "#7c839b",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-tint": "#565e74",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed": "#241a00",
+                        "on-background": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#e0e3e5",
+                        "secondary-container": "#fed65b",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#735c00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "section-gap": "120px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["DM Sans"],
+                        "label-caps": ["DM Sans"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["DM Sans"],
+                        "display-lg-mobile": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen flex overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-primary-container flex flex-col justify-between hidden md:flex h-full shadow-md z-20">
+<div class="p-6">
+<div class="mb-12">
+<h1 class="font-headline-lg text-headline-lg text-secondary-fixed-dim">Ascendant Luxury</h1>
+<p class="font-label-caps text-label-caps text-on-primary-container mt-2">Admin Dashboard</p>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg bg-secondary-fixed-dim bg-opacity-10 text-secondary-fixed-dim transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" data-weight="fill" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-body-lg text-body-lg font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-primary-container hover:bg-white hover:bg-opacity-5 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="hotel">hotel</span>
+<span class="font-body-lg text-body-lg">Hotels</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-primary-container hover:bg-white hover:bg-opacity-5 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="book_online">book_online</span>
+<span class="font-body-lg text-body-lg">Bookings</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg text-on-primary-container hover:bg-white hover:bg-opacity-5 transition-colors duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-lg text-body-lg">Settings</span>
+</a>
+</nav>
+</div>
+<div class="p-6 border-t border-outline-variant border-opacity-20">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-tint overflow-hidden bg-cover bg-center" data-alt="A professional headshot of a middle-aged man in a tailored dark blue suit, looking confidently at the camera. The background is a softly blurred office environment with warm, subtle lighting. The image conveys a sense of executive leadership and reliability, fitting for a luxury brand dashboard." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSGXth0q9DBdj6fwU7ZGiEiiE9aX6WHtkImawaLERyvysHt64mVYLFW7JgcDI8viKCkx_x6cxaXMp5_5TjYzJNgel1AIv13yVGPIgsJNOqPRB5rrNaKbjDoua5K9UvxI9tsHUq-ZJxJmQvTFmD69B7xiyCTAvSWZuRoVYpvH3qpkSBYGAJ8aVwHTxkdPj4MZSjIUGDTHaV3hyr7IOK0ye-ZF4JI1E3C0L4v3ptimye9HoPuHFBjYnNAFL6q5HFMSavYu6sOhmPiEA');"></div>
+<div>
+<p class="font-body-md text-on-primary font-medium">Concierge Admin</p>
+<p class="font-label-caps text-label-caps text-on-primary-container">System Access</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-surface relative">
+<!-- Top Bar (Mobile Nav & Global Actions) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant border-opacity-50 px-6 py-4 flex justify-between items-center sticky top-0 z-10 shadow-sm md:hidden">
+<h1 class="font-headline-lg text-headline-lg text-primary-container">Ascendant</h1>
+<button class="text-on-surface">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<div class="p-6 md:p-margin-desktop max-w-container-max mx-auto">
+<!-- Dashboard Header -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-2">Performance Overview</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Real-time metrics for all Ascendant properties.</p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="px-6 py-2 border border-secondary text-secondary rounded-lg font-body-md hover:bg-secondary hover:text-white transition-colors duration-300">Export Report</button>
+<button class="px-6 py-2 bg-primary-container text-white rounded-lg font-body-md flex items-center gap-2 hover:bg-opacity-90 transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+                        This Month
+                    </button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter mb-section-gap">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant border-opacity-30 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container bg-opacity-20 text-secondary rounded-lg">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="font-label-caps text-label-caps text-green-600 flex items-center gap-1">+12.5% <span class="material-symbols-outlined text-[16px]">trending_up</span></span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Total Revenue</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">$2.4M</h3>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant border-opacity-30 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container bg-opacity-10 text-primary-container rounded-lg">
+<span class="material-symbols-outlined" data-icon="book_online">book_online</span>
+</div>
+<span class="font-label-caps text-label-caps text-green-600 flex items-center gap-1">+8.2% <span class="material-symbols-outlined text-[16px]">trending_up</span></span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Total Bookings</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">1,284</h3>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant border-opacity-30 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-variant text-on-surface-variant rounded-lg">
+<span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+</div>
+<span class="font-label-caps text-label-caps text-red-600 flex items-center gap-1">-2.1% <span class="material-symbols-outlined text-[16px]">trending_down</span></span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">Avg Occupancy</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">86%</h3>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant border-opacity-30 hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-container bg-opacity-10 text-tertiary-container rounded-lg">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+</div>
+<span class="font-label-caps text-label-caps text-green-600 flex items-center gap-1">+18.4% <span class="material-symbols-outlined text-[16px]">trending_up</span></span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider">New VIP Users</p>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">342</h3>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-section-gap">
+<!-- Line Chart: Bookings Over Time -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant border-opacity-30 p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg text-[24px] text-on-surface">Bookings Over Time</h3>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+<div class="h-64 w-full relative flex items-end">
+<!-- Simulated Line Chart via SVG -->
+<svg class="w-full h-full absolute inset-0" preserveaspectratio="none" viewbox="0 0 100 100">
+<defs>
+<lineargradient id="line-gradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#131b2e" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#131b2e" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,100 L0,70 Q10,50 20,60 T40,40 T60,50 T80,20 T100,10 L100,100 Z" fill="url(#line-gradient)"></path>
+<path d="M0,70 Q10,50 20,60 T40,40 T60,50 T80,20 T100,10" fill="none" stroke="#131b2e" stroke-width="2"></path>
+<!-- Data Points -->
+<circle cx="20" cy="60" fill="#e9c349" r="1.5"></circle>
+<circle cx="40" cy="40" fill="#e9c349" r="1.5"></circle>
+<circle cx="60" cy="50" fill="#e9c349" r="1.5"></circle>
+<circle cx="80" cy="20" fill="#e9c349" r="1.5"></circle>
+<circle cx="100" cy="10" fill="#e9c349" r="1.5"></circle>
+</svg>
+</div>
+<div class="flex justify-between text-label-caps text-outline mt-4">
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span>May</span>
+<span>Jun</span>
+</div>
+</div>
+<!-- Bar Chart: Monthly Revenue -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant border-opacity-30 p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg text-[24px] text-on-surface">Revenue by Property</h3>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="more_vert">more_vert</span></button>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 pb-2">
+<!-- Simulated Bars -->
+<div class="w-full bg-surface-variant rounded-t-sm h-[40%] relative group cursor-pointer transition-all hover:bg-secondary">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white font-label-caps text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">$400k</div>
+</div>
+<div class="w-full bg-surface-variant rounded-t-sm h-[75%] relative group cursor-pointer transition-all hover:bg-secondary">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white font-label-caps text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">$750k</div>
+</div>
+<div class="w-full bg-primary-container rounded-t-sm h-[90%] relative group cursor-pointer shadow-md">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white font-label-caps text-[10px] px-2 py-1 rounded opacity-100 whitespace-nowrap">$900k</div>
+</div>
+<div class="w-full bg-surface-variant rounded-t-sm h-[50%] relative group cursor-pointer transition-all hover:bg-secondary">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white font-label-caps text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">$500k</div>
+</div>
+</div>
+<div class="flex justify-between text-label-caps text-outline mt-4">
+<span>Paris</span>
+<span>NY</span>
+<span>Tokyo</span>
+<span>London</span>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant border-opacity-30 overflow-hidden">
+<div class="p-6 border-b border-outline-variant border-opacity-30 flex justify-between items-center">
+<h3 class="font-headline-lg text-[24px] text-on-surface">Recent Bookings</h3>
+<a class="font-body-md text-secondary hover:underline flex items-center gap-1" href="#">View All <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant border-opacity-30">
+<th class="p-4 font-semibold uppercase">Guest</th>
+<th class="p-4 font-semibold uppercase">Property</th>
+<th class="p-4 font-semibold uppercase">Dates</th>
+<th class="p-4 font-semibold uppercase">Amount</th>
+<th class="p-4 font-semibold uppercase">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-on-surface">
+<tr class="border-b border-outline-variant border-opacity-20 hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="A portrait of an elegant woman with subtle makeup and sophisticated styling. She is looking gently at the camera against a soft, neutral background. The lighting is bright and flattering, aligning with a high-end luxury aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6kSFNy_4yUYuIZ5FR95vAFgx3n-iFq5Apb9iK7INHUMd2RZKkVAYQ01--L3GWrUouWIHemUNf-thO-i0zmkXJsDQ-a5q1heGL39zcFP9RH0SJhwbY2VB4I_ZWUvkfs109kK9WhIxcptWT-PNnW7qXhkunb3UGMnye1FMU6kolSVkSTG87E_3D4u6k8ggDInXTAKeQ_fJiY49bKTGo94xaxRP_JtChkQDCthRyd4G7W2-AlDoh0Eo9ZGZILhBmQ4nCaqws3H9lrGk');"></div>
+<span class="font-medium">Eleanor Vance</span>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">The Ascendant Paris</td>
+<td class="p-4 text-on-surface-variant">Oct 12 - Oct 18</td>
+<td class="p-4 font-medium">$8,400</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Confirmed</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant border-opacity-20 hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="A profile shot of a stylish man in a casual yet premium linen shirt. The image is taken outdoors with soft, natural lighting, creating a relaxed but affluent mood. The overall tone is bright and modern." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpcu2merrS29u3OBcb2lLAlioEvMDLU8D8SAhsKXSz4_ngzylYTAlnKAghB2J78zmtLiOuXP-WjuFpffMAXw-uyx86vZ4vgLbu0Ogz9XhbO6lOE8IaKyBeV810Nr3EjTk5258Vpp6H9GsMUhZr2h6ZOsCExAa6VxgNnx13BoMFsNFTAveQm04bx349Wdlg_dGC4e-6wbgm-EtR1Tpttvd6VXdddEZS6-6mQ8rlIjUcgHqSsfnXKw-KGoGrrVs-YHiZ7yE1rbCY26o');"></div>
+<span class="font-medium">Julian Thorne</span>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">The Ascendant Tokyo</td>
+<td class="p-4 text-on-surface-variant">Oct 14 - Oct 21</td>
+<td class="p-4 font-medium">$12,200</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary-container bg-opacity-30 text-secondary-fixed-dim">Pending</span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant border-opacity-20 hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center font-label-caps">MR</div>
+<span class="font-medium">Marcus Reed</span>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">The Ascendant New York</td>
+<td class="p-4 text-on-surface-variant">Oct 15 - Oct 17</td>
+<td class="p-4 font-medium">$3,800</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Confirmed</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors duration-150">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-gray-200 bg-cover bg-center" data-alt="A cheerful woman with glasses and a smart casual outfit. She is outdoors in a city setting, softly out of focus behind her. The image exudes approachability and professional success, matching the brand's upscale clientele profile." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA3KQfcO7_oW3VnPfUrdm3WNyIjhwvbs8P6_p0VgdHL8Tn2OkKHsQSHMyd6j_BR-n7GMsbVK45GLXWRssRHApcn7RA2zGwoTvVcWgUlzmbIE0JxKhfF_PPeJ3WZT-egqJSBu3h5ruSqZUzzUyehQQVKUEAdGZXRITVu66IDs5wprLTau6k_NNu6Y-4Wuuej8yIKny9JG4kjLPszk48W_AMaJZp1g2RZ2P6xRDQ5rSFvrkiUdUEutRdZbMp6RsVFfLa-lMIZtA9ax94');"></div>
+<span class="font-medium">Sarah Jenkins</span>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">The Ascendant London</td>
+<td class="p-4 text-on-surface-variant">Oct 20 - Oct 25</td>
+<td class="p-4 font-medium">$6,100</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Completed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>
