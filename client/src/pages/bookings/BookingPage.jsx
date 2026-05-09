@@ -4,7 +4,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as yup from 'yup';
 import { hotelsAPI, roomsAPI, bookingsAPI } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
-import { Calendar, Users, MapPin, CreditCard, AlertCircle, Check, ChevronLeft } from 'lucide-react';
 import dayjs from 'dayjs';
 
 const BookingPage = () => {
@@ -60,15 +59,15 @@ const BookingPage = () => {
 
   if (!hotel || !room) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+      <div className="min-h-screen bg-background flex items-center justify-center pt-20">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-container"></div>
       </div>
     );
   }
 
   const nights = dayjs(checkOut).diff(dayjs(checkIn), 'day');
   const roomTotal = room.price * nights;
-  const taxes = roomTotal * 0.15; // 15% taxes
+  const taxes = roomTotal * 0.15;
   const total = roomTotal + taxes;
 
   const handleBooking = async () => {
@@ -90,152 +89,241 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-background pb-16 pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Back Link */}
         <Link
           to={`/hotels/${hotelId}?${searchParams.toString()}`}
-          className="inline-flex items-center text-gray-600 hover:text-primary-600 mb-6 transition-colors"
+          className="inline-flex items-center gap-1 text-on-surface-variant hover:text-secondary font-sans text-sm transition-colors mb-8"
         >
-          <ChevronLeft className="h-5 w-5 mr-1" />
+          <span className="material-symbols-outlined text-[18px]">chevron_left</span>
           Back to hotel
         </Link>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Complete Your Booking</h1>
+        {/* Page Title */}
+        <h1 className="font-serif text-[48px] leading-tight text-on-surface mb-10">
+          Complete your booking
+        </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Booking Form */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Room Details */}
-            <div className="bg-white rounded-xl p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Room Details</h2>
-              <div className="flex items-start space-x-4">
-                <div className="w-24 h-24 bg-gray-200 rounded-lg flex-shrink-0">
-                  {room.images?.[0] && (
-                    <img src={room.images[0]} alt={room.roomType} className="w-full h-full object-cover rounded-lg" />
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900">{room.roomType}</h3>
-                  <p className="text-gray-600">{hotel.name}</p>
-                  <p className="text-gray-500 text-sm flex items-center mt-1">
-                    <MapPin className="h-4 w-4 mr-1" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          {/* Left Column — 7/12 */}
+          <div className="lg:col-span-7 flex flex-col gap-8">
+
+            {/* Room Summary Card */}
+            <div className="bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden flex flex-col sm:flex-row">
+              <div className="sm:w-2/5 h-48 sm:h-auto relative">
+                {room.images?.[0] ? (
+                  <img
+                    src={room.images[0]}
+                    alt={room.roomType}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-surface-container-high flex items-center justify-center">
+                    <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30">bed</span>
+                  </div>
+                )}
+              </div>
+              <div className="p-6 sm:w-3/5 flex flex-col justify-between">
+                <div>
+                  <span className="font-sans text-[12px] font-semibold uppercase tracking-widest text-secondary mb-2 block">
+                    {room.roomType}
+                  </span>
+                  <h2 className="font-serif text-[24px] text-on-surface mb-2">{hotel.name}</h2>
+                  <p className="font-sans text-base text-on-surface-variant flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[18px]">location_on</span>
                     {hotel.location}
                   </p>
+                </div>
+                <div className="flex items-center gap-4 text-on-surface-variant font-sans text-sm mt-4">
+                  <span className="flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[18px]">person</span>
+                    {guests} Guest{guests !== 1 ? 's' : ''}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Stay Details */}
-            <div className="bg-white rounded-xl p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Stay Details</h2>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <Calendar className="h-5 w-5 text-primary-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Check-in</p>
-                    <p className="font-medium">{dayjs(checkIn).format('MMM D, YYYY')}</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                    <Calendar className="h-5 w-5 text-primary-600" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Check-out</p>
-                    <p className="font-medium">{dayjs(checkOut).format('MMM D, YYYY')}</p>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center space-x-3 mt-4">
-                <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                  <Users className="h-5 w-5 text-primary-600" />
+            {/* Stay Information Card */}
+            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8">
+              <h3 className="font-serif text-[24px] text-on-surface mb-6 border-b border-outline-variant pb-4">
+                Stay Information
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant block mb-2">
+                    Check-In
+                  </label>
+                  <p className="font-sans text-body-lg text-on-surface font-semibold">
+                    {dayjs(checkIn).format('MMM D, YYYY')}
+                  </p>
+                  <p className="font-sans text-sm text-outline">After 3:00 PM</p>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-500">Guests</p>
-                  <p className="font-medium">{guests} guest{guests > 1 ? 's' : ''}</p>
+                  <label className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant block mb-2">
+                    Check-Out
+                  </label>
+                  <p className="font-sans text-body-lg text-on-surface font-semibold">
+                    {dayjs(checkOut).format('MMM D, YYYY')}
+                  </p>
+                  <p className="font-sans text-sm text-outline">Before 11:00 AM</p>
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-100">
-                <p className="text-sm text-gray-600">
-                  {nights} night{nights > 1 ? 's' : ''} stay
-                </p>
+              <div className="bg-surface p-4 rounded-lg flex items-center justify-between">
+                <span className="font-sans text-base text-on-surface font-medium">Total Length of Stay:</span>
+                <span className="font-sans text-base text-on-surface font-semibold">
+                  {nights} Night{nights !== 1 ? 's' : ''}
+                </span>
               </div>
             </div>
 
             {/* Special Requests */}
-            <div className="bg-white rounded-xl p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Special Requests</h2>
+            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8">
+              <h3 className="font-serif text-[24px] text-on-surface mb-6 border-b border-outline-variant pb-4">
+                Special Requests
+              </h3>
+              <p className="font-sans text-base text-on-surface-variant mb-4">
+                Have any special requirements? We'll do our best to accommodate them.
+              </p>
               <textarea
                 value={specialRequests}
                 onChange={(e) => setSpecialRequests(e.target.value)}
-                placeholder="Any special requests? (e.g., late check-in, specific room preferences)"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                placeholder="E.g., early check-in, dietary restrictions, room preferences..."
+                className="w-full bg-surface border-none rounded-lg p-4 font-sans text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none resize-none h-32"
                 rows={4}
               />
             </div>
           </div>
 
-          {/* Price Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl p-6 sticky top-24">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Price Summary</h2>
-              
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">${room.price} x {nights} night{nights > 1 ? 's' : ''}</span>
-                  <span className="font-medium">${roomTotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Taxes & Fees (15%)</span>
-                  <span className="font-medium">${taxes.toFixed(2)}</span>
-                </div>
-                <div className="border-t border-gray-200 pt-3">
-                  <div className="flex justify-between text-lg">
-                    <span className="font-semibold text-gray-900">Total</span>
-                    <span className="font-bold text-primary-600">${total.toFixed(2)}</span>
+          {/* Right Column — 5/12 */}
+          <div className="lg:col-span-5 relative">
+            <div className="sticky top-24 flex flex-col gap-8">
+
+              {/* Guest Details Form */}
+              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8">
+                <h3 className="font-serif text-[24px] text-on-surface mb-6">Guest Details</h3>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant block mb-2">
+                        First Name
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={user?.firstName || ''}
+                        readOnly
+                        className="w-full bg-surface border-none rounded-lg p-3 font-sans text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
+                        placeholder="First Name"
+                      />
+                    </div>
+                    <div>
+                      <label className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant block mb-2">
+                        Last Name
+                      </label>
+                      <input
+                        type="text"
+                        defaultValue={user?.lastName || ''}
+                        readOnly
+                        className="w-full bg-surface border-none rounded-lg p-3 font-sans text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
+                        placeholder="Last Name"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant block mb-2">
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      defaultValue={user?.email || ''}
+                      readOnly
+                      className="w-full bg-surface border-none rounded-lg p-3 font-sans text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
+                      placeholder="Email Address"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant block mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      defaultValue={user?.phone || ''}
+                      readOnly
+                      className="w-full bg-surface border-none rounded-lg p-3 font-sans text-on-surface focus:ring-1 focus:ring-secondary focus:outline-none"
+                      placeholder="Phone Number"
+                    />
                   </div>
                 </div>
               </div>
 
-              {createBookingMutation.isError && (
-                <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-3 flex items-start space-x-2">
-                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-600">
-                    {createBookingMutation.error?.response?.data?.message || 'Booking failed. Please try again.'}
-                  </p>
-                </div>
-              )}
+              {/* Price Summary Card */}
+              <div className="bg-primary-container text-on-primary-container rounded-xl shadow-lg p-8">
+                <h3 className="font-serif text-[24px] text-on-primary mb-6">Price Summary</h3>
 
-              {validationError && (
-                <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-3 flex items-start space-x-2">
-                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
-                  <p className="text-sm text-red-600">{validationError}</p>
+                <div className="space-y-4 mb-6 border-b border-on-primary-container/30 pb-6">
+                  <div className="flex justify-between items-center">
+                    <span className="font-sans text-base opacity-80">
+                      ${room.price} × {nights} night{nights !== 1 ? 's' : ''}
+                    </span>
+                    <span className="font-sans font-medium text-on-primary">${roomTotal.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="font-sans text-base opacity-80">Taxes &amp; Fees (15%)</span>
+                    <span className="font-sans font-medium text-on-primary">${taxes.toFixed(2)}</span>
+                  </div>
                 </div>
-              )}
 
-              <button
-                onClick={handleBooking}
-                disabled={createBookingMutation.isPending}
-                className="w-full bg-primary-600 text-white py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-              >
-                {createBookingMutation.isPending ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    <span>Processing...</span>
-                  </>
-                ) : (
-                  <>
-                    <CreditCard className="h-5 w-5" />
-                    <span>Confirm Booking</span>
-                  </>
+                <div className="flex justify-between items-end mb-8">
+                  <span className="font-serif text-[20px] text-on-primary">Total</span>
+                  <span className="font-serif text-[36px] text-secondary-fixed-dim leading-none">
+                    ${total.toFixed(2)}
+                  </span>
+                </div>
+
+                {/* Error Messages */}
+                {(createBookingMutation.isError || validationError) && (
+                  <div className="mb-4 bg-error-container rounded-lg p-3 flex items-start gap-2">
+                    <span className="material-symbols-outlined text-on-error-container text-[18px] flex-shrink-0 mt-0.5">error</span>
+                    <p className="font-sans text-sm text-on-error-container">
+                      {validationError || createBookingMutation.error?.response?.data?.message || 'Booking failed. Please try again.'}
+                    </p>
+                  </div>
                 )}
-              </button>
 
-              <p className="mt-4 text-xs text-gray-500 text-center">
-                You won't be charged yet. Payment will be processed at the hotel.
-              </p>
+                <button
+                  onClick={handleBooking}
+                  disabled={createBookingMutation.isPending}
+                  className="w-full bg-secondary text-on-secondary font-sans font-semibold py-4 rounded-lg hover:bg-secondary-container hover:text-on-secondary-container transition-colors duration-300 ease-out mb-4 shadow-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {createBookingMutation.isPending ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-on-secondary"></div>
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Confirm Booking</span>
+                      <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </>
+                  )}
+                </button>
+
+                <p className="font-sans text-[12px] text-center opacity-70">
+                  You won't be charged yet. Payment processed at the hotel.
+                </p>
+
+                {/* Trust Badges */}
+                <div className="flex justify-center gap-6 mt-4 opacity-60">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[20px]">lock</span>
+                    <span className="font-sans text-[10px] font-semibold uppercase tracking-widest">Secure Payment</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[20px]">verified_user</span>
+                    <span className="font-sans text-[10px] font-semibold uppercase tracking-widest">Verified Property</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

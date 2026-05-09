@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { hotelsAPI } from '../../services/api';
-import { MapPin, Star, Users, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import dayjs from 'dayjs';
 
 const HotelListPage = () => {
@@ -42,158 +41,233 @@ const HotelListPage = () => {
   const hotels = data?.data.data.hotels || [];
   const pagination = data?.data.pagination;
 
+  const amenityIcons = [
+    { icon: 'wifi', label: 'WiFi' },
+    { icon: 'pool', label: 'Pool' },
+    { icon: 'fitness_center', label: 'Gym' },
+    { icon: 'spa', label: 'Spa' },
+    { icon: 'restaurant', label: 'Restaurant' },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Search Bar */}
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-          <form onSubmit={handleSearch} className="flex flex-wrap items-end gap-4">
-            <div className="flex-1 min-w-[200px]">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                <Filter className="inline h-4 w-4 mr-1" /> Location
-              </label>
+    <div className="min-h-screen bg-background pt-20">
+      {/* Sticky Search Bar */}
+      <div className="sticky top-16 z-30 bg-surface-container-lowest border-b border-outline-variant/20 shadow-ambient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <form onSubmit={handleSearch}>
+            <div className="flex items-center gap-2 bg-background border border-outline-variant/40 rounded-full px-4 py-2 shadow-sm">
+              {/* Location */}
+              <span className="material-symbols-outlined text-on-surface-variant text-[20px]">location_on</span>
               <input
                 type="text"
-                placeholder="Search by city, hotel name..."
+                placeholder="Where are you going?"
                 value={filters.location}
                 onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="flex-1 min-w-[120px] bg-transparent text-on-surface placeholder-on-surface-variant font-sans text-sm focus:outline-none"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Check-in</label>
+              <div className="w-px h-5 bg-outline-variant/60" />
+              {/* Check-in */}
+              <span className="material-symbols-outlined text-on-surface-variant text-[20px]">calendar_today</span>
               <input
                 type="date"
                 value={filters.checkIn}
                 min={dayjs().format('YYYY-MM-DD')}
                 onChange={(e) => setFilters({ ...filters, checkIn: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="bg-transparent text-on-surface font-sans text-sm focus:outline-none cursor-pointer"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Check-out</label>
+              <div className="w-px h-5 bg-outline-variant/60" />
+              {/* Check-out */}
               <input
                 type="date"
                 value={filters.checkOut}
                 min={dayjs(filters.checkIn).add(1, 'day').format('YYYY-MM-DD')}
                 onChange={(e) => setFilters({ ...filters, checkOut: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="bg-transparent text-on-surface font-sans text-sm focus:outline-none cursor-pointer"
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Guests</label>
+              <div className="w-px h-5 bg-outline-variant/60" />
+              {/* Guests */}
+              <span className="material-symbols-outlined text-on-surface-variant text-[20px]">person</span>
               <select
                 value={filters.guests}
                 onChange={(e) => setFilters({ ...filters, guests: parseInt(e.target.value) })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="bg-transparent text-on-surface font-sans text-sm focus:outline-none cursor-pointer pr-1"
               >
                 {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <option key={num} value={num}>{num} Guests</option>
+                  <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
                 ))}
               </select>
+              {/* Search button */}
+              <button
+                type="submit"
+                className="ml-1 bg-primary-container text-secondary-fixed-dim w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-tint transition-colors flex-shrink-0"
+                aria-label="Search"
+              >
+                <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+              </button>
             </div>
-            <button
-              type="submit"
-              className="bg-primary-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-primary-700 transition-colors flex items-center space-x-2"
-            >
-              <Search className="h-5 w-5" />
-              <span>Search</span>
-            </button>
           </form>
         </div>
+      </div>
 
-        {/* Results */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            {filters.location ? `Hotels in "${filters.location}"` : 'All Hotels'}
-          </h1>
-          <p className="text-gray-600 mt-1">
-            {isLoading ? 'Loading...' : `${pagination?.total || 0} hotels found`}
-          </p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Results Header */}
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <h1 className="font-serif text-[48px] leading-tight text-on-surface">
+              {isLoading
+                ? 'Searching...'
+                : `${pagination?.total || 0} hotel${(pagination?.total || 0) !== 1 ? 's' : ''} found${filters.location ? ` in ${filters.location}` : ''}`}
+            </h1>
+            <p className="font-sans text-on-surface-variant mt-1">
+              {filters.checkIn && filters.checkOut
+                ? `${dayjs(filters.checkIn).format('MMM D')} – ${dayjs(filters.checkOut).format('MMM D, YYYY')} · ${filters.guests} guest${filters.guests !== 1 ? 's' : ''}`
+                : ''}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="font-sans text-sm text-on-surface-variant">Sort by:</span>
+            <select className="font-sans text-sm text-on-surface bg-surface-container-lowest border border-outline-variant/40 rounded-lg px-3 py-2 focus:outline-none focus:border-secondary">
+              <option>Recommended</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Top Rated</option>
+            </select>
+          </div>
         </div>
 
+        {/* States */}
         {isLoading ? (
-          <div className="flex justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="rounded-xl overflow-hidden bg-surface-container-lowest shadow-ambient border border-outline-variant/20 animate-pulse">
+                <div className="aspect-video bg-outline-variant/20" />
+                <div className="p-5 space-y-3">
+                  <div className="h-5 bg-outline-variant/20 rounded w-3/4" />
+                  <div className="h-4 bg-outline-variant/20 rounded w-1/2" />
+                  <div className="h-4 bg-outline-variant/20 rounded w-full" />
+                  <div className="flex justify-between items-center pt-2">
+                    <div className="h-6 bg-outline-variant/20 rounded w-1/3" />
+                    <div className="h-9 bg-outline-variant/20 rounded-lg w-1/3" />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : error ? (
-          <div className="text-center py-12">
-            <p className="text-red-600">Failed to load hotels. Please try again.</p>
+          <div className="text-center py-20">
+            <span className="material-symbols-outlined text-[48px] text-error mb-4 block">error_outline</span>
+            <p className="font-sans text-on-surface-variant">Failed to load hotels. Please try again.</p>
           </div>
         ) : hotels.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-xl">
-            <p className="text-gray-500 text-lg">No hotels found matching your criteria.</p>
+          <div className="text-center py-20 bg-surface-container-lowest rounded-xl border border-outline-variant/20">
+            <span className="material-symbols-outlined text-[64px] text-on-surface-variant/40 block mb-4">search_off</span>
+            <h3 className="font-serif text-2xl text-on-surface mb-2">No hotels found</h3>
+            <p className="font-sans text-on-surface-variant">Try adjusting your search criteria or explore a different destination.</p>
           </div>
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {hotels.map((hotel) => (
-                <Link
+                <article
                   key={hotel.id}
-                  to={`/hotels/${hotel.id}?${searchParams.toString()}`}
-                  className="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+                  className="rounded-xl overflow-hidden bg-surface-container-lowest shadow-ambient border border-outline-variant/20 hover:shadow-ambient-hover hover:-translate-y-1 transition-all duration-300 group"
                 >
-                  <div className="aspect-video bg-gray-200 relative">
+                  {/* Image */}
+                  <div className="aspect-video bg-outline-variant/10 relative overflow-hidden">
                     {hotel.images && hotel.images[0] ? (
                       <img
                         src={hotel.images[0]}
                         alt={hotel.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                        <MapPin className="h-12 w-12 text-gray-400" />
+                      <div className="w-full h-full flex items-center justify-center bg-surface-container">
+                        <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30">hotel</span>
                       </div>
                     )}
-                    <div className="absolute top-3 right-3 bg-white px-2 py-1 rounded-lg flex items-center space-x-1">
-                      <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                      <span className="text-sm font-medium">{hotel.avgRating?.toFixed(1) || '0.0'}</span>
+                    {/* Available badge */}
+                    <div className="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full label-caps uppercase text-xs">
+                      Available
                     </div>
+                    {/* Rating badge */}
+                    {hotel.avgRating > 0 && (
+                      <div className="absolute top-4 right-4 bg-primary-container/90 backdrop-blur-sm text-secondary-fixed-dim px-2.5 py-1 rounded-full flex items-center gap-1">
+                        <span className="material-symbols-outlined fill text-[14px]">star</span>
+                        <span className="font-sans text-xs font-semibold">{hotel.avgRating?.toFixed(1)}</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{hotel.name}</h3>
-                    <p className="text-gray-500 text-sm flex items-center mb-2">
-                      <MapPin className="h-4 w-4 mr-1" />
+
+                  {/* Content */}
+                  <div className="p-5">
+                    <h3 className="font-serif text-[24px] font-semibold text-on-surface leading-tight mb-1">
+                      {hotel.name}
+                    </h3>
+                    <p className="flex items-center text-on-surface-variant font-sans text-sm mb-3">
+                      <span className="material-symbols-outlined text-[16px] mr-1">location_on</span>
                       {hotel.location}
                     </p>
-                    <p className="text-gray-600 text-sm line-clamp-2 mb-3">{hotel.description}</p>
+
+                    {/* Amenity icons */}
+                    <div className="flex items-center gap-3 mb-4">
+                      {amenityIcons.map(({ icon, label }) => (
+                        <span
+                          key={icon}
+                          className="material-symbols-outlined text-[18px] text-on-surface-variant/60"
+                          title={label}
+                        >
+                          {icon}
+                        </span>
+                      ))}
+                    </div>
+
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Users className="h-4 w-4 mr-1" />
-                        <span>{hotel._count?.reviews || 0} reviews</span>
-                      </div>
-                      <div className="text-right">
-                        {hotel.rooms && hotel.rooms[0] && (
-                          <p className="text-lg font-bold text-primary-600">
-                            ${hotel.rooms[0].price}
-                            <span className="text-sm font-normal text-gray-500">/night</span>
-                          </p>
+                      <div>
+                        {hotel.rooms && hotel.rooms[0] ? (
+                          <>
+                            <span className="font-serif text-[28px] font-semibold text-on-surface leading-none">
+                              ${hotel.rooms[0].price}
+                            </span>
+                            <span className="font-sans text-sm text-on-surface-variant ml-1">/night</span>
+                          </>
+                        ) : (
+                          <span className="font-sans text-sm text-on-surface-variant">Contact for pricing</span>
                         )}
+                        <p className="font-sans text-xs text-on-surface-variant mt-0.5">
+                          {hotel._count?.reviews || 0} review{(hotel._count?.reviews || 0) !== 1 ? 's' : ''}
+                        </p>
                       </div>
+                      <Link
+                        to={`/hotels/${hotel.id}?${searchParams.toString()}`}
+                        className="bg-primary-container text-secondary-fixed-dim px-6 py-2.5 rounded-lg font-sans font-medium text-sm hover:bg-surface-tint hover:text-on-primary transition-colors"
+                      >
+                        View Hotel
+                      </Link>
                     </div>
                   </div>
-                </Link>
+                </article>
               ))}
             </div>
 
             {/* Pagination */}
             {pagination && pagination.pages > 1 && (
-              <div className="flex justify-center mt-8 space-x-2">
+              <div className="flex justify-center mt-12 gap-2">
                 <button
                   onClick={() => handlePageChange(page - 1)}
                   disabled={page === 1}
-                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-surface-container transition-colors"
+                  aria-label="Previous page"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <span className="material-symbols-outlined text-[20px]">chevron_left</span>
                 </button>
                 {[...Array(pagination.pages)].map((_, i) => (
                   <button
                     key={i + 1}
                     onClick={() => handlePageChange(i + 1)}
-                    className={`px-4 py-2 rounded-lg ${
+                    className={`w-10 h-10 rounded-full font-sans text-sm font-medium transition-colors ${
                       page === i + 1
-                        ? 'bg-primary-600 text-white'
-                        : 'border border-gray-300 hover:bg-gray-50'
+                        ? 'bg-primary-container text-secondary-fixed-dim'
+                        : 'border border-outline-variant hover:bg-surface-container text-on-surface'
                     }`}
                   >
                     {i + 1}
@@ -202,9 +276,10 @@ const HotelListPage = () => {
                 <button
                   onClick={() => handlePageChange(page + 1)}
                   disabled={page === pagination.pages}
-                  className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                  className="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:bg-surface-container transition-colors"
+                  aria-label="Next page"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <span className="material-symbols-outlined text-[20px]">chevron_right</span>
                 </button>
               </div>
             )}

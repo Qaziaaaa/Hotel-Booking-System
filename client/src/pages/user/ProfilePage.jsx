@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useAuth } from '../../context/AuthContext';
-import { authAPI } from '../../services/api';
-import { User, Mail, Shield, Phone, CheckCircle, AlertCircle } from 'lucide-react';
+import { authAPI, bookingsAPI, reviewsAPI } from '../../services/api';
+import dayjs from 'dayjs';
 
 const schema = yup.object({
   firstName: yup.string().required('First name is required'),
@@ -39,125 +39,194 @@ const ProfilePage = () => {
     },
   });
 
+  const { data: bookingsData } = useQuery({
+    queryKey: ['myBookings'],
+    queryFn: () => bookingsAPI.getMyBookings(),
+  });
+
+  const { data: reviewsData } = useQuery({
+    queryKey: ['myReviews'],
+    queryFn: () => reviewsAPI.getMyReviews(),
+  });
+
   const onSubmit = (data) => {
     setSuccessMessage('');
     mutation.mutate(data);
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">My Profile</h1>
+  const totalBookings = bookingsData?.data.data.bookings?.length || 0;
+  const totalReviews = reviewsData?.data.data.reviews?.length || 0;
+  const memberSince = user?.createdAt ? dayjs(user.createdAt).format('YYYY') : dayjs().format('YYYY');
 
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          {/* Profile Header */}
-          <div className="bg-gradient-to-r from-primary-600 to-primary-800 px-6 py-8">
-            <div className="flex items-center space-x-4">
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center">
-                <User className="h-10 w-10 text-primary-600" />
+  const getInitials = () => {
+    const first = user?.firstName?.[0] || '';
+    const last = user?.lastName?.[0] || '';
+    return (first + last).toUpperCase() || '?';
+  };
+
+  return (
+    <div className="min-h-screen bg-background pb-16 pt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+          {/* Left Column — 4/12 */}
+          <div className="lg:col-span-4 flex flex-col gap-6">
+
+            {/* Profile Identity Card */}
+            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8 flex flex-col items-center text-center gap-4">
+              {/* Avatar */}
+              <div className="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center">
+                <span className="font-serif text-[32px] text-on-primary">{getInitials()}</span>
               </div>
-              <div className="text-white">
-                <h2 className="text-2xl font-bold">{user?.firstName} {user?.lastName}</h2>
-                <p className="text-primary-100">{user?.email}</p>
+              <div>
+                <h2 className="font-serif text-[24px] text-on-surface">
+                  {user?.firstName} {user?.lastName}
+                </h2>
+                <p className="font-sans text-base text-on-surface-variant mt-1">{user?.email}</p>
+                {user?.role && (
+                  <span className="inline-block mt-2 font-sans text-[11px] font-semibold uppercase tracking-widest bg-surface-container text-on-surface-variant px-3 py-1 rounded-full">
+                    {user.role}
+                  </span>
+                )}
+              </div>
+              <button className="mt-2 inline-flex items-center gap-2 px-6 py-2.5 border border-outline-variant text-on-surface-variant rounded-full font-sans text-[12px] font-semibold uppercase tracking-widest hover:border-secondary hover:text-secondary transition-colors duration-300">
+                <span className="material-symbols-outlined text-[16px]">edit</span>
+                Edit Profile
+              </button>
+            </div>
+
+            {/* Stats Bento Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              {/* Total Bookings — full width */}
+              <div className="col-span-2 bg-primary-container rounded-xl p-6 flex items-center justify-between">
+                <div>
+                  <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-primary-container mb-1">
+                    Total Bookings
+                  </p>
+                  <p className="font-serif text-[32px] text-on-primary leading-none">{totalBookings}</p>
+                </div>
+                <span className="material-symbols-outlined text-[40px] text-on-primary-container opacity-60">luggage</span>
+              </div>
+
+              {/* Reviews Written */}
+              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-5">
+                <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+                  Reviews
+                </p>
+                <p className="font-serif text-[28px] text-on-surface leading-none">{totalReviews}</p>
+                <p className="font-sans text-xs text-on-surface-variant mt-1">Written</p>
+              </div>
+
+              {/* Member Since */}
+              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-5">
+                <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+                  Member
+                </p>
+                <p className="font-serif text-[28px] text-on-surface leading-none">{memberSince}</p>
+                <p className="font-sans text-xs text-on-surface-variant mt-1">Since</p>
               </div>
             </div>
           </div>
 
-          {/* Profile Form */}
-          <div className="p-6">
-            {/* Read-only info */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  <Mail className="inline h-4 w-4 mr-1" /> Email
-                </label>
-                <p className="text-gray-900 font-medium">{user?.email}</p>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  <Shield className="inline h-4 w-4 mr-1" /> Role
-                </label>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
-                  {user?.role}
-                </span>
-              </div>
-            </div>
+          {/* Right Column — 8/12 */}
+          <div className="lg:col-span-8">
+            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8 md:p-12">
+              <h1 className="font-serif text-[48px] leading-tight text-on-surface mb-10">
+                Personal Details
+              </h1>
 
-            <div className="border-t border-gray-200 pt-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Edit Profile</h3>
-
+              {/* Success Message */}
               {successMessage && (
-                <div className="mb-4 bg-green-50 border border-green-200 rounded-lg p-4 flex items-center space-x-2">
-                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
-                  <p className="text-sm text-green-700">{successMessage}</p>
+                <div className="mb-6 bg-surface-container-low border border-secondary/30 rounded-lg p-4 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-secondary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  <p className="font-sans text-sm text-on-surface">{successMessage}</p>
                 </div>
               )}
 
+              {/* Error Message */}
               {mutation.isError && (
-                <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-2">
-                  <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0" />
-                  <p className="text-sm text-red-600">
+                <div className="mb-6 bg-error-container rounded-lg p-4 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-on-error-container text-[20px]">error</span>
+                  <p className="font-sans text-sm text-on-error-container">
                     {mutation.error?.response?.data?.message || 'Failed to update profile. Please try again.'}
                   </p>
                 </div>
               )}
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+                {/* First Name + Last Name */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="firstName" className="block font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
                       First Name
                     </label>
                     <input
                       id="firstName"
                       type="text"
                       {...register('firstName')}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      className="w-full border-0 border-b border-outline-variant px-0 py-2 bg-transparent font-sans text-base text-on-surface focus:ring-0 focus:border-secondary focus:outline-none transition-colors"
                       placeholder="First name"
                     />
                     {errors.firstName && (
-                      <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>
+                      <p className="mt-1 font-sans text-sm text-error">{errors.firstName.message}</p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="lastName" className="block font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
                       Last Name
                     </label>
                     <input
                       id="lastName"
                       type="text"
                       {...register('lastName')}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                      className="w-full border-0 border-b border-outline-variant px-0 py-2 bg-transparent font-sans text-base text-on-surface focus:ring-0 focus:border-secondary focus:outline-none transition-colors"
                       placeholder="Last name"
                     />
                     {errors.lastName && (
-                      <p className="mt-1 text-sm text-red-600">{errors.lastName.message}</p>
+                      <p className="mt-1 font-sans text-sm text-error">{errors.lastName.message}</p>
                     )}
                   </div>
                 </div>
 
+                {/* Email — read-only */}
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    <Phone className="inline h-4 w-4 mr-1" /> Phone (optional)
+                  <label htmlFor="email" className="block font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={user?.email || ''}
+                    readOnly
+                    className="w-full border-0 border-b border-outline-variant px-0 py-2 bg-transparent font-sans text-base text-on-surface-variant focus:ring-0 focus:outline-none cursor-not-allowed"
+                  />
+                  <p className="mt-1 font-sans text-xs text-on-surface-variant opacity-60">Email cannot be changed</p>
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label htmlFor="phone" className="block font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+                    Phone Number
                   </label>
                   <input
                     id="phone"
                     type="tel"
                     {...register('phone')}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    className="w-full border-0 border-b border-outline-variant px-0 py-2 bg-transparent font-sans text-base text-on-surface focus:ring-0 focus:border-secondary focus:outline-none transition-colors"
                     placeholder="+1 (555) 000-0000"
                   />
                   {errors.phone && (
-                    <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                    <p className="mt-1 font-sans text-sm text-error">{errors.phone.message}</p>
                   )}
                 </div>
 
-                <div className="pt-2">
+                {/* Save Button */}
+                <div className="pt-4">
                   <button
                     type="submit"
                     disabled={mutation.isPending}
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-primary text-on-primary font-sans text-[12px] font-semibold uppercase tracking-widest rounded-full px-10 py-4 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
                     {mutation.isPending ? 'Saving...' : 'Save Changes'}
                   </button>

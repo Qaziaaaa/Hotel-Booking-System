@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useAuth } from '../../context/AuthContext';
-import { Eye, EyeOff, Mail, Lock, AlertCircle } from 'lucide-react';
 
 const schema = yup.object({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -37,112 +36,129 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-bold text-gray-900">
-          Sign in to your account
-        </h2>
-        <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
-          <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500">
-            create a new account
-          </Link>
-        </p>
+    <div className="min-h-screen flex">
+      {/* Left panel — hidden on mobile */}
+      <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-16 overflow-hidden bg-primary-container">
+        {/* Background image */}
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKBegyy60_trtcH2gY3PKGM91jWln6MHr53cCwwWjpEyjfxyG3VgIx6I2uYp09kYR0YvEj-jMCZQeau3Xu8HMTDFIJUbBJvJN5ZF_T0zRsNYI_j9JY9GeEqUZxa8p5mz0fJtgnmlvcdwtfAZTkv4_Rky_qI2gCIZhgyXOdKCGALgOQArnUGoZwH5TzUPYqZZX81gzF4tFcbSbdiGOEo3PU5G6fMy0d3aYX-k9r_MZIZKDSoY8upQXKV5wYyb7mbea0xm--_B6poFA"
+          alt="Luxury hotel lobby"
+          className="absolute inset-0 w-full h-full object-cover opacity-40"
+        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-container via-primary-container/70 to-transparent" />
+        {/* Quote */}
+        <div className="relative z-10">
+          <p className="font-serif text-[40px] leading-tight text-secondary-fixed-dim mb-6">
+            "Exclusivity is not just a destination; it is an experience meticulously crafted."
+          </p>
+          <div className="w-16 h-[2px] bg-secondary-fixed-dim" />
+        </div>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      {/* Right panel */}
+      <div className="flex-1 flex items-center justify-center bg-surface-container-lowest px-6 py-12">
+        <div className="w-full max-w-md">
+          {/* Brand */}
+          <div className="mb-10">
+            <Link to="/" className="font-serif text-2xl text-primary-container tracking-wide">
+              Ascendant Luxury
+            </Link>
+            <p className="font-sans text-on-surface-variant mt-2">
+              Welcome back. Please enter your credentials.
+            </p>
+          </div>
+
+          {/* Error */}
           {error && (
-            <div className="mb-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-2">
-              <AlertCircle className="h-5 w-5 text-red-600" />
-              <p className="text-sm text-red-600">{error}</p>
+            <div className="mb-6 bg-error-container border border-error/20 rounded-lg p-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-error text-[20px]">error_outline</span>
+              <p className="font-sans text-sm text-on-error-container">{error}</p>
             </div>
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block font-sans text-sm font-medium text-on-surface mb-1">
                 Email address
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
-                </div>
-                <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  {...register('email')}
-                  className="appearance-none block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
-                  placeholder="you@example.com"
-                />
-              </div>
+              <input
+                id="email"
+                type="email"
+                autoComplete="email"
+                {...register('email')}
+                placeholder="you@example.com"
+                className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+              />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                <p className="mt-1 font-sans text-sm text-error">{errors.email.message}</p>
               )}
             </div>
 
+            {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block font-sans text-sm font-medium text-on-surface mb-1">
                 Password
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
-                </div>
+              <div className="relative">
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="current-password"
                   {...register('password')}
-                  className="appearance-none block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
                   placeholder="••••••••"
+                  className="w-full border-0 border-b-2 border-outline-variant bg-surface-container-low px-4 py-3 pr-12 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-on-surface-variant hover:text-on-surface transition-colors"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-gray-400" />
-                  )}
+                  <span className="material-symbols-outlined text-[22px]">
+                    {showPassword ? 'visibility_off' : 'visibility'}
+                  </span>
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                <p className="mt-1 font-sans text-sm text-error">{errors.password.message}</p>
               )}
             </div>
 
+            {/* Remember me + Forgot */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                  className="w-4 h-4 rounded border-outline-variant text-secondary focus:ring-secondary"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                  Remember me
-                </label>
-              </div>
-
-              <div className="text-sm">
-                <a href="#" className="font-medium text-primary-600 hover:text-primary-500">
-                  Forgot password?
-                </a>
-              </div>
+                <span className="font-sans text-sm text-on-surface">Remember me</span>
+              </label>
+              <a href="#" className="font-sans text-sm text-secondary hover:text-on-secondary-container transition-colors">
+                Forgot password?
+              </a>
             </div>
 
+            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-primary-container text-on-primary w-full py-4 rounded font-sans font-semibold hover:-translate-y-1 hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
-              {isSubmitting ? 'Signing in...' : 'Sign in'}
+              {isSubmitting ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
+
+          {/* Register link */}
+          <p className="mt-8 text-center font-sans text-sm text-on-surface-variant">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-secondary font-medium hover:text-on-secondary-container transition-colors">
+              Create Account
+            </Link>
+          </p>
         </div>
       </div>
     </div>

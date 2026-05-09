@@ -1,161 +1,127 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Hotel, User, Menu, X, Calendar, LogOut, LayoutDashboard } from 'lucide-react';
-import { useState } from 'react';
-import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const isHomePage = location.pathname === '/';
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLogout = async () => {
     await logout();
     navigate('/');
+    setDropdownOpen(false);
   };
 
-  const navLinks = [
-    { to: '/', label: 'Home' },
-    { to: '/hotels', label: 'Hotels' },
-  ];
-
-  const authLinks = isAuthenticated
-    ? [
-        { to: '/my-bookings', label: 'My Bookings', icon: Calendar },
-        { to: '/profile', label: 'Profile', icon: User },
-        ...(user?.role === 'ADMIN' ? [{ to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard }] : []),
-      ]
-    : [
-        { to: '/login', label: 'Login' },
-        { to: '/register', label: 'Register' },
-      ];
+  const navBg = isHomePage && !scrolled
+    ? 'bg-transparent'
+    : 'bg-surface-container-lowest/95 backdrop-blur-md shadow-sm';
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
-              <Hotel className="h-8 w-8 text-primary-600" />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">StayBook</span>
-            </Link>
-          </div>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}>
+      <div className="flex justify-between items-center w-full px-5 md:px-16 py-4 max-w-[1440px] mx-auto">
+        {/* Logo */}
+        <Link to="/" className="font-serif text-2xl font-semibold text-on-surface">
+          Ascendant Luxury
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors"
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center space-x-8">
+          <Link to="/hotels" className="text-secondary border-b-2 border-secondary pb-1 font-sans hover:text-secondary transition-colors duration-300">
+            Hotels
+          </Link>
+          <a href="#" className="text-on-surface font-sans hover:text-secondary transition-colors duration-300">
+            About
+          </a>
+        </nav>
+
+        {/* Desktop Actions */}
+        <div className="hidden md:flex items-center space-x-6">
+          {isAuthenticated ? (
+            <div className="relative">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-2 text-on-surface hover:text-secondary transition-colors duration-300"
               >
-                {link.label}
-              </Link>
-            ))}
-
-            {isAuthenticated ? (
-              <div className="flex items-center space-x-4">
-                <ThemeToggle />
-                {authLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 font-medium transition-colors flex items-center space-x-1"
-                  >
-                    <link.icon className="h-4 w-4" />
-                    <span>{link.label}</span>
+                <div className="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-sans font-semibold text-sm">
+                  {user?.firstName?.[0]}{user?.lastName?.[0]}
+                </div>
+                <span className="font-sans text-sm">{user?.firstName}</span>
+                <span className="material-symbols-outlined text-base">expand_more</span>
+              </button>
+              {dropdownOpen && (
+                <div className="absolute right-0 top-full mt-2 w-52 bg-surface-container-lowest rounded-xl shadow-ambient-hover border border-outline-variant/30 py-2 z-50">
+                  <Link to="/my-bookings" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-4 py-3 font-sans text-sm text-on-surface hover:bg-surface-container-low transition-colors">
+                    <span className="material-symbols-outlined text-base">luggage</span>
+                    My Bookings
                   </Link>
-                ))}
-                <button
-                  onClick={handleLogout}
-                  className="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 font-medium transition-colors flex items-center space-x-1"
-                >
-                  <LogOut className="h-4 w-4" />
-                  <span>Logout</span>
-                </button>
-                <span className="text-sm text-gray-500 dark:text-gray-400">
-                  Hi, {user?.firstName}
-                </span>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-4">
-                <ThemeToggle />
-                {authLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className={`font-medium transition-colors ${
-                      link.to === '/register'
-                        ? 'bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700'
-                        : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                    }`}
-                  >
-                    {link.label}
+                  <Link to="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-4 py-3 font-sans text-sm text-on-surface hover:bg-surface-container-low transition-colors">
+                    <span className="material-symbols-outlined text-base">person</span>
+                    Profile
                   </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none"
-            >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
+                  {user?.role === 'ADMIN' && (
+                    <Link to="/dashboard" onClick={() => setDropdownOpen(false)} className="flex items-center gap-3 px-4 py-3 font-sans text-sm text-on-surface hover:bg-surface-container-low transition-colors">
+                      <span className="material-symbols-outlined text-base">dashboard</span>
+                      Dashboard
+                    </Link>
+                  )}
+                  <div className="border-t border-outline-variant/30 my-1" />
+                  <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-3 font-sans text-sm text-error hover:bg-surface-container-low transition-colors w-full text-left">
+                    <span className="material-symbols-outlined text-base">logout</span>
+                    Sign Out
+                  </button>
+                </div>
               )}
-            </button>
-          </div>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="text-secondary font-sans hover:text-on-secondary-container transition-colors duration-300">
+                Login/Register
+              </Link>
+              <button className="text-on-surface hover:text-secondary transition-colors duration-300">
+                <span className="material-symbols-outlined">person</span>
+              </button>
+            </>
+          )}
         </div>
+
+        {/* Mobile Hamburger */}
+        <button className="md:hidden text-on-surface" onClick={() => setMenuOpen(!menuOpen)}>
+          <span className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
+        </button>
       </div>
 
-      {/* Mobile menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
-          <div className="px-4 pt-2 pb-3 space-y-1">
-            <div className="px-3 py-2">
-              <ThemeToggle />
-            </div>
-            {navLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setIsMenuOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {authLinks.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                onClick={() => setIsMenuOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {isAuthenticated && (
-              <button
-                onClick={() => {
-                  handleLogout();
-                  setIsMenuOpen(false);
-                }}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
-              >
-                Logout
-              </button>
-            )}
-          </div>
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-surface-container-lowest border-t border-outline-variant/30 px-5 py-4 space-y-4">
+          <Link to="/hotels" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">Hotels</Link>
+          <a href="#" className="block font-sans text-on-surface hover:text-secondary transition-colors">About</a>
+          {isAuthenticated ? (
+            <>
+              <Link to="/my-bookings" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">My Bookings</Link>
+              <Link to="/profile" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">Profile</Link>
+              {user?.role === 'ADMIN' && (
+                <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">Dashboard</Link>
+              )}
+              <button onClick={handleLogout} className="block font-sans text-error hover:opacity-80 transition-colors">Sign Out</button>
+            </>
+          ) : (
+            <Link to="/login" onClick={() => setMenuOpen(false)} className="block font-sans text-secondary">Login / Register</Link>
+          )}
         </div>
       )}
-    </nav>
+    </header>
   );
 };
 

@@ -1,39 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   * {
-    @apply border-gray-200 dark:border-gray-700;
+    box-sizing: border-box;
   }
+  
   body {
-    @apply font-sans antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-900;
+    @apply bg-background text-on-surface font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
   }
 }
 
 @layer components {
-  .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
+
+  .material-symbols-outlined.fill {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Luxury card hover effect */
+  .luxury-card {
+    @apply bg-surface-container-lowest rounded-xl shadow-ambient hover:shadow-ambient-hover transition-all duration-300 ease-out hover:-translate-y-2;
+  }
+
+  /* Primary button */
   .btn-primary {
-    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-primary-container text-on-primary font-sans font-semibold px-8 py-3 rounded-lg hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-out;
   }
-  .btn-secondary {
-    @apply btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-primary-500;
+
+  /* Gold accent button */
+  .btn-gold {
+    @apply bg-secondary text-on-secondary font-sans font-semibold px-8 py-4 rounded-lg hover:bg-on-secondary-container hover:text-on-primary transition-all duration-300 ease-out shadow-lg hover:-translate-y-1;
   }
-  .btn-danger {
-    @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply border border-secondary text-secondary font-sans font-medium px-6 py-3 rounded-lg hover:bg-secondary hover:text-on-secondary transition-all duration-300 ease-out;
   }
-  .input {
-    @apply block w-full rounded-lg border-gray-300 dark:border-gray-600 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
+
+  /* Label caps style */
+  .label-caps {
+    @apply font-sans text-xs font-semibold uppercase tracking-widest;
   }
-  .card {
-    @apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden;
+
+  /* Ambient shadow */
+  .ambient-shadow {
+    box-shadow: 0 20px 40px -10px rgba(11, 28, 48, 0.05), 0 10px 20px -5px rgba(11, 28, 48, 0.03);
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f8f9ff;
+}
+::-webkit-scrollbar-thumb {
+  background: #c6c6cd;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #76777d;
 }

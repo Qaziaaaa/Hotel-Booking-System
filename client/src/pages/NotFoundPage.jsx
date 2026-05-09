@@ -1,24 +1,41 @@
 import { Link } from 'react-router-dom';
-import { Home, AlertTriangle } from 'lucide-react';
 
 const NotFoundPage = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-center px-4">
-        <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <AlertTriangle className="h-12 w-12 text-red-600" />
-        </div>
-        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Page Not Found</h2>
-        <p className="text-gray-600 mb-8 max-w-md mx-auto">
-          The page you are looking for doesn't exist or has been moved.
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <img
+        src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=2070&auto=format&fit=crop"
+        alt="Luxury hotel corridor"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background/80" />
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-6">
+        {/* 404 */}
+        <h1 className="font-serif text-[64px] leading-none text-primary-container mb-4">
+          404
+        </h1>
+
+        {/* Gold divider */}
+        <div className="w-16 h-[2px] bg-secondary mx-auto mb-6" />
+
+        {/* Message */}
+        <p className="font-sans text-on-surface-variant text-lg mb-10 max-w-sm mx-auto">
+          The page you are looking for has checked out.
         </p>
+
+        {/* CTA button */}
         <Link
           to="/"
-          className="inline-flex items-center space-x-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+          className="group inline-flex items-center gap-2 bg-secondary text-on-secondary rounded-full px-8 py-4 label-caps uppercase hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
         >
-          <Home className="h-5 w-5" />
-          <span>Back to Home</span>
+          Return to Homepage
+          <span className="material-symbols-outlined text-[18px] translate-x-0 group-hover:translate-x-1 transition-transform duration-300">
+            arrow_forward
+          </span>
         </Link>
       </div>
     </div>
