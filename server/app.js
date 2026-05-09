@@ -5,15 +5,15 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 
-import authRoutes from './routes/authRoutes.js';
-import hotelRoutes from './routes/hotelRoutes.js';
-import bookingRoutes from './routes/bookingRoutes.js';
-import aiRoutes from './routes/aiRoutes.js';
-import analyticsRoutes from './routes/analyticsRoutes.js';
-import chatbotRoutes from './routes/chatbotRoutes.js';
-import notificationRoutes from './routes/notificationRoutes.js';
-import globalErrorHandler from './middleware/errorHandler.js';
-import AppError from './utils/AppError.js';
+import authRoutes from './server/routes/authRoutes.js';
+import hotelRoutes from './server/routes/hotelRoutes.js';
+import bookingRoutes from './server/routes/bookingRoutes.js';
+import aiRoutes from './server/routes/aiRoutes.js';
+import analyticsRoutes from './server/routes/analyticsRoutes.js';
+import chatbotRoutes from './server/routes/chatbotRoutes.js';
+import notificationRoutes from './server/routes/notificationRoutes.js';
+import globalErrorHandler from './server/middleware/errorHandler.js';
+import AppError from './server/utils/AppError.js';
 
 const app = express();
 
