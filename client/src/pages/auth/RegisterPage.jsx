@@ -44,9 +44,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="flex flex-1 min-h-[calc(100vh-64px)]">
       {/* Left panel — hidden on mobile */}
-      <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-16 overflow-hidden bg-primary-container">
+      <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-end p-16 overflow-hidden bg-primary-container flex-shrink-0">
         {/* Background image */}
         <img
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKBegyy60_trtcH2gY3PKGM91jWln6MHr53cCwwWjpEyjfxyG3VgIx6I2uYp09kYR0YvEj-jMCZQeau3Xu8HMTDFIJUbBJvJN5ZF_T0zRsNYI_j9JY9GeEqUZxa8p5mz0fJtgnmlvcdwtfAZTkv4_Rky_qI2gCIZhgyXOdKCGALgOQArnUGoZwH5TzUPYqZZX81gzF4tFcbSbdiGOEo3PU5G6fMy0d3aYX-k9r_MZIZKDSoY8upQXKV5wYyb7mbea0xm--_B6poFA"
@@ -65,7 +65,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center bg-surface-container-lowest px-6 py-12 overflow-y-auto">
+      <div className="flex-1 flex items-center justify-center bg-surface-container-lowest px-6 py-12 overflow-y-auto min-h-[calc(100vh-64px)]">
         <div className="w-full max-w-md">
           {/* Brand */}
           <div className="mb-8">

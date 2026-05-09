@@ -30,13 +30,11 @@ function App() {
   return (
     <>
       <Routes>
-        {/* Auth pages — standalone, no Navbar/Footer */}
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
-
-        {/* Main app — with Navbar + Footer */}
+        {/* All pages inside MainLayout — Navbar + Footer */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
           <Route path="hotels" element={<HotelListPage />} />
           <Route path="hotels/:id" element={<HotelDetailPage />} />
           <Route
