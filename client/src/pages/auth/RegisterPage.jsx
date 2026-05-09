@@ -66,7 +66,7 @@ const RegisterPage = () => {
 
       {/* Right panel */}
       <div className="flex-1 flex items-center justify-center bg-white px-6 py-12 overflow-y-auto">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md pt-20">
           {/* Brand */}
           <div className="mb-8">
             <Link to="/" className="font-serif text-2xl text-primary-container tracking-wide">
