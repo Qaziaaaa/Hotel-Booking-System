@@ -13,6 +13,7 @@ import BookingPage from './pages/bookings/BookingPage';
 import MyBookingsPage from './pages/bookings/MyBookingsPage';
 import ProfilePage from './pages/user/ProfilePage';
 import DashboardPage from './pages/admin/DashboardPage';
+import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import Chatbot from './components/Chatbot';
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="register" element={<RegisterPage />} />
           <Route path="hotels" element={<HotelListPage />} />
           <Route path="hotels/:id" element={<HotelDetailPage />} />
+          <Route path="about" element={<AboutPage />} />
           <Route
             path="book/:hotelId/:roomId"
             element={

@@ -48,14 +48,14 @@ const Navbar = () => {
           >
             Hotels
           </Link>
-          <a
-            href="#"
+          <Link
+            to="/about"
             className={`font-sans transition-colors duration-300 ${
               isHomePage && !scrolled ? 'text-white/90 hover:text-white' : 'text-on-surface hover:text-secondary'
             }`}
           >
             About
-          </a>
+          </Link>
         </nav>
 
         {/* Desktop Actions */}
@@ -130,7 +130,7 @@ const Navbar = () => {
       {menuOpen && (
         <div className="md:hidden bg-surface-container-lowest border-t border-outline-variant/30 px-5 py-4 space-y-4">
           <Link to="/hotels" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">Hotels</Link>
-          <a href="#" className="block font-sans text-on-surface hover:text-secondary transition-colors">About</a>
+          <Link to="/about" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">About</Link>
           {isAuthenticated ? (
             <>
               <Link to="/my-bookings" onClick={() => setMenuOpen(false)} className="block font-sans text-on-surface hover:text-secondary transition-colors">My Bookings</Link>
