@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post('/recommendations', optionalAuth, getRecommendations);
 router.post('/personalized-hotels', protect, getPersonalizedHotels);
-router.get('/sentiment/:hotelId', analyzeSentiment);
+router.get('/sentiment/:hotelId', protect, analyzeSentiment);
 
 export default router;

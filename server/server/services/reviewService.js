@@ -139,9 +139,10 @@ export const updateReview = async (id, userId, data) => {
     throw new AppError('Review not found', 404);
   }
 
+  const { rating, comment } = data;
   const updatedReview = await prisma.review.update({
     where: { id },
-    data,
+    data: { rating, comment },
     include: {
       user: {
         select: {

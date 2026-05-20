@@ -1,5 +1,12 @@
 import nodemailer from 'nodemailer';
 
+const requiredEmailVars = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'FROM_NAME', 'FROM_EMAIL'];
+for (const key of requiredEmailVars) {
+  if (!process.env[key]) {
+    console.warn(`Warning: ${key} is not set. Email functionality may be unavailable.`);
+  }
+}
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,

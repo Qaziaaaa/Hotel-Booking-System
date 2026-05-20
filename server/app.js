@@ -8,6 +8,8 @@ import rateLimit from 'express-rate-limit';
 import authRoutes from './server/routes/authRoutes.js';
 import hotelRoutes from './server/routes/hotelRoutes.js';
 import bookingRoutes from './server/routes/bookingRoutes.js';
+import standaloneRoomRoutes from './server/routes/standaloneRoomRoutes.js';
+import standaloneReviewRoutes from './server/routes/standaloneReviewRoutes.js';
 import aiRoutes from './server/routes/aiRoutes.js';
 import analyticsRoutes from './server/routes/analyticsRoutes.js';
 import chatbotRoutes from './server/routes/chatbotRoutes.js';
@@ -52,6 +54,8 @@ app.use('/api/hotels', hotelRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/rooms', standaloneRoomRoutes);
+app.use('/api/reviews', standaloneReviewRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/notifications', notificationRoutes);
 

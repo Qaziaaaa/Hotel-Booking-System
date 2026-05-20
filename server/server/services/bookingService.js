@@ -8,7 +8,9 @@ const calculateNights = (checkIn, checkOut) => {
   const oneDay = 24 * 60 * 60 * 1000;
   const start = new Date(checkIn);
   const end = new Date(checkOut);
-  return Math.round(Math.abs((end - start) / oneDay));
+  const diff = end.getTime() - start.getTime();
+  if (diff < 0) throw new AppError('Check-out must be after check-in', 400);
+  return Math.max(1, Math.round(diff / oneDay));
 };
 
 export const createBooking = async (data, user) => {
@@ -46,50 +48,62 @@ export const createBooking = async (data, user) => {
     throw new AppError(`This room can only accommodate ${room.capacity} guests`, 400);
   }
 
-  // Check availability
-  const isAvailable = await checkRoomAvailability(roomId, checkIn, checkOut);
-  if (!isAvailable) {
-    throw new AppError('Room is not available for the selected dates', 409);
-  }
+  // Use transaction to prevent race condition (double-booking)
+  const booking = await prisma.$transaction(async (prismaTx) => {
+    // Re-check availability inside the transaction
+    const conflictingBookings = await prismaTx.booking.findMany({
+      where: {
+        roomId,
+        status: { in: ['PENDING', 'CONFIRMED'] },
+        AND: [
+          { checkIn: { lt: checkOutDate } },
+          { checkOut: { gt: checkInDate } },
+        ],
+      },
+    });
 
-  // Calculate total price
-  const nights = calculateNights(checkIn, checkOut);
-  const totalPrice = nights * room.price;
+    if (conflictingBookings.length > 0) {
+      throw new AppError('Room is not available for the selected dates', 409);
+    }
 
-  // Create booking
-  const booking = await prisma.booking.create({
-    data: {
-      userId: user.id,
-      hotelId,
-      roomId,
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      guests,
-      totalPrice,
-      specialRequests,
-      status: 'CONFIRMED',
-    },
-    include: {
-      user: {
-        select: {
-          email: true,
-          firstName: true,
-          lastName: true,
+    // Calculate total price
+    const nights = calculateNights(checkIn, checkOut);
+    const totalPrice = nights * room.price;
+
+    return prismaTx.booking.create({
+      data: {
+        userId: user.id,
+        hotelId,
+        roomId,
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+        guests,
+        totalPrice,
+        specialRequests,
+        status: 'CONFIRMED',
+      },
+      include: {
+        user: {
+          select: {
+            email: true,
+            firstName: true,
+            lastName: true,
+          },
+        },
+        hotel: {
+          select: {
+            name: true,
+            location: true,
+          },
+        },
+        room: {
+          select: {
+            roomType: true,
+            price: true,
+          },
         },
       },
-      hotel: {
-        select: {
-          name: true,
-          location: true,
-        },
-      },
-      room: {
-        select: {
-          roomType: true,
-          price: true,
-        },
-      },
-    },
+    });
   });
 
   // Send confirmation email
@@ -154,12 +168,10 @@ export const getUserBookings = async (userId) => {
   return bookings;
 };
 
-export const getBookingById = async (id, userId) => {
+export const getBookingById = async (id, userId, userRole) => {
+  const where = userRole === 'ADMIN' ? { id } : { id, userId };
   const booking = await prisma.booking.findFirst({
-    where: {
-      id,
-      userId,
-    },
+    where,
     include: {
       hotel: true,
       room: true,
@@ -174,12 +186,10 @@ export const getBookingById = async (id, userId) => {
   return booking;
 };
 
-export const cancelBooking = async (id, userId) => {
+export const cancelBooking = async (id, userId, userRole) => {
+  const where = userRole === 'ADMIN' ? { id } : { id, userId };
   const booking = await prisma.booking.findFirst({
-    where: {
-      id,
-      userId,
-    },
+    where,
     include: {
       user: {
         select: {

@@ -2,9 +2,10 @@ import * as roomService from '../services/roomService.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const createRoom = catchAsync(async (req, res) => {
-  const data = { ...req.body };
+  const { roomType, price, capacity, amenities, description, hotelId } = req.body;
+  const data = { roomType, price, capacity, amenities, description, hotelId };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
-    data.images = [...(data.images || []), ...req.cloudinaryUrls];
+    data.images = req.cloudinaryUrls;
   }
   const room = await roomService.createRoom(data);
 
@@ -45,9 +46,10 @@ export const getRoom = catchAsync(async (req, res) => {
 });
 
 export const updateRoom = catchAsync(async (req, res) => {
-  const data = { ...req.body };
+  const { roomType, price, capacity, amenities, description } = req.body;
+  const data = { roomType, price, capacity, amenities, description };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
-    data.images = [...(data.images || []), ...req.cloudinaryUrls];
+    data.images = req.cloudinaryUrls;
   }
   const room = await roomService.updateRoom(req.params.id, data);
 
@@ -62,7 +64,7 @@ export const updateRoom = catchAsync(async (req, res) => {
 export const deleteRoom = catchAsync(async (req, res) => {
   await roomService.deleteRoom(req.params.id);
 
-  res.status(204).json({
+  res.status(200).json({
     status: 'success',
     data: null,
   });

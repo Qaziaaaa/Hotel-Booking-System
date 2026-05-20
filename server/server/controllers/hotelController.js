@@ -2,9 +2,10 @@ import * as hotelService from '../services/hotelService.js';
 import catchAsync from '../utils/catchAsync.js';
 
 export const createHotel = catchAsync(async (req, res) => {
-  const data = { ...req.body };
+  const { name, location, address, description, amenities } = req.body;
+  const data = { name, location, address, description, amenities };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
-    data.images = [...(data.images || []), ...req.cloudinaryUrls];
+    data.images = req.cloudinaryUrls;
   }
   const hotel = await hotelService.createHotel(data);
 
@@ -17,11 +18,13 @@ export const createHotel = catchAsync(async (req, res) => {
 });
 
 export const getAllHotels = catchAsync(async (req, res) => {
-  const { location, page, limit } = req.query;
+  const { location, page: pageStr, limit: limitStr } = req.query;
+  const page = pageStr ? Math.max(1, parseInt(pageStr) || 1) : 1;
+  const limit = limitStr ? Math.min(50, Math.max(1, parseInt(limitStr) || 10)) : 10;
   const result = await hotelService.getAllHotels({
     location,
-    page: page ? parseInt(page) : 1,
-    limit: limit ? parseInt(limit) : 10,
+    page,
+    limit,
   });
 
   res.status(200).json({
@@ -46,9 +49,10 @@ export const getHotel = catchAsync(async (req, res) => {
 });
 
 export const updateHotel = catchAsync(async (req, res) => {
-  const data = { ...req.body };
+  const { name, location, address, description, amenities } = req.body;
+  const data = { name, location, address, description, amenities };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
-    data.images = [...(data.images || []), ...req.cloudinaryUrls];
+    data.images = req.cloudinaryUrls;
   }
   const hotel = await hotelService.updateHotel(req.params.id, data);
 
@@ -63,7 +67,7 @@ export const updateHotel = catchAsync(async (req, res) => {
 export const deleteHotel = catchAsync(async (req, res) => {
   await hotelService.deleteHotel(req.params.id);
 
-  res.status(204).json({
+  res.status(200).json({
     status: 'success',
     data: null,
   });

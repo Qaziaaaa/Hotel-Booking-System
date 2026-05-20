@@ -41,9 +41,13 @@ const Navbar = () => {
           <Link
             to="/hotels"
             className={`font-sans transition-colors duration-300 ${
-              isHomePage && !scrolled
-                ? 'text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim pb-1'
-                : 'text-secondary border-b-2 border-secondary pb-1'
+              location.pathname.startsWith('/hotels')
+                ? isHomePage && !scrolled
+                  ? 'text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim pb-1'
+                  : 'text-secondary border-b-2 border-secondary pb-1'
+                : isHomePage && !scrolled
+                  ? 'text-white/90 hover:text-white'
+                  : 'text-on-surface hover:text-secondary'
             }`}
           >
             Hotels
@@ -51,7 +55,13 @@ const Navbar = () => {
           <Link
             to="/about"
             className={`font-sans transition-colors duration-300 ${
-              isHomePage && !scrolled ? 'text-white/90 hover:text-white' : 'text-on-surface hover:text-secondary'
+              location.pathname === '/about'
+                ? isHomePage && !scrolled
+                  ? 'text-secondary-fixed-dim border-b-2 border-secondary-fixed-dim pb-1'
+                  : 'text-secondary border-b-2 border-secondary pb-1'
+                : isHomePage && !scrolled
+                  ? 'text-white/90 hover:text-white'
+                  : 'text-on-surface hover:text-secondary'
             }`}
           >
             About

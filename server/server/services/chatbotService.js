@@ -7,6 +7,10 @@ import dayjs from 'dayjs';
 class ChatbotService {
   constructor() {
     this.contexts = new Map(); // Store conversation contexts
+    this.MAX_CONTEXTS = 10000;
+
+    // Periodic cleanup every 5 minutes
+    setInterval(() => this.cleanOldContexts(), 5 * 60 * 1000);
   }
 
   /**
@@ -407,9 +411,10 @@ class ChatbotService {
    */
   saveContext(sessionId, context) {
     this.contexts.set(sessionId, context);
-    
-    // Clean old contexts periodically
-    this.cleanOldContexts();
+
+    if (this.contexts.size > this.MAX_CONTEXTS) {
+      this.cleanOldContexts();
+    }
   }
 
   /**

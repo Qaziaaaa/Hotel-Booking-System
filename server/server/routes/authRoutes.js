@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post('/register', validate(schemas.register), register);
 router.post('/login', validate(schemas.login), login);
-router.get('/logout', logout);
+router.post('/logout', logout);
 router.get('/me', protect, getMe);
 router.patch('/me', protect, updateMe);
 

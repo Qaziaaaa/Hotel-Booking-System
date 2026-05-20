@@ -25,7 +25,7 @@ export const getMyBookings = catchAsync(async (req, res) => {
 });
 
 export const getBooking = catchAsync(async (req, res) => {
-  const booking = await bookingService.getBookingById(req.params.id, req.user.id);
+  const booking = await bookingService.getBookingById(req.params.id, req.user.id, req.user.role);
 
   res.status(200).json({
     status: 'success',
@@ -36,7 +36,7 @@ export const getBooking = catchAsync(async (req, res) => {
 });
 
 export const cancelBooking = catchAsync(async (req, res) => {
-  const booking = await bookingService.cancelBooking(req.params.id, req.user.id);
+  const booking = await bookingService.cancelBooking(req.params.id, req.user.id, req.user.role);
 
   res.status(200).json({
     status: 'success',
