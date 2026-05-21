@@ -96,42 +96,37 @@ const ProfilePage = () => {
             </div>
 
             {/* Stats Bento Grid */}
-            <div className="grid grid-cols-2 gap-4">
-              {/* Total Bookings — full width */}
-              <div className="col-span-2 bg-primary-container rounded-xl p-6 flex items-center justify-between">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
+              <div className="col-span-2 bg-primary-container rounded-xl p-4 md:p-6 flex items-center justify-between">
                 <div>
-                  <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-white/70 mb-1">
+                  <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-white/70 mb-0.5 md:mb-1">
                     Total Bookings
                   </p>
-                  <p className="font-serif text-[32px] text-white leading-none">{totalBookings}</p>
+                  <p className="font-serif text-2xl md:text-[32px] text-white leading-none">{totalBookings}</p>
                 </div>
-                <span className="material-symbols-outlined text-[40px] text-white/50">luggage</span>
+                <span className="material-symbols-outlined text-3xl md:text-[40px] text-white/50">luggage</span>
               </div>
-
-              {/* Reviews Written */}
-              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-5">
-                <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-4 md:p-5">
+                <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1 md:mb-2">
                   Reviews
                 </p>
-                <p className="font-serif text-[28px] text-on-surface leading-none">{totalReviews}</p>
-                <p className="font-sans text-xs text-on-surface-variant mt-1">Written</p>
+                <p className="font-serif text-xl md:text-[28px] text-on-surface leading-none">{totalReviews}</p>
+                <p className="font-sans text-[10px] md:text-xs text-on-surface-variant mt-0.5 md:mt-1">Written</p>
               </div>
-
-              {/* Member Since */}
-              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-5">
-                <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-4 md:p-5">
+                <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1 md:mb-2">
                   Member
                 </p>
-                <p className="font-serif text-[28px] text-on-surface leading-none">{memberSince}</p>
-                <p className="font-sans text-xs text-on-surface-variant mt-1">Since</p>
+                <p className="font-serif text-xl md:text-[28px] text-on-surface leading-none">{memberSince}</p>
+                <p className="font-sans text-[10px] md:text-xs text-on-surface-variant mt-0.5 md:mt-1">Since</p>
               </div>
             </div>
           </div>
 
           {/* Right Column — 8/12 */}
           <div className="lg:col-span-8">
-            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8 md:p-12">
-              <h1 className="font-serif text-[48px] leading-tight text-on-surface mb-10">
+            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-5 md:p-8 md:p-12">
+              <h1 className="font-serif text-[28px] md:text-[48px] leading-tight text-on-surface mb-6 md:mb-10">
                 Personal Details
               </h1>
 

@@ -29,12 +29,12 @@ const AboutPage = () => {
       </section>
 
       {/* ── Our Story Section ── */}
-      <section className="py-24 px-5 md:px-16 bg-background">
+      <section className="py-16 md:py-24 px-5 md:px-16 bg-background">
         <div className="max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
             <div>
               <span className="label-caps text-secondary mb-3 block">Our Story</span>
-              <h2 className="font-serif text-[40px] leading-tight font-semibold text-on-surface mb-6">
+              <h2 className="font-serif text-[28px] md:text-[40px] leading-tight font-semibold text-on-surface mb-4 md:mb-6">
                 Redefining the Art of Travel
               </h2>
               <div className="w-16 h-[2px] bg-secondary mb-6" />
@@ -61,17 +61,17 @@ const AboutPage = () => {
       </section>
 
       {/* ── How It Works Section ── */}
-      <section className="py-24 px-5 md:px-16 bg-surface-container-low">
+      <section className="py-16 md:py-24 px-5 md:px-16 bg-surface-container-low">
         <div className="max-w-[1440px] mx-auto text-center">
           <span className="label-caps text-secondary mb-3 block">Simple & Seamless</span>
-          <h2 className="font-serif text-[40px] leading-tight font-semibold text-on-surface mb-4">
+          <h2 className="font-serif text-[28px] md:text-[40px] leading-tight font-semibold text-on-surface mb-3 md:mb-4">
             How It Works
           </h2>
-          <p className="font-sans text-body-lg text-on-surface-variant max-w-xl mx-auto mb-16">
+          <p className="font-sans text-sm md:text-body-lg text-on-surface-variant max-w-xl mx-auto mb-10 md:mb-16">
             Finding and booking your perfect luxury stay is effortless. Follow these simple steps to begin your journey.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-8 relative">
             <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-[2px] bg-outline-variant/50 z-0" />
 
             {[
@@ -111,19 +111,19 @@ const AboutPage = () => {
       </section>
 
       {/* ── Features Section ── */}
-      <section className="py-24 px-5 md:px-16 bg-background">
+      <section className="py-16 md:py-24 px-5 md:px-16 bg-background">
         <div className="max-w-[1440px] mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <span className="label-caps text-secondary mb-3 block">Why Choose Us</span>
-            <h2 className="font-serif text-[40px] leading-tight font-semibold text-on-surface mb-4">
+            <h2 className="font-serif text-[28px] md:text-[40px] leading-tight font-semibold text-on-surface mb-3 md:mb-4">
               The Ascendant Difference
             </h2>
-            <p className="font-sans text-body-lg text-on-surface-variant max-w-xl mx-auto">
+            <p className="font-sans text-sm md:text-body-lg text-on-surface-variant max-w-xl mx-auto">
               We go beyond booking to deliver an elevated travel experience at every touchpoint.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             {[
               {
                 icon: 'verified',
@@ -174,27 +174,27 @@ const AboutPage = () => {
       </section>
 
       {/* ── CTA Banner ── */}
-      <section className="py-24 px-5 md:px-16">
+      <section className="py-16 md:py-24 px-5 md:px-16">
         <div className="max-w-[1440px] mx-auto">
           <div className="bg-primary-container rounded-xl overflow-hidden relative shadow-2xl">
-            <div className="p-12 md:p-20 text-center relative z-10">
-              <h2 className="font-serif text-[40px] md:text-[48px] leading-tight font-semibold text-on-primary mb-6">
+            <div className="p-8 md:p-20 text-center relative z-10">
+              <h2 className="font-serif text-[28px] md:text-[48px] leading-tight font-semibold text-on-primary mb-4 md:mb-6">
                 Ready to Experience Luxury?
               </h2>
-              <p className="font-sans text-body-lg text-white/80 max-w-xl mx-auto mb-10">
+              <p className="font-sans text-sm md:text-body-lg text-white/80 max-w-xl mx-auto mb-8 md:mb-10">
                 Begin your journey with Ascendant Luxury. Browse our curated collection of exceptional properties and book your next unforgettable stay.
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4">
                 <Link
                   to="/hotels"
-                  className="btn-gold inline-flex items-center gap-2"
+                  className="btn-gold inline-flex items-center gap-2 text-sm md:text-base px-6 md:px-8 py-3 md:py-4"
                 >
                   Browse Hotels
-                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  <span className="material-symbols-outlined text-[16px] md:text-[18px]">arrow_forward</span>
                 </Link>
                 <Link
                   to="/register"
-                  className="border border-white/30 text-on-primary font-sans font-semibold px-8 py-4 rounded-lg hover:bg-white/10 transition-all duration-300"
+                  className="border border-white/30 text-on-primary font-sans font-semibold px-6 md:px-8 py-3 md:py-4 rounded-lg text-sm md:text-base hover:bg-white/10 transition-all duration-300"
                 >
                   Create an Account
                 </Link>
@@ -203,6 +203,9 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Bottom spacer for mobile nav */}
+      <div className="h-4 md:h-0" />
 
     </div>
   );

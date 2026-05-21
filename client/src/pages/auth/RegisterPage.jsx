@@ -65,14 +65,14 @@ const RegisterPage = () => {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center bg-white px-6 py-12 overflow-y-auto">
-        <div className="w-full max-w-md pt-20">
+      <div className="flex-1 flex items-center justify-center bg-white px-5 md:px-6 py-8 md:py-12 overflow-y-auto">
+        <div className="w-full max-w-md pt-16 md:pt-20">
           {/* Brand */}
-          <div className="mb-8">
-            <Link to="/" className="font-serif text-2xl text-primary-container tracking-wide">
+          <div className="mb-6 md:mb-8">
+            <Link to="/" className="font-serif text-xl md:text-2xl text-primary-container tracking-wide">
               Ascendant Luxury
             </Link>
-            <p className="font-sans text-on-surface-variant mt-2">
+            <p className="font-sans text-sm md:text-base text-on-surface-variant mt-1 md:mt-2">
               Create your account to begin your luxury experience.
             </p>
           </div>
@@ -85,11 +85,11 @@ const RegisterPage = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 md:space-y-5">
             {/* First + Last Name */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               <div>
-                <label htmlFor="firstName" className="block font-sans text-sm font-medium text-on-surface mb-1">
+                <label htmlFor="firstName" className="block font-sans text-xs md:text-sm font-medium text-on-surface mb-1">
                   First Name
                 </label>
                 <input
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                   type="text"
                   {...register('firstName')}
                   placeholder="John"
-                  className="w-full border-0 border-b-2 border-outline-variant bg-white px-4 py-3 font-sans text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
+                  className="w-full border-0 border-b-2 border-outline-variant bg-white px-3 md:px-4 py-2.5 md:py-3 font-sans text-sm md:text-base text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary transition-colors"
                 />
                 {errors.firstName && (
                   <p className="mt-1 font-sans text-xs text-error">{errors.firstName.message}</p>

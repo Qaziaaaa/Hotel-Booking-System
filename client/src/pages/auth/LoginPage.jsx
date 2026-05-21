@@ -57,14 +57,14 @@ const LoginPage = () => {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center bg-white px-6 py-12 overflow-y-auto">
-        <div className="w-full max-w-md pt-20">
+      <div className="flex-1 flex items-center justify-center bg-white px-5 md:px-6 py-8 md:py-12 overflow-y-auto">
+        <div className="w-full max-w-md pt-16 md:pt-20">
           {/* Brand */}
-          <div className="mb-10">
-            <Link to="/" className="font-serif text-2xl text-primary-container tracking-wide">
+          <div className="mb-8 md:mb-10">
+            <Link to="/" className="font-serif text-xl md:text-2xl text-primary-container tracking-wide">
               Ascendant Luxury
             </Link>
-            <p className="font-sans text-on-surface-variant mt-2">
+            <p className="font-sans text-sm md:text-base text-on-surface-variant mt-1 md:mt-2">
               Welcome back. Please enter your credentials.
             </p>
           </div>

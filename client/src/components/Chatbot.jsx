@@ -72,7 +72,7 @@ const Chatbot = () => {
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50" style={{ bottom: 'calc(4.5rem + env(safe-area-inset-bottom, 0px))' }}>
       {/* Chat Button */}
       {!isOpen && (
         <button
@@ -86,7 +86,7 @@ const Chatbot = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="bg-surface-container-lowest rounded-2xl shadow-2xl w-96 h-[520px] flex flex-col overflow-hidden border border-outline-variant/30">
+        <div className="bg-surface-container-lowest rounded-2xl md:rounded-2xl shadow-2xl w-screen h-[100dvh] md:w-96 md:h-[520px] fixed md:relative bottom-0 left-0 right-0 md:bottom-auto md:left-auto md:right-auto flex flex-col overflow-hidden border-0 md:border border-outline-variant/30">
           {/* Header */}
           <div className="bg-primary-container text-on-primary p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">

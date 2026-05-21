@@ -162,7 +162,7 @@ const MyBookingsPage = () => {
                 className="bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden flex flex-col md:flex-row hover:-translate-y-1 transition-transform duration-300"
               >
                 {/* Hotel Image — Left 1/3 */}
-                <div className="w-full md:w-1/3 h-56 md:h-auto relative flex-shrink-0">
+                <div className="w-full md:w-1/3 h-44 md:h-auto relative flex-shrink-0">
                   {booking.hotel.images?.[0] ? (
                     <img
                       src={booking.hotel.images[0]}
