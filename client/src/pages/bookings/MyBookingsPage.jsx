@@ -100,15 +100,15 @@ const MyBookingsPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="font-serif text-[48px] leading-tight text-on-surface">My Reservations</h1>
-          <p className="font-sans text-base text-on-surface-variant mt-2">
+        <div className="mb-6 md:mb-8">
+          <h1 className="font-serif text-[28px] md:text-[48px] leading-tight text-on-surface">My Reservations</h1>
+          <p className="font-sans text-sm md:text-base text-on-surface-variant mt-1 md:mt-2">
             Manage your upcoming and past stays
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex gap-6 border-b border-outline-variant mb-8 overflow-x-auto">
+        <div className="flex gap-4 md:gap-6 border-b border-outline-variant mb-6 md:mb-8 overflow-x-auto hide-scrollbar">
           {filters.map((filter) => (
             <button
               key={filter}

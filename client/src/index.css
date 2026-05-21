@@ -90,3 +90,55 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #76777d;
 }
+
+/* ── Mobile App-level Optimizations ── */
+
+/* Tap highlight color for touch feedback */
+* {
+  -webkit-tap-highlight-color: rgba(115, 92, 0, 0.1);
+}
+
+/* Safe area for notched devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-nav-safe {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+  }
+}
+
+/* Bottom nav bar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(198, 198, 205, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.dark .bottom-nav {
+  background: rgba(19, 27, 46, 0.95);
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hide scrollbar on mobile filter strips */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -89,19 +89,19 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-16 pt-20">
+    <div className="min-h-screen bg-background pb-24 md:pb-16 pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Link */}
         <Link
           to={`/hotels/${hotelId}?${searchParams.toString()}`}
-          className="inline-flex items-center gap-1 text-on-surface-variant hover:text-secondary font-sans text-sm transition-colors mb-8"
+          className="inline-flex items-center gap-1 text-on-surface-variant hover:text-secondary font-sans text-sm transition-colors mb-6 md:mb-8"
         >
           <span className="material-symbols-outlined text-[18px]">chevron_left</span>
           Back to hotel
         </Link>
 
         {/* Page Title */}
-        <h1 className="font-serif text-[48px] leading-tight text-on-surface mb-10">
+        <h1 className="font-serif text-[28px] md:text-[48px] leading-tight text-on-surface mb-6 md:mb-10">
           Complete your booking
         </h1>
 
@@ -327,6 +327,30 @@ const BookingPage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ── Mobile Sticky Bottom Bar ── */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/30 px-4 py-3 md:hidden flex items-center justify-between shadow-lg shadow-black/5">
+        <div>
+          <p className="text-[10px] font-sans font-semibold uppercase tracking-widest text-on-surface-variant">Total</p>
+          <p className="font-serif text-2xl font-bold text-on-surface">${total.toFixed(2)}</p>
+        </div>
+        <button
+          onClick={handleBooking}
+          disabled={createBookingMutation.isPending}
+          className="bg-secondary text-on-secondary font-sans text-[11px] font-semibold uppercase tracking-widest px-6 py-3 rounded-full hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 flex items-center gap-2"
+        >
+          {createBookingMutation.isPending ? (
+            <>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-on-secondary"></div>
+              Processing
+            </>
+          ) : (
+            <>
+              Confirm Booking
+            </>
+          )}
+        </button>
       </div>
     </div>
   );

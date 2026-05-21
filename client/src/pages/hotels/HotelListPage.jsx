@@ -52,81 +52,74 @@ const HotelListPage = () => {
   return (
     <div className="min-h-screen bg-background pt-20">
       {/* Sticky Search Bar */}
-      <div className="sticky top-16 z-30 bg-surface-container-lowest border-b border-outline-variant/20 shadow-ambient">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div className="sticky top-14 md:top-16 z-30 bg-surface-container-lowest/95 backdrop-blur-md border-b border-outline-variant/20 shadow-ambient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-3">
           <form onSubmit={handleSearch}>
-            <div className="flex items-center gap-2 bg-background border border-outline-variant rounded-full px-4 py-2 shadow-sm">
-              {/* Location */}
-              <span className="material-symbols-outlined text-on-surface-variant text-[20px]">location_on</span>
+            <div className="flex items-center gap-1.5 md:gap-2 bg-background border border-outline-variant rounded-full px-3 md:px-4 py-1.5 md:py-2 shadow-sm">
+              <span className="material-symbols-outlined text-on-surface-variant text-[18px] md:text-[20px]">location_on</span>
               <input
                 type="text"
-                placeholder="Where are you going?"
+                placeholder="Where?"
                 value={filters.location}
                 onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-                className="flex-1 min-w-[120px] bg-transparent text-on-surface placeholder-on-surface-variant font-sans text-sm focus:outline-none"
+                className="flex-1 min-w-0 w-16 md:w-[120px] bg-transparent text-on-surface placeholder-on-surface-variant font-sans text-xs md:text-sm focus:outline-none"
               />
-              <div className="w-px h-5 bg-outline-variant/60" />
-              {/* Check-in */}
-              <span className="material-symbols-outlined text-on-surface-variant text-[20px]">calendar_today</span>
+              <div className="w-px h-4 md:h-5 bg-outline-variant/60 flex-shrink-0" />
               <input
                 type="date"
                 value={filters.checkIn}
                 min={dayjs().format('YYYY-MM-DD')}
                 onChange={(e) => setFilters({ ...filters, checkIn: e.target.value })}
-                className="bg-transparent text-on-surface font-sans text-sm focus:outline-none cursor-pointer"
+                className="bg-transparent text-on-surface font-sans text-[11px] md:text-sm focus:outline-none cursor-pointer w-[90px] md:w-auto"
               />
-              <div className="w-px h-5 bg-outline-variant/60" />
-              {/* Check-out */}
+              <div className="w-px h-4 md:h-5 bg-outline-variant/60 flex-shrink-0" />
               <input
                 type="date"
                 value={filters.checkOut}
                 min={dayjs(filters.checkIn).add(1, 'day').format('YYYY-MM-DD')}
                 onChange={(e) => setFilters({ ...filters, checkOut: e.target.value })}
-                className="bg-transparent text-on-surface font-sans text-sm focus:outline-none cursor-pointer"
+                className="bg-transparent text-on-surface font-sans text-[11px] md:text-sm focus:outline-none cursor-pointer w-[90px] md:w-auto"
               />
-              <div className="w-px h-5 bg-outline-variant/60" />
-              {/* Guests */}
-              <span className="material-symbols-outlined text-on-surface-variant text-[20px]">person</span>
+              <div className="w-px h-4 md:h-5 bg-outline-variant/60 flex-shrink-0" />
               <select
                 value={filters.guests}
                 onChange={(e) => setFilters({ ...filters, guests: parseInt(e.target.value) })}
-                className="bg-transparent text-on-surface font-sans text-sm focus:outline-none cursor-pointer pr-1"
+                className="bg-transparent text-on-surface font-sans text-[11px] md:text-sm focus:outline-none cursor-pointer w-12 md:w-auto"
               >
                 {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
+                  <option key={num} value={num}>{num} {num === 1 ? 'G' : 'G'}</option>
                 ))}
               </select>
-              {/* Search button */}
               <button
                 type="submit"
-                className="ml-1 bg-primary-container text-secondary-fixed-dim w-9 h-9 rounded-full flex items-center justify-center hover:bg-surface-tint transition-colors flex-shrink-0"
+                className="ml-auto md:ml-1 bg-primary-container text-secondary-fixed-dim w-8 h-8 md:w-9 md:h-9 rounded-full flex items-center justify-center hover:bg-surface-tint transition-colors flex-shrink-0 active:scale-95"
                 aria-label="Search"
               >
-                <span className="material-symbols-outlined text-[20px]">arrow_forward</span>
+                <span className="material-symbols-outlined text-[18px] md:text-[20px]">arrow_forward</span>
               </button>
             </div>
           </form>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
         {/* Results Header */}
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 md:gap-0 mb-6 md:mb-8">
           <div>
-            <h1 className="font-serif text-[48px] leading-tight text-on-surface">
+            <h1 className="font-serif text-[24px] md:text-[48px] leading-tight text-on-surface">
               {isLoading
                 ? 'Searching...'
                 : `${pagination?.total || 0} hotel${(pagination?.total || 0) !== 1 ? 's' : ''} found${filters.location ? ` in ${filters.location}` : ''}`}
             </h1>
-            <p className="font-sans text-on-surface-variant mt-1">
+            <p className="font-sans text-sm md:text-base text-on-surface-variant mt-0.5 md:mt-1">
               {filters.checkIn && filters.checkOut
                 ? `${dayjs(filters.checkIn).format('MMM D')} – ${dayjs(filters.checkOut).format('MMM D, YYYY')} · ${filters.guests} guest${filters.guests !== 1 ? 's' : ''}`
                 : ''}
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-sans text-sm text-on-surface-variant">Sort by:</span>
-            <select className="font-sans text-sm text-on-surface bg-surface-container-lowest border border-outline-variant/40 rounded-lg px-3 py-2 focus:outline-none focus:border-secondary">
+            <span className="font-sans text-[11px] md:text-sm text-on-surface-variant">Sort:</span>
+            <select className="font-sans text-[11px] md:text-sm text-on-surface bg-surface-container-lowest border border-outline-variant/40 rounded-lg px-2 md:px-3 py-1.5 md:py-2 focus:outline-none focus:border-secondary">
               <option>Recommended</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
@@ -166,14 +159,13 @@ const HotelListPage = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {hotels.map((hotel) => (
                 <article
                   key={hotel.id}
                   className="rounded-xl overflow-hidden bg-surface-container-lowest shadow-ambient border border-outline-variant/20 hover:shadow-ambient-hover hover:-translate-y-1 transition-all duration-300 group"
                 >
-                  {/* Image */}
-                  <div className="aspect-video bg-outline-variant/10 relative overflow-hidden">
+                  <div className="aspect-[4/3] md:aspect-video bg-outline-variant/10 relative overflow-hidden">
                     {hotel.images && hotel.images[0] ? (
                       <img
                         src={hotel.images[0]}
@@ -182,8 +174,59 @@ const HotelListPage = () => {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-surface-container">
-                        <span className="material-symbols-outlined text-[48px] text-on-surface-variant/30">hotel</span>
+                        <span className="material-symbols-outlined text-4xl md:text-[48px] text-on-surface-variant/30">hotel</span>
                       </div>
+                    )}
+                    <div className="absolute top-3 left-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-2 md:px-3 py-0.5 md:py-1 rounded-full label-caps uppercase text-[10px] md:text-xs">
+                      Available
+                    </div>
+                    {hotel.avgRating > 0 && (
+                      <div className="absolute top-3 right-3 bg-primary-container/90 backdrop-blur-sm text-secondary-fixed-dim px-2 md:px-2.5 py-0.5 md:py-1 rounded-full flex items-center gap-0.5 md:gap-1">
+                        <span className="material-symbols-outlined fill text-[12px] md:text-[14px]">star</span>
+                        <span className="font-sans text-[10px] md:text-xs font-semibold">{hotel.avgRating?.toFixed(1)}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-3 md:p-5">
+                    <h3 className="font-serif text-base md:text-[24px] font-semibold text-on-surface leading-tight mb-0.5 md:mb-1">
+                      {hotel.name}
+                    </h3>
+                    <p className="font-sans text-[11px] md:text-sm text-on-surface-variant mb-1 md:mb-2">{hotel.location}</p>
+                    <p className="font-sans text-xs md:text-body-md text-on-surface-variant line-clamp-2 mb-2 md:mb-3 hidden md:block">
+                      {hotel.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-4">
+                      {amenityIcons.slice(0, 4).map((amenity) => (
+                        <span key={amenity.icon} className="flex items-center gap-0.5 md:gap-1 text-on-surface-variant text-[10px] md:text-xs">
+                          <span className="material-symbols-outlined text-[14px] md:text-[16px]">{amenity.icon}</span>
+                          <span className="hidden md:inline">{amenity.label}</span>
+                        </span>
+                      ))}
+                      {hotel.amenities && hotel.amenities.length > 4 && (
+                        <span className="text-[10px] md:text-xs text-on-surface-variant">+{hotel.amenities.length - 4}</span>
+                      )}
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="font-sans text-[9px] md:text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant">
+                          From
+                        </p>
+                        <p className="font-serif text-xl md:text-[28px] font-bold text-on-surface leading-none">
+                          ${hotel.cheapestRoom?.price ?? '—'}
+                        </p>
+                        <p className="font-sans text-[10px] md:text-sm text-on-surface-variant">/ night</p>
+                      </div>
+                      <Link
+                        to={`/hotels/${hotel.id}`}
+                        className="bg-primary-container text-on-primary text-[11px] md:text-sm font-sans font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-full hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 active:scale-95"
+                      >
+                        View Details
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
                     )}
                     {/* Available badge */}
                     <div className="absolute top-4 left-4 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface px-3 py-1 rounded-full label-caps uppercase text-xs">

@@ -312,7 +312,7 @@ const HotelDetailPage = () => {
                   ))}
                 </div>
                 {reviewPagination && reviewPagination.pages > 1 && (
-                  <div className="flex justify-center mt-4 items-center gap-3">
+                  <div className="flex justify-center mt-4 items-center gap-3 mb-20 md:mb-0">
                     <button
                       onClick={() => setReviewPage((p) => Math.max(1, p - 1))}
                       disabled={reviewPage === 1}
@@ -381,6 +381,19 @@ const HotelDetailPage = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ── Mobile Sticky Bottom CTA ── */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-t border-outline-variant/30 px-4 py-3 md:hidden flex items-center justify-between shadow-lg shadow-black/5">
+        <div>
+          <p className="font-serif text-xl font-bold text-on-surface">
+            {rooms.length > 0 ? `$${rooms[0]?.price}` : 'From $—'}
+            <span className="font-sans text-sm font-normal text-on-surface-variant"> / night</span>
+          </p>
+        </div>
+        <button className="bg-primary-container text-on-primary font-sans text-[11px] font-semibold uppercase tracking-widest px-6 py-3 rounded-full hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 active:scale-95">
+          Check Availability
+        </button>
       </div>
     </div>
   );
