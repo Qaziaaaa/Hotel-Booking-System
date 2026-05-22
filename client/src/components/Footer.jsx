@@ -5,7 +5,7 @@ const Footer = () => (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-6 px-5 md:px-16 py-12 md:py-20 max-w-[1440px] mx-auto">
       <div className="col-span-2 md:col-span-1">
         <div className="font-serif text-xl md:text-2xl text-white mb-4 md:mb-6">Ascendant Luxury</div>
-        <p className="text-white/80 font-sans text-sm md:text-base mb-4 md:mb-6 max-w-xs">
+        <p className="text-white/80 font-sans text-sm md:text-base mb-4 md:mb-6 max-w-xs break-words">
           Elevating the art of travel through exclusive access and uncompromising service.
         </p>
         <div className="text-white/60 font-sans text-xs md:text-sm">

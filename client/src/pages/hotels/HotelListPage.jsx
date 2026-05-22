@@ -106,8 +106,8 @@ const HotelListPage = () => {
         {/* Results Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 md:gap-0 mb-6 md:mb-8">
           <div>
-            <h1 className="font-serif text-[24px] md:text-[48px] leading-tight text-on-surface">
-              {isLoading
+                <h1 className="font-serif text-[24px] md:text-[48px] leading-tight text-on-surface break-words">
+                  {isLoading
                 ? 'Searching...'
                 : `${pagination?.total || 0} hotel${(pagination?.total || 0) !== 1 ? 's' : ''} found${filters.location ? ` in ${filters.location}` : ''}`}
             </h1>
@@ -149,13 +149,13 @@ const HotelListPage = () => {
         ) : error ? (
           <div className="text-center py-20">
             <span className="material-symbols-outlined text-[48px] text-error mb-4 block">error_outline</span>
-            <p className="font-sans text-on-surface-variant">Failed to load hotels. Please try again.</p>
+            <p className="font-sans text-on-surface-variant break-words">Failed to load hotels. Please try again.</p>
           </div>
         ) : hotels.length === 0 ? (
           <div className="text-center py-20 bg-surface-container-lowest rounded-xl border border-outline-variant/20">
             <span className="material-symbols-outlined text-[64px] text-on-surface-variant/40 block mb-4">search_off</span>
             <h3 className="font-serif text-2xl text-on-surface mb-2">No hotels found</h3>
-            <p className="font-sans text-on-surface-variant">Try adjusting your search criteria or explore a different destination.</p>
+            <p className="font-sans text-on-surface-variant break-words">Try adjusting your search criteria or explore a different destination.</p>
           </div>
         ) : (
           <>
@@ -163,7 +163,7 @@ const HotelListPage = () => {
               {hotels.map((hotel) => (
                 <article
                   key={hotel.id}
-                  className="rounded-xl overflow-hidden bg-surface-container-lowest shadow-ambient border border-outline-variant/20 hover:shadow-ambient-hover hover:-translate-y-1 transition-all duration-300 group"
+                    className="rounded-xl overflow-hidden bg-surface-container-lowest shadow-card-3d border border-outline-variant/20 card-edge hover:shadow-card-raised hover:-translate-y-1 transition-all duration-300 group"
                 >
                   <div className="aspect-[4/3] md:aspect-video bg-outline-variant/10 relative overflow-hidden">
                     {hotel.images && hotel.images[0] ? (
@@ -188,10 +188,10 @@ const HotelListPage = () => {
                     )}
                   </div>
                   <div className="p-3 md:p-5">
-                    <h3 className="font-serif text-base md:text-[24px] font-semibold text-on-surface leading-tight mb-0.5 md:mb-1">
+                    <h3 className="font-serif text-base md:text-[24px] font-semibold text-on-surface leading-tight mb-0.5 md:mb-1 break-words">
                       {hotel.name}
                     </h3>
-                    <p className="font-sans text-[11px] md:text-sm text-on-surface-variant mb-1 md:mb-2">{hotel.location}</p>
+                    <p className="font-sans text-[11px] md:text-sm text-on-surface-variant mb-1 md:mb-2 break-words">{hotel.location}</p>
                     <p className="font-sans text-xs md:text-body-md text-on-surface-variant line-clamp-2 mb-2 md:mb-3 hidden md:block">
                       {hotel.description}
                     </p>

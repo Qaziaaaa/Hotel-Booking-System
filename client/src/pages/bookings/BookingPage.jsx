@@ -110,7 +110,7 @@ const BookingPage = () => {
           <div className="lg:col-span-7 flex flex-col gap-8">
 
             {/* Room Summary Card */}
-            <div className="bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden flex flex-col sm:flex-row">
+            <div className="bg-surface-container-lowest rounded-xl shadow-card-3d overflow-hidden flex flex-col sm:flex-row card-edge">
               <div className="sm:w-2/5 h-48 sm:h-auto relative">
                 {room.images?.[0] ? (
                   <img
@@ -129,9 +129,9 @@ const BookingPage = () => {
                   <span className="font-sans text-[12px] font-semibold uppercase tracking-widest text-secondary mb-2 block">
                     {room.roomType}
                   </span>
-                  <h2 className="font-serif text-[24px] text-on-surface mb-2">{hotel.name}</h2>
-                  <p className="font-sans text-base text-on-surface-variant flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[18px]">location_on</span>
+                  <h2 className="font-serif text-[24px] text-on-surface mb-2 break-words">{hotel.name}</h2>
+                  <p className="font-sans text-base text-on-surface-variant flex items-center gap-2 break-words">
+                    <span className="material-symbols-outlined text-[18px] shrink-0">location_on</span>
                     {hotel.location}
                   </p>
                 </div>
@@ -145,7 +145,7 @@ const BookingPage = () => {
             </div>
 
             {/* Stay Information Card */}
-            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8">
+            <div className="bg-surface-container-lowest rounded-xl shadow-card-3d p-8">
               <h3 className="font-serif text-[24px] text-on-surface mb-6 border-b border-outline-variant pb-4">
                 Stay Information
               </h3>
@@ -178,7 +178,7 @@ const BookingPage = () => {
             </div>
 
             {/* Special Requests */}
-            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8">
+            <div className="bg-surface-container-lowest rounded-xl shadow-card-3d p-8">
               <h3 className="font-serif text-[24px] text-on-surface mb-6 border-b border-outline-variant pb-4">
                 Special Requests
               </h3>
@@ -200,7 +200,7 @@ const BookingPage = () => {
             <div className="sticky top-24 flex flex-col gap-8">
 
               {/* Guest Details Form */}
-              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8">
+              <div className="bg-surface-container-lowest rounded-xl shadow-card-3d p-8">
                 <h3 className="font-serif text-[24px] text-on-surface mb-6">Guest Details</h3>
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -257,7 +257,7 @@ const BookingPage = () => {
               </div>
 
               {/* Price Summary Card */}
-              <div className="bg-primary-container rounded-xl shadow-lg p-8">
+              <div className="bg-primary-container rounded-xl shadow-card-raised p-8">
                 <h3 className="font-serif text-[24px] text-white mb-6">Price Summary</h3>
 
                 <div className="space-y-4 mb-6 border-b border-white/20 pb-6">

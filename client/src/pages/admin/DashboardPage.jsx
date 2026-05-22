@@ -392,8 +392,8 @@ const HotelsTab = () => {
               {hotels.map((hotel) => (
                 <>
                   <tr key={hotel.id} className="border-b border-outline-variant/30 hover:bg-surface-container-low">
-                    <td className="px-6 py-4 font-medium text-on-surface">{hotel.name}</td>
-                    <td className="px-6 py-4 text-on-surface-variant">{hotel.location}</td>
+                    <td className="px-6 py-4 font-medium text-on-surface break-words">{hotel.name}</td>
+                    <td className="px-6 py-4 text-on-surface-variant break-words">{hotel.location}</td>
                     <td className="px-6 py-4 text-on-surface-variant">
                       {hotel._count?.rooms ?? hotel.rooms?.length ?? 0}
                     </td>
@@ -428,7 +428,7 @@ const HotelsTab = () => {
                     <tr key={`${hotel.id}-rooms`} className="bg-surface-container-low">
                       <td colSpan={4} className="px-6 py-4">
                         <div className="flex justify-between items-center mb-3">
-                          <h3 className="text-sm font-semibold text-on-surface-variant">Rooms for {hotel.name}</h3>
+                          <h3 className="text-sm font-semibold text-on-surface-variant break-words">Rooms for {hotel.name}</h3>
                           <button
                             onClick={() => setShowCreateRoom(true)}
                             className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-on-secondary rounded-lg hover:bg-on-secondary-container text-xs font-medium"

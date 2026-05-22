@@ -205,7 +205,7 @@ const HomePage = () => {
               <h2 className="font-serif text-[28px] md:text-[48px] leading-tight font-semibold text-on-surface mb-2 md:mb-4">
                 Top Destinations
               </h2>
-              <p className="font-sans text-sm md:text-body-lg text-on-surface-variant max-w-2xl">
+              <p className="font-sans text-sm md:text-body-lg text-on-surface-variant max-w-2xl break-words">
                 Discover our handpicked selection of the world's most exquisite properties, curated for the discerning traveler.
               </p>
             </div>
@@ -234,7 +234,7 @@ const HomePage = () => {
                   <Link
                     key={hotel.id}
                     to={`/hotels/${hotel.id}`}
-                    className="group luxury-card overflow-hidden block"
+                    className="group luxury-card overflow-hidden block break-words"
                   >
                     <div className="relative h-48 md:h-64 overflow-hidden">
                       {hotel.images?.[0] ? (
@@ -256,11 +256,11 @@ const HomePage = () => {
                       </div>
                     </div>
                     <div className="p-4 md:p-6">
-                      <h3 className="font-serif text-xl md:text-2xl font-semibold text-on-surface mb-1 md:mb-2">
+                      <h3 className="font-serif text-xl md:text-2xl font-semibold text-on-surface mb-1 md:mb-2 break-words">
                         {hotel.name}
                       </h3>
-                      <p className="font-sans text-sm md:text-body-md text-on-surface-variant mb-3 md:mb-4 flex items-center gap-1 md:gap-2">
-                        <span className="material-symbols-outlined text-sm">location_on</span>
+                      <p className="font-sans text-sm md:text-body-md text-on-surface-variant mb-3 md:mb-4 flex items-center gap-1 md:gap-2 break-words">
+                        <span className="material-symbols-outlined text-sm shrink-0">location_on</span>
                         {hotel.location}
                       </p>
                       <div className="flex justify-between items-center mt-4 md:mt-6 pt-3 md:pt-4 border-t border-outline-variant/30">
@@ -280,7 +280,7 @@ const HomePage = () => {
                   { name: 'The Metropolitan', location: 'New York', rating: 4.8, price: 850 },
                   { name: 'Oasis Retreat', location: 'Bali', rating: 5.0, price: 950 },
                 ].map((hotel, i) => (
-                  <Link key={i} to="/hotels" className="group luxury-card overflow-hidden block">
+                  <Link key={i} to="/hotels" className="group luxury-card overflow-hidden block break-words">
                     <div className="relative h-48 md:h-64 overflow-hidden bg-surface-container-high flex items-center justify-center">
                       <span className="material-symbols-outlined text-5xl md:text-6xl text-on-surface-variant">hotel</span>
                       <div className="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur px-2.5 py-1 rounded-full flex items-center gap-1">
@@ -289,9 +289,9 @@ const HomePage = () => {
                       </div>
                     </div>
                     <div className="p-4 md:p-6">
-                      <h3 className="font-serif text-xl md:text-2xl font-semibold text-on-surface mb-1 md:mb-2">{hotel.name}</h3>
-                      <p className="font-sans text-sm md:text-body-md text-on-surface-variant mb-3 md:mb-4 flex items-center gap-1 md:gap-2">
-                        <span className="material-symbols-outlined text-sm">location_on</span>
+                      <h3 className="font-serif text-xl md:text-2xl font-semibold text-on-surface mb-1 md:mb-2 break-words">{hotel.name}</h3>
+                      <p className="font-sans text-sm md:text-body-md text-on-surface-variant mb-3 md:mb-4 flex items-center gap-1 md:gap-2 break-words">
+                        <span className="material-symbols-outlined text-sm shrink-0">location_on</span>
                         {hotel.location}
                       </p>
                       <div className="flex justify-between items-center mt-4 md:mt-6 pt-3 md:pt-4 border-t border-outline-variant/30">
@@ -332,7 +332,7 @@ const HomePage = () => {
                   <span className="material-symbols-outlined text-3xl md:text-4xl">{step.icon}</span>
                 </div>
                 <h3 className="font-serif text-xl md:text-2xl font-semibold text-on-surface mb-2 md:mb-3">{step.title}</h3>
-                <p className="font-sans text-sm md:text-body-md text-on-surface-variant max-w-xs">{step.desc}</p>
+                <p className="font-sans text-sm md:text-body-md text-on-surface-variant max-w-xs break-words">{step.desc}</p>
               </div>
             ))}
           </div>

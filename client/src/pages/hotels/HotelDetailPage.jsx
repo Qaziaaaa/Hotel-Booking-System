@@ -132,7 +132,7 @@ const HotelDetailPage = () => {
 
             {/* Hotel Header */}
             <section className="flex flex-col gap-4 border-b border-outline-variant pb-8">
-              <h1 className="font-serif text-[48px] leading-tight text-primary-container tracking-tight">
+              <h1 className="font-serif text-[28px] md:text-[48px] leading-tight text-primary-container tracking-tight break-words">
                 {hotel.name}
               </h1>
               <div className="flex flex-wrap items-center gap-6 text-on-surface-variant font-sans text-base">
@@ -143,7 +143,7 @@ const HotelDetailPage = () => {
                 </div>
                 <div className="flex items-center gap-1">
                   <span className="material-symbols-outlined text-[20px]">location_on</span>
-                  <span>{hotel.address || hotel.location}</span>
+                  <span className="break-words">{hotel.address || hotel.location}</span>
                 </div>
               </div>
               {hotel.amenities?.length > 0 && (
@@ -163,7 +163,7 @@ const HotelDetailPage = () => {
             {/* About Section */}
             <section className="flex flex-col gap-6">
               <h2 className="font-serif text-[32px] text-primary-container">About this property</h2>
-              <p className="font-sans text-body-lg text-on-surface-variant leading-relaxed">
+              <p className="font-sans text-body-lg text-on-surface-variant leading-relaxed break-words">
                 {hotel.description}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-2 bg-surface-container-low rounded-xl p-6">
@@ -202,7 +202,7 @@ const HotelDetailPage = () => {
                   {rooms.map((room) => (
                     <div
                       key={room.id}
-                      className={`flex flex-col md:flex-row bg-surface-container-lowest rounded-xl overflow-hidden shadow-ambient border border-outline-variant/30 hover:shadow-md transition-shadow duration-300 ${!room.isAvailable ? 'opacity-60' : ''}`}
+                      className={`flex flex-col md:flex-row bg-surface-container-lowest rounded-xl overflow-hidden shadow-card-3d border border-outline-variant/30 card-edge hover:shadow-card-raised transition-all duration-300 ${!room.isAvailable ? 'opacity-60' : ''}`}
                     >
                       {/* Room Image */}
                       <div className="w-full md:w-1/3 h-48 md:h-auto">
@@ -244,7 +244,7 @@ const HotelDetailPage = () => {
                         <div className="flex justify-between items-end mt-2">
                           <div>
                             <p className="font-sans text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1">Per Night</p>
-                            <p className="font-serif text-[28px] font-bold text-on-surface">${room.price}</p>
+                            <p className="font-serif text-[28px] font-bold text-on-surface break-words">${room.price}</p>
                             <p className="font-sans text-sm text-on-surface-variant">
                               Total: <span className="font-semibold">${room.price * nights}</span> for {nights} night{nights !== 1 ? 's' : ''}
                             </p>
@@ -340,7 +340,7 @@ const HotelDetailPage = () => {
 
           {/* Right Sticky Column — Booking Summary */}
           <div className="hidden lg:block lg:col-span-4 relative">
-            <div className="sticky top-[100px] bg-surface-container-lowest rounded-xl p-6 shadow-ambient border border-outline-variant/20 flex flex-col gap-6">
+            <div className="sticky top-[100px] bg-surface-container-lowest rounded-xl p-6 shadow-card-raised border border-outline-variant/20 flex flex-col gap-6">
               <div>
                 <p className="font-serif text-[28px] font-bold text-on-surface">
                   {rooms.length > 0 ? `$${rooms[0]?.price}` : 'From $—'}

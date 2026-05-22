@@ -107,6 +107,8 @@ export default {
         'ambient': '0 8px 30px rgb(11,28,48,0.04)',
         'ambient-hover': '0 20px 40px rgb(11,28,48,0.08)',
         'card': '0 8px 30px rgba(11,28,48,0.06)',
+        'card-3d': '0 4px 12px rgba(11,28,48,0.08), 0 1px 3px rgba(11,28,48,0.06)',
+        'card-raised': '0 12px 40px rgba(11,28,48,0.10), 0 2px 8px rgba(11,28,48,0.06)',
       },
     },
   },

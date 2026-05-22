@@ -73,16 +73,16 @@ const ProfilePage = () => {
           <div className="lg:col-span-4 flex flex-col gap-6">
 
             {/* Profile Identity Card */}
-            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-8 flex flex-col items-center text-center gap-4">
+            <div className="bg-surface-container-lowest rounded-xl shadow-card-raised p-8 flex flex-col items-center text-center gap-4">
               {/* Avatar */}
               <div className="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center">
                 <span className="font-serif text-[32px] text-on-primary">{getInitials()}</span>
               </div>
               <div>
-                <h2 className="font-serif text-[24px] text-on-surface">
+                <h2 className="font-serif text-[24px] text-on-surface break-words">
                   {user?.firstName} {user?.lastName}
                 </h2>
-                <p className="font-sans text-base text-on-surface-variant mt-1">{user?.email}</p>
+                <p className="font-sans text-base text-on-surface-variant mt-1 break-words">{user?.email}</p>
                 {user?.role && (
                   <span className="inline-block mt-2 font-sans text-[11px] font-semibold uppercase tracking-widest bg-surface-container text-on-surface-variant px-3 py-1 rounded-full">
                     {user.role}
@@ -106,14 +106,14 @@ const ProfilePage = () => {
                 </div>
                 <span className="material-symbols-outlined text-3xl md:text-[40px] text-white/50">luggage</span>
               </div>
-              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-4 md:p-5">
+              <div className="bg-surface-container-lowest rounded-xl shadow-card-3d p-4 md:p-5">
                 <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1 md:mb-2">
                   Reviews
                 </p>
                 <p className="font-serif text-xl md:text-[28px] text-on-surface leading-none">{totalReviews}</p>
                 <p className="font-sans text-[10px] md:text-xs text-on-surface-variant mt-0.5 md:mt-1">Written</p>
               </div>
-              <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-4 md:p-5">
+              <div className="bg-surface-container-lowest rounded-xl shadow-card-3d p-4 md:p-5">
                 <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1 md:mb-2">
                   Member
                 </p>
@@ -125,7 +125,7 @@ const ProfilePage = () => {
 
           {/* Right Column — 8/12 */}
           <div className="lg:col-span-8">
-            <div className="bg-surface-container-lowest rounded-xl shadow-ambient p-5 md:p-8 md:p-12">
+            <div className="bg-surface-container-lowest rounded-xl shadow-card-raised p-5 md:p-8 md:p-12">
               <h1 className="font-serif text-[28px] md:text-[48px] leading-tight text-on-surface mb-6 md:mb-10">
                 Personal Details
               </h1>

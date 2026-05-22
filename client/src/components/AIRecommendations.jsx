@@ -54,13 +54,13 @@ const AIRecommendations = () => {
   return (
     <div className="bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 mb-8">
       <div className="flex items-center space-x-2 mb-6">
-        <Sparkles className="h-6 w-6 text-purple-600" />
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">AI Travel Recommendations</h2>
+        <Sparkles className="h-6 w-6 text-purple-600 flex-shrink-0" />
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white break-words">AI Travel Recommendations</h2>
       </div>
 
       {!showResults ? (
         <div className="space-y-6">
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-gray-600 dark:text-gray-300 break-words">
             Let our AI help you plan the perfect trip. Tell us your preferences and get personalized recommendations.
           </p>
 
@@ -83,7 +83,7 @@ const AIRecommendations = () => {
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               <DollarSign className="inline h-4 w-4 mr-1" /> Budget
             </label>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {['low', 'moderate', 'high', 'luxury'].map((budget) => (
                 <button
                   key={budget}
@@ -141,9 +141,9 @@ const AIRecommendations = () => {
 
           <button
             onClick={handleGetRecommendations}
-            className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center space-x-2"
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-3 sm:py-4 rounded-xl font-bold text-sm sm:text-base shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center space-x-2"
           >
-            <Sparkles className="h-5 w-5" />
+            <Sparkles className="h-5 w-5 animate-pulse" />
             <span>Get AI Recommendations</span>
           </button>
         </div>
@@ -228,8 +228,8 @@ const AIRecommendations = () => {
                             )}
                           </div>
                           <div className="flex-1">
-                            <h4 className="font-semibold text-gray-900 dark:text-white">{hotel.name}</h4>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{hotel.location}</p>
+                            <h4 className="font-semibold text-gray-900 dark:text-white break-words">{hotel.name}</h4>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 break-words">{hotel.location}</p>
                             <div className="flex items-center mt-2 space-x-3">
                               <span className="flex items-center text-sm">
                                 <Star className="h-4 w-4 text-yellow-400 fill-current mr-1" />

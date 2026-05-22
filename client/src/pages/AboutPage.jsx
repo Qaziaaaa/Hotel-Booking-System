@@ -38,10 +38,10 @@ const AboutPage = () => {
                 Redefining the Art of Travel
               </h2>
               <div className="w-16 h-[2px] bg-secondary mb-6" />
-              <p className="font-sans text-body-lg text-on-surface-variant leading-relaxed mb-4">
+              <p className="font-sans text-body-lg text-on-surface-variant leading-relaxed mb-4 break-words">
                 Ascendant Luxury is a premium hotel booking platform designed for travelers who seek more than just accommodation. We curate exceptional properties across the globe, from private island resorts to urban sanctuaries, ensuring every stay is an experience unto itself.
               </p>
-              <p className="font-sans text-body-lg text-on-surface-variant leading-relaxed">
+              <p className="font-sans text-body-lg text-on-surface-variant leading-relaxed break-words">
                 Our platform combines intelligent technology with a human touch, offering personalized recommendations, seamless booking, and dedicated support at every step of your journey.
               </p>
             </div>
@@ -101,7 +101,7 @@ const AboutPage = () => {
                   <span className="material-symbols-outlined text-4xl">{step.icon}</span>
                 </div>
                 <h3 className="font-serif text-2xl font-semibold text-on-surface mb-3">{step.title}</h3>
-                <p className="font-sans text-body-md text-on-surface-variant max-w-xs leading-relaxed">
+                <p className="font-sans text-body-md text-on-surface-variant max-w-xs leading-relaxed break-words">
                   {step.description}
                 </p>
               </div>
@@ -158,13 +158,13 @@ const AboutPage = () => {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="bg-surface-container-lowest rounded-xl shadow-ambient p-8 hover:shadow-ambient-hover hover:-translate-y-1 transition-all duration-300"
+                className="bg-surface-container-lowest rounded-xl shadow-card-3d p-8 card-edge hover:shadow-card-raised hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center mb-5 text-secondary">
                   <span className="material-symbols-outlined text-3xl">{feature.icon}</span>
                 </div>
                 <h3 className="font-serif text-2xl font-semibold text-on-surface mb-3">{feature.title}</h3>
-                <p className="font-sans text-body-md text-on-surface-variant leading-relaxed">
+                <p className="font-sans text-body-md text-on-surface-variant leading-relaxed break-words">
                   {feature.description}
                 </p>
               </div>

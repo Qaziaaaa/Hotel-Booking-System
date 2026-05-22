@@ -48,7 +48,7 @@ const ReviewModal = ({ booking, onClose, onSuccess }) => {
 
         {/* Hotel info */}
         <div className="mb-5 pb-4 border-b border-outline-variant/30">
-          <p className="font-sans font-semibold text-on-surface">{booking.hotel?.name}</p>
+          <p className="font-sans font-semibold text-on-surface break-words">{booking.hotel?.name}</p>
           <p className="font-sans text-sm text-on-surface-variant">{booking.room?.roomType}</p>
         </div>
 

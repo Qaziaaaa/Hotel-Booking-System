@@ -134,7 +134,7 @@ const MyBookingsPage = () => {
 
         {/* Empty State */}
         {!error && filteredBookings.length === 0 && (
-          <div className="bg-surface-container-lowest rounded-xl p-16 text-center shadow-ambient">
+            <div className="bg-surface-container-lowest rounded-xl p-16 text-center shadow-card-raised">
             <span className="material-symbols-outlined text-[64px] text-on-surface-variant/30 block mb-4">luggage</span>
             <h2 className="font-serif text-[24px] text-on-surface mb-2">No reservations found</h2>
             <p className="font-sans text-base text-on-surface-variant mb-8">
@@ -159,7 +159,7 @@ const MyBookingsPage = () => {
             {filteredBookings.map((booking) => (
               <div
                 key={booking.id}
-                className="bg-surface-container-lowest rounded-xl shadow-ambient overflow-hidden flex flex-col md:flex-row hover:-translate-y-1 transition-transform duration-300"
+                className="bg-surface-container-lowest rounded-xl shadow-card-3d overflow-hidden flex flex-col md:flex-row card-edge hover:shadow-card-raised hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Hotel Image — Left 1/3 */}
                 <div className="w-full md:w-1/3 h-44 md:h-auto relative flex-shrink-0">
@@ -183,10 +183,10 @@ const MyBookingsPage = () => {
                     <div className="flex flex-wrap items-start justify-between gap-3 mb-3">
                       <div>
                         {getStatusBadge(booking.status)}
-                        <h3 className="font-serif text-[32px] leading-tight text-on-surface mt-2">
+                        <h3 className="font-serif text-[24px] md:text-[32px] leading-tight text-on-surface mt-2 break-words">
                           {booking.hotel.name}
                         </h3>
-                        <p className="font-sans text-base text-on-surface-variant mt-1">
+                        <p className="font-sans text-base text-on-surface-variant mt-1 break-words">
                           {booking.room.roomType} · {booking.guests} Guest{booking.guests !== 1 ? 's' : ''}
                         </p>
                       </div>
@@ -202,15 +202,15 @@ const MyBookingsPage = () => {
                         <span className="material-symbols-outlined text-[16px]">calendar_today</span>
                         {dayjs(booking.checkIn).format('MMM D')} – {dayjs(booking.checkOut).format('MMM D, YYYY')}
                       </span>
-                      <span className="flex items-center gap-1">
-                        <span className="material-symbols-outlined text-[16px]">location_on</span>
+                      <span className="flex items-center gap-1 break-words">
+                        <span className="material-symbols-outlined text-[16px] shrink-0">location_on</span>
                         {booking.hotel.location}
                       </span>
                     </div>
 
                     {/* Special Requests */}
                     {booking.specialRequests && (
-                      <p className="font-sans text-sm text-on-surface-variant mt-3 italic">
+                      <p className="font-sans text-sm text-on-surface-variant mt-3 italic break-words">
                         "{booking.specialRequests}"
                       </p>
                     )}
