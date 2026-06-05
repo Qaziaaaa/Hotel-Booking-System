@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+src/test/
+vitest.config.js
+coverage/
+*.log
+.DS_Store

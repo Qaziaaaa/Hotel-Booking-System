@@ -1,0 +1,14 @@
+node_modules/
+.git/
+.gitattributes
+.gitignore
+.vscode/
+.agents/
+.kiro/
+README.md
+HOTEL BOOKING SYSTEM Details.pdf
+*.log
+.DS_Store
+coverage/
+skills-lock.json
+stitch_elite_stay_hotel_booking/
