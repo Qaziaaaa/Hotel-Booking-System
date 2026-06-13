@@ -10,7 +10,7 @@ async function main() {
   const adminPassword = await bcrypt.hash('admin123456', 12);
   const admin = await prisma.user.upsert({
     where: { email: 'admin@hotelbooking.com' },
-    update: {},
+    update: { password: adminPassword },
     create: {
       email: 'admin@hotelbooking.com',
       password: adminPassword,
@@ -20,13 +20,13 @@ async function main() {
       role: 'ADMIN',
     },
   });
-  console.log('Created admin user:', admin.email);
+  console.log('Admin user ready:', admin.email);
 
   // Create sample user
   const userPassword = await bcrypt.hash('password123', 12);
   const user = await prisma.user.upsert({
     where: { email: 'user@example.com' },
-    update: {},
+    update: { password: userPassword },
     create: {
       email: 'user@example.com',
       password: userPassword,
@@ -36,7 +36,7 @@ async function main() {
       role: 'USER',
     },
   });
-  console.log('Created sample user:', user.email);
+  console.log('Sample user ready:', user.email);
 
   // Create sample hotels
   const hotels = [

@@ -27,7 +27,7 @@ const cloudinaryUpload = async (req, res, next) => {
     req.cloudinaryUrls = urls;
     next();
   } catch (error) {
-    next(new AppError('Image upload failed', 500));
+    next(new AppError('Image upload failed. Check Cloudinary configuration.', 500));
   }
 };
 
