@@ -1,9 +1,11 @@
 import { v2 as cloudinary } from 'cloudinary';
 
-if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
-  console.warn('Warning: Cloudinary credentials not fully configured. Image uploads will fail.');
+const isCloudinaryConfigured = !!(process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY && process.env.CLOUDINARY_API_SECRET);
+
+if (isCloudinaryConfigured) {
+  console.log(`[Cloudinary] Connected (cloud_name: ${process.env.CLOUDINARY_CLOUD_NAME})`);
 } else {
-  console.log(`Cloudinary configured: cloud_name=${process.env.CLOUDINARY_CLOUD_NAME}`);
+  console.warn('[Cloudinary] Not configured — image uploads will fail');
 }
 
 cloudinary.config({
