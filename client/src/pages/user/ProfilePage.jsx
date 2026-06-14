@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { authAPI, bookingsAPI, reviewsAPI } from '../../services/api';
 import dayjs from 'dayjs';
 
@@ -15,8 +15,9 @@ const schema = yup.object({
 
 const ProfilePage = () => {
   const { user, refreshUser } = useAuth();
+  const { addToast } = useToast();
   const queryClient = useQueryClient();
-  const [successMessage, setSuccessMessage] = useState('');
+
 
   const {
     register,
@@ -34,8 +35,11 @@ const ProfilePage = () => {
   const mutation = useMutation({
     mutationFn: (data) => authAPI.updateMe(data),
     onSuccess: () => {
-      setSuccessMessage('Profile updated successfully.');
+      addToast('Profile updated successfully!');
       refreshUser();
+    },
+    onError: (err) => {
+      addToast(err?.response?.data?.message || 'Failed to update profile', 'error');
     },
   });
 
@@ -50,7 +54,6 @@ const ProfilePage = () => {
   });
 
   const onSubmit = (data) => {
-    setSuccessMessage('');
     mutation.mutate(data);
   };
 
@@ -126,14 +129,6 @@ const ProfilePage = () => {
               <h1 className="font-serif text-[28px] md:text-[48px] leading-tight text-on-surface mb-6 md:mb-10">
                 Personal Details
               </h1>
-
-              {/* Success Message */}
-              {successMessage && (
-                <div className="mb-6 bg-surface-container-low border border-secondary/30 rounded-lg p-4 flex items-center gap-3">
-                  <span className="material-symbols-outlined text-secondary text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  <p className="font-sans text-sm text-on-surface">{successMessage}</p>
-                </div>
-              )}
 
               {/* Error Message */}
               {mutation.isError && (

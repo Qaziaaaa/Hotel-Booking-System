@@ -1,6 +1,7 @@
 ﻿import { useState, Fragment } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { analyticsAPI, hotelsAPI, roomsAPI } from '../../services/api';
+import { useToast } from '../../context/ToastContext';
 import {
   BarChart,
   Bar,
@@ -74,6 +75,7 @@ const FormField = ({ label, value, onChange, type = 'text', textarea = false, re
 
 // ─── CreateHotelModal ────────────────────────────────────────────────────────
 const CreateHotelModal = ({ onClose, queryClient }) => {
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     name: '', location: '', address: '', description: '', amenities: '',
   });
@@ -82,8 +84,12 @@ const CreateHotelModal = ({ onClose, queryClient }) => {
   const mutation = useMutation({
     mutationFn: (formData) => hotelsAPI.create(formData),
     onSuccess: () => {
+      addToast('Hotel created successfully');
       queryClient.invalidateQueries({ queryKey: ['adminHotels'] });
       onClose();
+    },
+    onError: (err) => {
+      addToast(err?.response?.data?.message || 'Failed to create hotel', 'error');
     },
   });
 
@@ -130,6 +136,7 @@ const CreateHotelModal = ({ onClose, queryClient }) => {
 
 // ─── EditHotelModal ──────────────────────────────────────────────────────────
 const EditHotelModal = ({ hotel, onClose, queryClient }) => {
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     name: hotel.name || '',
     location: hotel.location || '',
@@ -142,9 +149,13 @@ const EditHotelModal = ({ hotel, onClose, queryClient }) => {
   const mutation = useMutation({
     mutationFn: (formData) => hotelsAPI.update(hotel.id, formData),
     onSuccess: () => {
+      addToast('Hotel updated successfully');
       queryClient.invalidateQueries({ queryKey: ['adminHotels'] });
       queryClient.invalidateQueries({ queryKey: ['hotel', hotel.id] });
       onClose();
+    },
+    onError: (err) => {
+      addToast(err?.response?.data?.message || 'Failed to update hotel', 'error');
     },
   });
 
@@ -191,6 +202,7 @@ const EditHotelModal = ({ hotel, onClose, queryClient }) => {
 
 // ─── CreateRoomModal ─────────────────────────────────────────────────────────
 const CreateRoomModal = ({ hotelId, onClose, queryClient }) => {
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     roomType: '', price: '', capacity: '', description: '', amenities: '',
   });
@@ -199,9 +211,13 @@ const CreateRoomModal = ({ hotelId, onClose, queryClient }) => {
   const mutation = useMutation({
     mutationFn: (formData) => roomsAPI.create(hotelId, formData),
     onSuccess: () => {
+      addToast('Room created successfully');
       queryClient.invalidateQueries({ queryKey: ['adminRooms', hotelId] });
       queryClient.invalidateQueries({ queryKey: ['rooms', hotelId] });
       onClose();
+    },
+    onError: (err) => {
+      addToast(err?.response?.data?.message || 'Failed to create room', 'error');
     },
   });
 
@@ -248,6 +264,7 @@ const CreateRoomModal = ({ hotelId, onClose, queryClient }) => {
 
 // ─── EditRoomModal ───────────────────────────────────────────────────────────
 const EditRoomModal = ({ room, hotelId, onClose, queryClient }) => {
+  const { addToast } = useToast();
   const [form, setForm] = useState({
     roomType: room.roomType || '',
     price: room.price != null ? String(room.price) : '',
@@ -260,9 +277,13 @@ const EditRoomModal = ({ room, hotelId, onClose, queryClient }) => {
   const mutation = useMutation({
     mutationFn: (formData) => roomsAPI.update(room.id, formData),
     onSuccess: () => {
+      addToast('Room updated successfully');
       queryClient.invalidateQueries({ queryKey: ['adminRooms', hotelId] });
       queryClient.invalidateQueries({ queryKey: ['rooms', hotelId] });
       onClose();
+    },
+    onError: (err) => {
+      addToast(err?.response?.data?.message || 'Failed to update room', 'error');
     },
   });
 
@@ -309,6 +330,7 @@ const EditRoomModal = ({ room, hotelId, onClose, queryClient }) => {
 
 // ─── HotelsTab ───────────────────────────────────────────────────────────────
 const HotelsTab = () => {
+  const { addToast } = useToast();
   const queryClient = useQueryClient();
   const [showCreateHotel, setShowCreateHotel] = useState(false);
   const [editHotel, setEditHotel] = useState(null);
@@ -330,17 +352,21 @@ const HotelsTab = () => {
   const deleteHotelMutation = useMutation({
     mutationFn: (id) => hotelsAPI.delete(id),
     onSuccess: () => {
+      addToast('Hotel deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['adminHotels'] });
       if (expandedHotelId) setExpandedHotelId(null);
     },
+    onError: () => addToast('Failed to delete hotel', 'error'),
   });
 
   const deleteRoomMutation = useMutation({
     mutationFn: (id) => roomsAPI.delete(id),
     onSuccess: () => {
+      addToast('Room deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['adminRooms', expandedHotelId] });
       queryClient.invalidateQueries({ queryKey: ['rooms', expandedHotelId] });
     },
+    onError: () => addToast('Failed to delete room', 'error'),
   });
 
   const handleDeleteHotel = (hotel) => {

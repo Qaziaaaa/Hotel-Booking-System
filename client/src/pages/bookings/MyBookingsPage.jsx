@@ -3,11 +3,14 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { bookingsAPI } from '../../services/api';
 import dayjs from 'dayjs';
 import ReviewModal from '../../components/ReviewModal';
+import { useToast } from '../../context/ToastContext';
 
 const MyBookingsPage = () => {
   const queryClient = useQueryClient();
   const [reviewBooking, setReviewBooking] = useState(null);
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const { addToast } = useToast();
+  const [cancellingId, setCancellingId] = useState(null);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['myBookings'],
@@ -16,9 +19,16 @@ const MyBookingsPage = () => {
 
   const cancelMutation = useMutation({
     mutationFn: (id) => bookingsAPI.cancel(id),
+    onMutate: (id) => setCancellingId(id),
     onSuccess: () => {
+      setCancellingId(null);
+      addToast('Booking cancelled successfully');
       queryClient.invalidateQueries({ queryKey: ['myBookings'] });
       queryClient.invalidateQueries({ queryKey: ['rooms'] });
+    },
+    onError: () => {
+      setCancellingId(null);
+      addToast('Failed to cancel booking', 'error');
     },
   });
 
@@ -221,11 +231,15 @@ const MyBookingsPage = () => {
                     {canCancel(booking) && (
                       <button
                         onClick={() => handleCancel(booking.id)}
-                        disabled={cancelMutation.isPending}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-secondary text-secondary rounded-full font-sans text-[12px] font-semibold uppercase tracking-widest hover:bg-secondary hover:text-on-secondary transition-colors duration-300 disabled:opacity-50"
+                        disabled={cancellingId === booking.id}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 border border-secondary text-secondary rounded-full font-sans text-[12px] font-semibold uppercase tracking-widest hover:bg-secondary hover:text-on-secondary transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <span className="material-symbols-outlined text-[16px]">cancel</span>
-                        Cancel
+                        {cancellingId === booking.id ? (
+                          <span className="animate-spin h-4 w-4 border-2 border-secondary border-t-transparent rounded-full" />
+                        ) : (
+                          <span className="material-symbols-outlined text-[16px]">cancel</span>
+                        )}
+                        {cancellingId === booking.id ? 'Cancelling...' : 'Cancel'}
                       </button>
                     )}
                     {canReview(booking) && (
