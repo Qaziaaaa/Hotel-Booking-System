@@ -27,7 +27,8 @@ const cloudinaryUpload = async (req, res, next) => {
     req.cloudinaryUrls = urls;
     next();
   } catch (error) {
-    next(new AppError('Image upload failed. Check Cloudinary configuration.', 500));
+    console.error('[Cloudinary] Upload error:', error.message);
+    next(new AppError(`Image upload failed: ${error.message}`, 500));
   }
 };
 
