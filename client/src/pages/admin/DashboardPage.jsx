@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useState, Fragment } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { analyticsAPI, hotelsAPI, roomsAPI } from '../../services/api';
 import {
@@ -390,8 +390,8 @@ const HotelsTab = () => {
             </thead>
             <tbody>
               {hotels.map((hotel) => (
-                <>
-                  <tr key={hotel.id} className="border-b border-outline-variant/30 hover:bg-surface-container-low">
+                <Fragment key={hotel.id}>
+                  <tr className="border-b border-outline-variant/30 hover:bg-surface-container-low">
                     <td className="px-6 py-4 font-medium text-on-surface break-words">{hotel.name}</td>
                     <td className="px-6 py-4 text-on-surface-variant break-words">{hotel.location}</td>
                     <td className="px-6 py-4 text-on-surface-variant">
@@ -487,7 +487,7 @@ const HotelsTab = () => {
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>
