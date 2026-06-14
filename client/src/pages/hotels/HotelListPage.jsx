@@ -87,7 +87,7 @@ const HotelListPage = () => {
                 className="bg-transparent text-on-surface font-sans text-[11px] md:text-sm focus:outline-none cursor-pointer w-12 md:w-auto"
               >
                 {[1, 2, 3, 4, 5, 6].map((num) => (
-                  <option key={num} value={num}>{num} {num === 1 ? 'G' : 'G'}</option>
+                  <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
                 ))}
               </select>
               <button

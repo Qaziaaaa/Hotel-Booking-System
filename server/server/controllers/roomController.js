@@ -1,9 +1,22 @@
 import * as roomService from '../services/roomService.js';
 import catchAsync from '../utils/catchAsync.js';
 
+const normalizeAmenities = (amenities) => {
+  if (Array.isArray(amenities)) return amenities;
+  if (typeof amenities === 'string') return amenities.split(',').map((a) => a.trim()).filter(Boolean);
+  return [];
+};
+
 export const createRoom = catchAsync(async (req, res) => {
   const { roomType, price, capacity, amenities, description, hotelId } = req.body;
-  const data = { roomType, price, capacity, amenities, description, hotelId };
+  const data = {
+    roomType,
+    price: parseFloat(price),
+    capacity: parseInt(capacity),
+    amenities: normalizeAmenities(amenities),
+    description,
+    hotelId,
+  };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
     data.images = req.cloudinaryUrls;
   }
@@ -47,9 +60,17 @@ export const getRoom = catchAsync(async (req, res) => {
 
 export const updateRoom = catchAsync(async (req, res) => {
   const { roomType, price, capacity, amenities, description } = req.body;
-  const data = { roomType, price, capacity, amenities, description };
+  const data = {
+    roomType,
+    price: price ? parseFloat(price) : undefined,
+    capacity: capacity ? parseInt(capacity) : undefined,
+    amenities: normalizeAmenities(amenities),
+    description,
+  };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
-    data.images = req.cloudinaryUrls;
+    const existing = await roomService.getRoomById(req.params.id);
+    const existingImages = existing.images || [];
+    data.images = [...existingImages, ...req.cloudinaryUrls];
   }
   const room = await roomService.updateRoom(req.params.id, data);
 

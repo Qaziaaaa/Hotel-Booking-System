@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { chatbotAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -14,6 +14,7 @@ const Chatbot = () => {
   const messagesEndRef = useRef(null);
   const { isAuthenticated } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Hide chatbot on auth pages
   const isAuthPage = ['/login', '/register'].includes(location.pathname);
@@ -58,7 +59,7 @@ const Chatbot = () => {
 
   const handleActionClick = (action) => {
     if (action.link) {
-      window.location.href = action.link;
+      navigate(action.link);
     } else if (action.value) {
       setInput(action.value);
     }

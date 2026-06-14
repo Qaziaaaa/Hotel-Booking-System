@@ -1,9 +1,21 @@
 import * as hotelService from '../services/hotelService.js';
 import catchAsync from '../utils/catchAsync.js';
 
+const normalizeAmenities = (amenities) => {
+  if (Array.isArray(amenities)) return amenities;
+  if (typeof amenities === 'string') return amenities.split(',').map((a) => a.trim()).filter(Boolean);
+  return [];
+};
+
 export const createHotel = catchAsync(async (req, res) => {
   const { name, location, address, description, amenities } = req.body;
-  const data = { name, location, address, description, amenities };
+  const data = {
+    name,
+    location,
+    address,
+    description,
+    amenities: normalizeAmenities(amenities),
+  };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
     data.images = req.cloudinaryUrls;
   }
@@ -50,9 +62,17 @@ export const getHotel = catchAsync(async (req, res) => {
 
 export const updateHotel = catchAsync(async (req, res) => {
   const { name, location, address, description, amenities } = req.body;
-  const data = { name, location, address, description, amenities };
+  const data = {
+    name,
+    location,
+    address,
+    description,
+    amenities: normalizeAmenities(amenities),
+  };
   if (req.cloudinaryUrls && req.cloudinaryUrls.length > 0) {
-    data.images = req.cloudinaryUrls;
+    const existing = await hotelService.getHotelById(req.params.id);
+    const existingImages = existing.images || [];
+    data.images = [...existingImages, ...req.cloudinaryUrls];
   }
   const hotel = await hotelService.updateHotel(req.params.id, data);
 

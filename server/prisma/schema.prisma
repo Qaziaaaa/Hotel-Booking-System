@@ -59,6 +59,7 @@ model Room {
   hotel    Hotel     @relation(fields: [hotelId], references: [id], onDelete: Cascade)
   bookings Booking[]
 
+  @@index([hotelId])
   @@map("rooms")
 }
 
@@ -81,6 +82,11 @@ model Booking {
   room   Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
   review Review?
 
+  @@index([hotelId])
+  @@index([userId])
+  @@index([status])
+  @@index([checkIn, checkOut])
+  @@index([roomId, status])
   @@map("bookings")
 }
 
@@ -99,6 +105,9 @@ model Review {
   booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
   @@unique([userId, hotelId, bookingId])
+  @@index([hotelId])
+  @@index([userId])
+  @@index([hotelId, rating])
   @@map("reviews")
 }
 

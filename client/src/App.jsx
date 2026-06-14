@@ -1,21 +1,27 @@
 import { Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { useAuth } from './context/AuthContext';
 import MainLayout from './layouts/MainLayout';
 import ProtectedRoute from './components/ProtectedRoute';
-
-// Pages
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/auth/LoginPage';
-import RegisterPage from './pages/auth/RegisterPage';
-import HotelListPage from './pages/hotels/HotelListPage';
-import HotelDetailPage from './pages/hotels/HotelDetailPage';
-import BookingPage from './pages/bookings/BookingPage';
-import MyBookingsPage from './pages/bookings/MyBookingsPage';
-import ProfilePage from './pages/user/ProfilePage';
-import DashboardPage from './pages/admin/DashboardPage';
-import AboutPage from './pages/AboutPage';
-import NotFoundPage from './pages/NotFoundPage';
 import Chatbot from './components/Chatbot';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
+const HotelListPage = lazy(() => import('./pages/hotels/HotelListPage'));
+const HotelDetailPage = lazy(() => import('./pages/hotels/HotelDetailPage'));
+const BookingPage = lazy(() => import('./pages/bookings/BookingPage'));
+const MyBookingsPage = lazy(() => import('./pages/bookings/MyBookingsPage'));
+const ProfilePage = lazy(() => import('./pages/user/ProfilePage'));
+const DashboardPage = lazy(() => import('./pages/admin/DashboardPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+
+const PageLoader = () => (
+  <div className="min-h-[60vh] flex items-center justify-center bg-background">
+    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary-container" />
+  </div>
+);
 
 function App() {
   const { isLoading } = useAuth();
@@ -23,7 +29,7 @@ function App() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-container"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-container" />
       </div>
     );
   }
@@ -31,19 +37,18 @@ function App() {
   return (
     <>
       <Routes>
-        {/* All pages inside MainLayout — Navbar + Footer */}
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="hotels" element={<HotelListPage />} />
-          <Route path="hotels/:id" element={<HotelDetailPage />} />
-          <Route path="about" element={<AboutPage />} />
+          <Route index element={<Suspense fallback={<PageLoader />}><HomePage /></Suspense>} />
+          <Route path="login" element={<Suspense fallback={<PageLoader />}><LoginPage /></Suspense>} />
+          <Route path="register" element={<Suspense fallback={<PageLoader />}><RegisterPage /></Suspense>} />
+          <Route path="hotels" element={<Suspense fallback={<PageLoader />}><HotelListPage /></Suspense>} />
+          <Route path="hotels/:id" element={<Suspense fallback={<PageLoader />}><HotelDetailPage /></Suspense>} />
+          <Route path="about" element={<Suspense fallback={<PageLoader />}><AboutPage /></Suspense>} />
           <Route
             path="book/:hotelId/:roomId"
             element={
               <ProtectedRoute>
-                <BookingPage />
+                <Suspense fallback={<PageLoader />}><BookingPage /></Suspense>
               </ProtectedRoute>
             }
           />
@@ -51,7 +56,7 @@ function App() {
             path="my-bookings"
             element={
               <ProtectedRoute>
-                <MyBookingsPage />
+                <Suspense fallback={<PageLoader />}><MyBookingsPage /></Suspense>
               </ProtectedRoute>
             }
           />
@@ -59,7 +64,7 @@ function App() {
             path="profile"
             element={
               <ProtectedRoute>
-                <ProfilePage />
+                <Suspense fallback={<PageLoader />}><ProfilePage /></Suspense>
               </ProtectedRoute>
             }
           />
@@ -67,11 +72,11 @@ function App() {
             path="dashboard"
             element={
               <ProtectedRoute adminOnly>
-                <DashboardPage />
+                <Suspense fallback={<PageLoader />}><DashboardPage /></Suspense>
               </ProtectedRoute>
             }
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<Suspense fallback={<PageLoader />}><NotFoundPage /></Suspense>} />
         </Route>
       </Routes>
       <Chatbot />

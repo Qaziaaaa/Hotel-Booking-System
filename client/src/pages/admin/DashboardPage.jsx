@@ -171,7 +171,7 @@ const EditHotelModal = ({ hotel, onClose, queryClient }) => {
         <FormField label="Description" value={form.description} onChange={(v) => setForm({ ...form, description: v })} textarea required />
         <FormField label="Amenities (comma-separated)" value={form.amenities} onChange={(v) => setForm({ ...form, amenities: v })} />
         <div>
-          <label className="block text-sm font-medium text-on-surface-variant mb-1">Replace Images (optional)</label>
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Add Images (optional)</label>
           <input type="file" multiple accept="image/*" onChange={(e) => setImageFiles(Array.from(e.target.files))}
             className="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface-container-low file:text-on-surface hover:file:bg-surface-container" />
         </div>
@@ -289,7 +289,7 @@ const EditRoomModal = ({ room, hotelId, onClose, queryClient }) => {
         <FormField label="Description (optional)" value={form.description} onChange={(v) => setForm({ ...form, description: v })} textarea />
         <FormField label="Amenities (comma-separated)" value={form.amenities} onChange={(v) => setForm({ ...form, amenities: v })} />
         <div>
-          <label className="block text-sm font-medium text-on-surface-variant mb-1">Replace Images (optional)</label>
+          <label className="block text-sm font-medium text-on-surface-variant mb-1">Add Images (optional)</label>
           <input type="file" multiple accept="image/*" onChange={(e) => setImageFiles(Array.from(e.target.files))}
             className="block w-full text-sm text-on-surface-variant file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-surface-container-low file:text-on-surface hover:file:bg-surface-container" />
         </div>

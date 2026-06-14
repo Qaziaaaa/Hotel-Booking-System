@@ -14,7 +14,7 @@ const schema = yup.object({
 });
 
 const ProfilePage = () => {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const queryClient = useQueryClient();
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -35,7 +35,7 @@ const ProfilePage = () => {
     mutationFn: (data) => authAPI.updateMe(data),
     onSuccess: () => {
       setSuccessMessage('Profile updated successfully.');
-      queryClient.invalidateQueries({ queryKey: ['me'] });
+      refreshUser();
     },
   });
 
@@ -89,10 +89,7 @@ const ProfilePage = () => {
                   </span>
                 )}
               </div>
-              <button className="mt-2 inline-flex items-center gap-2 px-6 py-2.5 border border-outline-variant text-on-surface-variant rounded-full font-sans text-[12px] font-semibold uppercase tracking-widest hover:border-secondary hover:text-secondary transition-colors duration-300">
-                <span className="material-symbols-outlined text-[16px]">edit</span>
-                Edit Profile
-              </button>
+
             </div>
 
             {/* Stats Bento Grid */}
