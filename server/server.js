@@ -3,6 +3,7 @@ dotenv.config();
 
 import app from './app.js';
 import { connectDB, disconnectDB } from './server/config/database.js';
+import './server/config/cloudinary.js';
 import './server/jobs/reminderEmails.js';
 
 const PORT = process.env.PORT || 5000;
